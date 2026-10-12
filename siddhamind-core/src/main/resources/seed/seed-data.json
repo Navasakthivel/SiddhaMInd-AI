@@ -1,0 +1,1187 @@
+{
+  "_comment": [
+    "Firestore seed data. Port of the original data.sql.",
+    "Sourced from: Siddha TERM-1 SFI Preparations booklet, Gunapadam Thathu Jeevam",
+    "Vaguppu (1968), Siddha Vaithiya Thirattu (1987), Siddha Principles of Social",
+    "and Preventive Medicine.",
+    "",
+    "Each 'id' is the Firestore document ID. Denormalized display names (ingredient",
+    "names inside formulations, disease names inside indicatedDiseases) are NOT",
+    "written here - the seeder copies them from the ingredient and disease records so",
+    "the two cannot drift apart.",
+    "",
+    "'password' is plaintext and BCrypt-hashed at seed time. These are published demo",
+    "credentials. Never put a real password in this file."
+  ],
+  "roles": [
+    {
+      "id": "ADMIN",
+      "roleName": "ADMIN",
+      "description": "System administrator - manages users, corpus and knowledge base"
+    },
+    {
+      "id": "PRACTITIONER",
+      "roleName": "PRACTITIONER",
+      "description": "Registered Siddha practitioner - diagnosis and safety tools"
+    },
+    {
+      "id": "STUDENT",
+      "roleName": "STUDENT",
+      "description": "BSMS student - formulary study and AI assistant"
+    },
+    {
+      "id": "PATIENT",
+      "roleName": "PATIENT",
+      "description": "Public user - guided information and preventive health"
+    }
+  ],
+  "users": [
+    {
+      "id": "admin",
+      "fullName": "System Administrator",
+      "email": "admin@siddhamind.in",
+      "password": "admin123",
+      "phone": "9000000001",
+      "roleId": "ADMIN",
+      "regNumber": "ADM-001",
+      "institution": "SiddhaMind AI",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "doctor",
+      "fullName": "Dr. Meenakshi Sundaram",
+      "email": "doctor@siddhamind.in",
+      "password": "doctor123",
+      "phone": "9000000002",
+      "roleId": "PRACTITIONER",
+      "loginId": "DOC-0001",
+      "regNumber": "TN-SID-4471",
+      "institution": "Govt Siddha Medical College, Palayamkottai",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "student",
+      "fullName": "Navasakthivel S M",
+      "email": "student@siddhamind.in",
+      "password": "student123",
+      "phone": "9000000003",
+      "roleId": "STUDENT",
+      "loginId": "STU-0001",
+      "regNumber": "95192309033",
+      "institution": "Govt Siddha Medical College, Palayamkottai",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "patient",
+      "fullName": "Public User",
+      "email": "patient@siddhamind.in",
+      "password": "patient123",
+      "phone": "9000000004",
+      "roleId": "PATIENT",
+      "regNumber": null,
+      "institution": null,
+      "status": "ACTIVE"
+    }
+  ],
+  "ingredients": [
+    {
+      "id": "crab-fossil",
+      "nameTamil": "நண்டுக்கல்",
+      "nameEnglish": "Crab fossil",
+      "scientificName": "Fossilised crab shell",
+      "sourceType": "ANIMAL",
+      "partUsed": "Whole",
+      "sutthiRequired": true,
+      "heavyMetal": false,
+      "elementSymbol": null,
+      "toxicityClass": "LOW",
+      "maxDailyMg": 400,
+      "notes": "Calcium carbonate rich; used in urinary calculi"
+    },
+    {
+      "id": "radish",
+      "nameTamil": "முள்ளங்கி",
+      "nameEnglish": "Radish",
+      "scientificName": "Raphanus raphanistrum subsp. sativus",
+      "sourceType": "HERBAL",
+      "partUsed": "Root tuber juice",
+      "sutthiRequired": false,
+      "heavyMetal": false,
+      "elementSymbol": null,
+      "toxicityClass": "NONE",
+      "maxDailyMg": null,
+      "notes": "Used as grinding medium (aattal) and diuretic"
+    },
+    {
+      "id": "mountain-knotgrass",
+      "nameTamil": "சிறுபீளை",
+      "nameEnglish": "Mountain knotgrass",
+      "scientificName": "Aerva lanata",
+      "sourceType": "HERBAL",
+      "partUsed": "Whole plant juice",
+      "sutthiRequired": false,
+      "heavyMetal": false,
+      "elementSymbol": null,
+      "toxicityClass": "NONE",
+      "maxDailyMg": null,
+      "notes": "Classical lithotriptic in Siddha urology"
+    },
+    {
+      "id": "apple-snail",
+      "nameTamil": "நத்தை",
+      "nameEnglish": "Apple snail",
+      "scientificName": "Pila globosa",
+      "sourceType": "ANIMAL",
+      "partUsed": "Whole shell",
+      "sutthiRequired": true,
+      "heavyMetal": false,
+      "elementSymbol": null,
+      "toxicityClass": "LOW",
+      "maxDailyMg": 400,
+      "notes": "Calcined to white parpam"
+    },
+    {
+      "id": "indian-mallow",
+      "nameTamil": "துத்தி",
+      "nameEnglish": "Indian mallow",
+      "scientificName": "Abutilon indicum",
+      "sourceType": "HERBAL",
+      "partUsed": "Leaf juice",
+      "sutthiRequired": false,
+      "heavyMetal": false,
+      "elementSymbol": null,
+      "toxicityClass": "NONE",
+      "maxDailyMg": null,
+      "notes": "Grinding medium for parpam; demulcent"
+    },
+    {
+      "id": "zinc",
+      "nameTamil": "நாகம் (துத்தநாகம்)",
+      "nameEnglish": "Zinc",
+      "scientificName": "Zincum",
+      "sourceType": "MINERAL",
+      "partUsed": "Metal ingot",
+      "sutthiRequired": true,
+      "heavyMetal": true,
+      "elementSymbol": "Zn",
+      "toxicityClass": "MODERATE",
+      "maxDailyMg": 50,
+      "notes": "Must undergo sutthi and repeated pudam before use"
+    },
+    {
+      "id": "false-daisy",
+      "nameTamil": "கரிசாலை",
+      "nameEnglish": "False daisy",
+      "scientificName": "Eclipta prostrata",
+      "sourceType": "HERBAL",
+      "partUsed": "Whole plant juice",
+      "sutthiRequired": false,
+      "heavyMetal": false,
+      "elementSymbol": null,
+      "toxicityClass": "NONE",
+      "maxDailyMg": null,
+      "notes": "Hepatoprotective; used in naga parpam processing"
+    },
+    {
+      "id": "cinnabar",
+      "nameTamil": "லிங்கம்",
+      "nameEnglish": "Cinnabar",
+      "scientificName": "Mercuric sulphide (HgS)",
+      "sourceType": "MINERAL",
+      "partUsed": "Mineral",
+      "sutthiRequired": true,
+      "heavyMetal": true,
+      "elementSymbol": "Hg",
+      "toxicityClass": "HIGH",
+      "maxDailyMg": 30,
+      "notes": "Mercury bearing - strict sutthi, never in pregnancy or renal disease"
+    },
+    {
+      "id": "calomel",
+      "nameTamil": "பூரம்",
+      "nameEnglish": "Calomel",
+      "scientificName": "Mercurous chloride (Hg2Cl2)",
+      "sourceType": "MINERAL",
+      "partUsed": "Mineral",
+      "sutthiRequired": true,
+      "heavyMetal": true,
+      "elementSymbol": "Hg",
+      "toxicityClass": "HIGH",
+      "maxDailyMg": 15,
+      "notes": "Mercury bearing - short courses only under supervision"
+    },
+    {
+      "id": "white-arsenic",
+      "nameTamil": "வெள்ளைப் பாஷாணம்",
+      "nameEnglish": "White arsenic",
+      "scientificName": "Arsenic trioxide (As2O3)",
+      "sourceType": "MINERAL",
+      "partUsed": "Mineral",
+      "sutthiRequired": true,
+      "heavyMetal": true,
+      "elementSymbol": "As",
+      "toxicityClass": "HIGH",
+      "maxDailyMg": 5,
+      "notes": "Highly toxic - restricted preparation, expert use only"
+    },
+    {
+      "id": "sulphur",
+      "nameTamil": "கந்தகம்",
+      "nameEnglish": "Sulphur",
+      "scientificName": "Sulphur",
+      "sourceType": "MINERAL",
+      "partUsed": "Mineral",
+      "sutthiRequired": true,
+      "heavyMetal": false,
+      "elementSymbol": "S",
+      "toxicityClass": "LOW",
+      "maxDailyMg": 250,
+      "notes": "Purified with milk and ghee before use"
+    },
+    {
+      "id": "iron",
+      "nameTamil": "அயம்",
+      "nameEnglish": "Iron",
+      "scientificName": "Ferrum",
+      "sourceType": "MINERAL",
+      "partUsed": "Metal",
+      "sutthiRequired": true,
+      "heavyMetal": true,
+      "elementSymbol": "Fe",
+      "toxicityClass": "MODERATE",
+      "maxDailyMg": 200,
+      "notes": "Used in anaemia; avoid with tetracyclines"
+    },
+    {
+      "id": "neem",
+      "nameTamil": "வேம்பு",
+      "nameEnglish": "Neem",
+      "scientificName": "Azadirachta indica",
+      "sourceType": "HERBAL",
+      "partUsed": "Leaf, bark",
+      "sutthiRequired": false,
+      "heavyMetal": false,
+      "elementSymbol": null,
+      "toxicityClass": "LOW",
+      "maxDailyMg": null,
+      "notes": "Antimicrobial; hypoglycaemic tendency"
+    },
+    {
+      "id": "fenugreek",
+      "nameTamil": "வெந்தயம்",
+      "nameEnglish": "Fenugreek",
+      "scientificName": "Trigonella foenum-graecum",
+      "sourceType": "HERBAL",
+      "partUsed": "Seed",
+      "sutthiRequired": false,
+      "heavyMetal": false,
+      "elementSymbol": null,
+      "toxicityClass": "NONE",
+      "maxDailyMg": null,
+      "notes": "Hypoglycaemic; may potentiate antidiabetic drugs"
+    },
+    {
+      "id": "giloy",
+      "nameTamil": "சீந்தில்",
+      "nameEnglish": "Giloy",
+      "scientificName": "Tinospora cordifolia",
+      "sourceType": "HERBAL",
+      "partUsed": "Stem",
+      "sutthiRequired": false,
+      "heavyMetal": false,
+      "elementSymbol": null,
+      "toxicityClass": "LOW",
+      "maxDailyMg": null,
+      "notes": "Immunomodulator; caution with immunosuppressants"
+    },
+    {
+      "id": "turmeric",
+      "nameTamil": "மஞ்சள்",
+      "nameEnglish": "Turmeric",
+      "scientificName": "Curcuma longa",
+      "sourceType": "HERBAL",
+      "partUsed": "Rhizome",
+      "sutthiRequired": false,
+      "heavyMetal": false,
+      "elementSymbol": null,
+      "toxicityClass": "NONE",
+      "maxDailyMg": null,
+      "notes": "Antiplatelet tendency at high dose"
+    },
+    {
+      "id": "conch-shell",
+      "nameTamil": "சங்கு",
+      "nameEnglish": "Conch shell",
+      "scientificName": "Turbinella pyrum",
+      "sourceType": "ANIMAL",
+      "partUsed": "Shell",
+      "sutthiRequired": true,
+      "heavyMetal": false,
+      "elementSymbol": "Ca",
+      "toxicityClass": "LOW",
+      "maxDailyMg": 500,
+      "notes": "Antacid parpam"
+    },
+    {
+      "id": "pearl-oyster-shell",
+      "nameTamil": "முத்துச்சிப்பி",
+      "nameEnglish": "Pearl oyster shell",
+      "scientificName": "Pinctada species",
+      "sourceType": "ANIMAL",
+      "partUsed": "Shell",
+      "sutthiRequired": true,
+      "heavyMetal": false,
+      "elementSymbol": "Ca",
+      "toxicityClass": "LOW",
+      "maxDailyMg": 400,
+      "notes": "Cooling parpam for pitha conditions"
+    },
+    {
+      "id": "king-of-bitters",
+      "nameTamil": "நிலவேம்பு",
+      "nameEnglish": "King of bitters",
+      "scientificName": "Andrographis paniculata",
+      "sourceType": "HERBAL",
+      "partUsed": "Whole plant",
+      "sutthiRequired": false,
+      "heavyMetal": false,
+      "elementSymbol": null,
+      "toxicityClass": "LOW",
+      "maxDailyMg": null,
+      "notes": "Classical antipyretic kudineer"
+    },
+    {
+      "id": "dry-ginger",
+      "nameTamil": "சுக்கு",
+      "nameEnglish": "Dry ginger",
+      "scientificName": "Zingiber officinale",
+      "sourceType": "HERBAL",
+      "partUsed": "Rhizome",
+      "sutthiRequired": false,
+      "heavyMetal": false,
+      "elementSymbol": null,
+      "toxicityClass": "NONE",
+      "maxDailyMg": null,
+      "notes": "Carminative; antiplatelet tendency at high dose"
+    }
+  ],
+  "diseases": [
+    {
+      "id": "neerkkattu",
+      "noiTamil": "நீர்க்கட்டு",
+      "noiEnglish": "Neerkkattu",
+      "modernEquivalent": "Dysuria / urinary retention",
+      "mukkutramType": "PITHAM",
+      "description": "Painful and obstructed micturition"
+    },
+    {
+      "id": "kalladaippu",
+      "noiTamil": "கல்லடைப்பு",
+      "noiEnglish": "Kalladaippu",
+      "modernEquivalent": "Urinary calculi (renal stone)",
+      "mukkutramType": "VATHAM",
+      "description": "Calculus obstructing the urinary passage"
+    },
+    {
+      "id": "neeradaippu",
+      "noiTamil": "நீரடைப்பு",
+      "noiEnglish": "Neeradaippu",
+      "modernEquivalent": "Urinary obstruction",
+      "mukkutramType": "VATHAM",
+      "description": "Retention of urine"
+    },
+    {
+      "id": "kuruthi-eruvaimulai",
+      "noiTamil": "குருதி எருவாய்முளை",
+      "noiEnglish": "Kuruthi Eruvaimulai",
+      "modernEquivalent": "Bleeding haemorrhoids",
+      "mukkutramType": "PITHAM",
+      "description": "Piles with bleeding per rectum"
+    },
+    {
+      "id": "kaduppu-kalichal",
+      "noiTamil": "கடுப்புக்கழிச்சல்",
+      "noiEnglish": "Kaduppu Kalichal",
+      "modernEquivalent": "Dysentery",
+      "mukkutramType": "PITHAM",
+      "description": "Loose stool with griping pain"
+    },
+    {
+      "id": "ilaippu-suvasakasam",
+      "noiTamil": "இளைப்பு / சுவாசகாசம்",
+      "noiEnglish": "Ilaippu / Suvasakasam",
+      "modernEquivalent": "Bronchial asthma",
+      "mukkutramType": "KABAM",
+      "description": "Difficulty in breathing with wheeze"
+    },
+    {
+      "id": "eelai",
+      "noiTamil": "ஈளை",
+      "noiEnglish": "Eelai",
+      "modernEquivalent": "Chronic cough with phlegm",
+      "mukkutramType": "KABAM",
+      "description": "Productive cough"
+    },
+    {
+      "id": "mathumegam",
+      "noiTamil": "மதுமேகம்",
+      "noiEnglish": "Mathumegam",
+      "modernEquivalent": "Diabetes mellitus",
+      "mukkutramType": "KABAM",
+      "description": "Sweet urine disease with polyuria"
+    },
+    {
+      "id": "paandu",
+      "noiTamil": "பாண்டு",
+      "noiEnglish": "Paandu",
+      "modernEquivalent": "Anaemia",
+      "mukkutramType": "PITHAM",
+      "description": "Pallor with fatigue"
+    },
+    {
+      "id": "suram",
+      "noiTamil": "சுரம்",
+      "noiEnglish": "Suram",
+      "modernEquivalent": "Fever",
+      "mukkutramType": "MIXED",
+      "description": "Febrile illness including dengue and chikungunya"
+    },
+    {
+      "id": "vatha-noi",
+      "noiTamil": "வாத நோய்",
+      "noiEnglish": "Vatha Noi",
+      "modernEquivalent": "Arthritis / joint disorder",
+      "mukkutramType": "VATHAM",
+      "description": "Joint pain, stiffness and restricted movement"
+    },
+    {
+      "id": "gunmam",
+      "noiTamil": "குன்மம்",
+      "noiEnglish": "Gunmam",
+      "modernEquivalent": "Peptic ulcer / gastritis",
+      "mukkutramType": "PITHAM",
+      "description": "Burning epigastric pain"
+    },
+    {
+      "id": "malachikkal",
+      "noiTamil": "மலச்சிக்கல்",
+      "noiEnglish": "Malachikkal",
+      "modernEquivalent": "Constipation",
+      "mukkutramType": "VATHAM",
+      "description": "Difficult and infrequent stool"
+    }
+  ],
+  "allopathicDrugs": [
+    {
+      "id": "metformin",
+      "drugName": "Metformin",
+      "drugClass": "Biguanide antidiabetic",
+      "commonBrand": "Glycomet",
+      "notes": "Narrow glycaemic margin when combined with hypoglycaemic herbs"
+    },
+    {
+      "id": "glimepiride",
+      "drugName": "Glimepiride",
+      "drugClass": "Sulfonylurea antidiabetic",
+      "commonBrand": "Amaryl",
+      "notes": "High hypoglycaemia risk"
+    },
+    {
+      "id": "warfarin",
+      "drugName": "Warfarin",
+      "drugClass": "Vitamin K antagonist anticoagulant",
+      "commonBrand": "Warf",
+      "notes": "Very narrow therapeutic index"
+    },
+    {
+      "id": "aspirin",
+      "drugName": "Aspirin",
+      "drugClass": "Antiplatelet / NSAID",
+      "commonBrand": "Ecosprin",
+      "notes": "Bleeding risk"
+    },
+    {
+      "id": "levothyroxine",
+      "drugName": "Levothyroxine",
+      "drugClass": "Thyroid hormone",
+      "commonBrand": "Eltroxin",
+      "notes": "Absorption blocked by mineral cations"
+    },
+    {
+      "id": "doxycycline",
+      "drugName": "Doxycycline",
+      "drugClass": "Tetracycline antibiotic",
+      "commonBrand": "Doxy-1",
+      "notes": "Chelated by metal ions"
+    },
+    {
+      "id": "ciprofloxacin",
+      "drugName": "Ciprofloxacin",
+      "drugClass": "Fluoroquinolone antibiotic",
+      "commonBrand": "Cifran",
+      "notes": "Chelated by metal ions"
+    },
+    {
+      "id": "penicillamine",
+      "drugName": "Penicillamine",
+      "drugClass": "Chelating agent",
+      "commonBrand": "Cilamin",
+      "notes": "Alters metal handling"
+    },
+    {
+      "id": "furosemide",
+      "drugName": "Furosemide",
+      "drugClass": "Loop diuretic",
+      "commonBrand": "Lasix",
+      "notes": "Renal load consideration"
+    },
+    {
+      "id": "tacrolimus",
+      "drugName": "Tacrolimus",
+      "drugClass": "Immunosuppressant",
+      "commonBrand": "Pangraf",
+      "notes": "Immunomodulators may oppose action"
+    },
+    {
+      "id": "amlodipine",
+      "drugName": "Amlodipine",
+      "drugClass": "Calcium channel blocker",
+      "commonBrand": "Amlong",
+      "notes": "BP interaction"
+    },
+    {
+      "id": "pantoprazole",
+      "drugName": "Pantoprazole",
+      "drugClass": "Proton pump inhibitor",
+      "commonBrand": "Pantocid",
+      "notes": "Gastric pH changes mineral absorption"
+    }
+  ],
+  "formulations": [
+    {
+      "id": "nandukkal-parpam",
+      "nameTamil": "நண்டுக்கல் பற்பம்",
+      "nameEnglish": "Nandukkal Parpam",
+      "sfiCode": "SFI-P-017",
+      "dosageForm": "Parpam",
+      "sourceBook": "Siddha TERM-1 SFI Preparations",
+      "pageNo": 12,
+      "verseNo": "249",
+      "preparationMethod": "நண்டுக்கல்லைக் கல்வத்திலிட்டு, முள்ளங்கிச் சாற்றால் மூன்று நாட்கள் அரைத்து உலர்த்தவும். பிறகு சிறுபீளைச் சாற்றால் அரைத்து வெயிலில் உலர்த்தி எடுத்து வைத்துக் கொள்ளவும். | Levigate purified crab fossil in a kalvam with radish juice for three days and dry. Re-levigate with Aerva lanata juice and sun-dry.",
+      "dose": "200-400 மி.கி., இருவேளை (200-400 mg twice daily)",
+      "anupanam": "நீர், இளநீர், நீர்முள்ளிக் குடிநீர்",
+      "shelfLife": "3 years",
+      "containsHeavyMetal": false,
+      "safetyClass": "GREEN",
+      "ingredients": [
+        {
+          "ingredientId": "crab-fossil",
+          "quantity": "தேவையான அளவு",
+          "sutthiNote": "Sutthi in water before levigation"
+        },
+        {
+          "ingredientId": "radish",
+          "quantity": "சாறு தேவையான அளவு",
+          "sutthiNote": "Fresh juice, 3 days levigation"
+        },
+        {
+          "ingredientId": "mountain-knotgrass",
+          "quantity": "சாறு தேவையான அளவு",
+          "sutthiNote": "Fresh whole-plant juice"
+        }
+      ],
+      "indicatedDiseases": [
+        {
+          "diseaseId": "neerkkattu",
+          "evidenceNote": "Classical indication - SFI Term-1 verse 249"
+        },
+        {
+          "diseaseId": "kalladaippu",
+          "evidenceNote": "Classical indication - SFI Term-1 verse 249"
+        },
+        {
+          "diseaseId": "neeradaippu",
+          "evidenceNote": "Classical indication - SFI Term-1 verse 249"
+        }
+      ],
+      "contraindications": [
+        {
+          "conditionName": "Hypercalcaemia",
+          "severity": "MODERATE",
+          "note": "Calcium rich parpam - monitor serum calcium."
+        }
+      ]
+    },
+    {
+      "id": "nathai-parpam",
+      "nameTamil": "நத்தைப் பற்பம்",
+      "nameEnglish": "Nathai Parpam",
+      "sfiCode": "SFI-P-014",
+      "dosageForm": "Parpam",
+      "sourceBook": "Gunapadam Thathu Jeeva Vaguppu (1968)",
+      "pageNo": 390,
+      "verseNo": "17:14",
+      "preparationMethod": "ஒரு பானையில் கழுவிய முழு நத்தைகளைப் பாதி அளவுக்கு நிரப்பி, அகலைக் கொண்டு மூடி சீலைமண் செய்து உலர்ந்தபின் புடமிடவும். நத்தைச் சாம்பலைத் துத்தியிலைச் சாற்றால் அரைத்து வில்லைகள் தட்டி மீண்டும் புடமிடவும். பற்பம் வெண்ணிறமாகும் வரை இரண்டு அல்லது மூன்று முறை புடமிடவும். | Half fill an earthen pot with washed snails, seal with seelaimann, dry and give puddam. Levigate the ash with Abutilon indicum juice, make discs and re-fire until the parpam turns white.",
+      "dose": "200-400 மி.கி., இருவேளை (200-400 mg twice daily)",
+      "anupanam": "பசு நெய், பசு வெண்ணெய்",
+      "shelfLife": "3 years",
+      "containsHeavyMetal": false,
+      "safetyClass": "GREEN",
+      "ingredients": [
+        {
+          "ingredientId": "apple-snail",
+          "quantity": "பானையில் பாதி அளவு",
+          "sutthiNote": "Washed and purified"
+        },
+        {
+          "ingredientId": "indian-mallow",
+          "quantity": "இலைச் சாறு தேவையான அளவு",
+          "sutthiNote": "Fresh leaf juice"
+        }
+      ],
+      "indicatedDiseases": [
+        {
+          "diseaseId": "kuruthi-eruvaimulai",
+          "evidenceNote": "Gunapadam Thathu Jeevam p.390"
+        },
+        {
+          "diseaseId": "kaduppu-kalichal",
+          "evidenceNote": "Gunapadam Thathu Jeevam p.390"
+        }
+      ],
+      "contraindications": [
+        {
+          "conditionName": "Hypercalcaemia",
+          "severity": "MODERATE",
+          "note": "Calcium rich parpam - monitor serum calcium."
+        }
+      ]
+    },
+    {
+      "id": "naga-parpam",
+      "nameTamil": "நாக பற்பம்",
+      "nameEnglish": "Naga Parpam",
+      "sfiCode": "SFI-P-021",
+      "dosageForm": "Parpam",
+      "sourceBook": "Siddha Vaithiya Thirattu (1987)",
+      "pageNo": 147,
+      "verseNo": "236-237",
+      "preparationMethod": "நாகக் கட்டியை அயக்கரண்டிக்குள் இட்டு அடுப்பேற்றி, கரிசாலைச் சாறு நாழி விட்டு நான்கு சாமம் சுருக்குப் போட்டு நீறச் செய்யவும். | Melt purified zinc in an iron ladle, quench and triturate repeatedly with Eclipta prostrata juice for four jamams until it is fully calcined.",
+      "dose": "100-200 மி.கி., இருவேளை (100-200 mg twice daily)",
+      "anupanam": "தேன், மிளகுத் தூள்",
+      "shelfLife": "5 years",
+      "containsHeavyMetal": true,
+      "safetyClass": "AMBER",
+      "ingredients": [
+        {
+          "ingredientId": "zinc",
+          "quantity": "1 கட்டி",
+          "sutthiNote": "Sutthi mandatory before calcination"
+        },
+        {
+          "ingredientId": "false-daisy",
+          "quantity": "13 லிட்டர் சாறு",
+          "sutthiNote": "Fresh juice, four jamam trituration"
+        }
+      ],
+      "indicatedDiseases": [
+        {
+          "diseaseId": "ilaippu-suvasakasam",
+          "evidenceNote": "Siddha Vaithiya Thirattu verse 237"
+        },
+        {
+          "diseaseId": "eelai",
+          "evidenceNote": "Siddha Vaithiya Thirattu verse 237"
+        }
+      ],
+      "contraindications": [
+        {
+          "conditionName": "Pregnancy",
+          "severity": "MAJOR",
+          "note": "Zinc bearing calcined preparation - avoid throughout pregnancy and lactation."
+        },
+        {
+          "conditionName": "Chronic kidney disease",
+          "severity": "MAJOR",
+          "note": "Reduced metal clearance; avoid or reduce dose with nephrology input."
+        }
+      ]
+    },
+    {
+      "id": "linga-chenthuram",
+      "nameTamil": "லிங்க செந்தூரம்",
+      "nameEnglish": "Linga Chenthuram",
+      "sfiCode": "SFI-C-008",
+      "dosageForm": "Chenthuram",
+      "sourceBook": "Gunapadam Thathu Jeeva Vaguppu (1968)",
+      "pageNo": 214,
+      "verseNo": "12:06",
+      "preparationMethod": "சுத்தி செய்த லிங்கத்தைக் கந்தகத்துடன் சேர்த்து வளுகையாக்கி, குகைப் புடமிட்டு செந்தூரம் செய்யவும். | Combine purified cinnabar with purified sulphur, form kajjali and fire in a gugai puddam to obtain the red chenthuram.",
+      "dose": "30-65 மி.கி., ஒருவேளை (30-65 mg once daily)",
+      "anupanam": "தேன், வெற்றிலைச் சாறு",
+      "shelfLife": "5 years",
+      "containsHeavyMetal": true,
+      "safetyClass": "RED",
+      "ingredients": [
+        {
+          "ingredientId": "cinnabar",
+          "quantity": "35 கிராம்",
+          "sutthiNote": "Strict sutthi; expert supervision"
+        },
+        {
+          "ingredientId": "sulphur",
+          "quantity": "35 கிராம",
+          "sutthiNote": "Purified with milk and ghee"
+        }
+      ],
+      "indicatedDiseases": [
+        {
+          "diseaseId": "vatha-noi",
+          "evidenceNote": "Gunapadam Thathu Jeevam p.214"
+        }
+      ],
+      "contraindications": [
+        {
+          "conditionName": "Pregnancy",
+          "severity": "MAJOR",
+          "note": "Mercury bearing chenthuram is absolutely contraindicated in pregnancy."
+        },
+        {
+          "conditionName": "Chronic kidney disease",
+          "severity": "MAJOR",
+          "note": "Mercury is nephrotoxic; absolutely contraindicated."
+        },
+        {
+          "conditionName": "Paediatric age below 12",
+          "severity": "MAJOR",
+          "note": "Not to be used in children."
+        },
+        {
+          "conditionName": "Liver disease",
+          "severity": "MAJOR",
+          "note": "Hepatic impairment increases mercury toxicity risk."
+        }
+      ]
+    },
+    {
+      "id": "ayya-parpam",
+      "nameTamil": "அயப் பற்பம்",
+      "nameEnglish": "Ayya Parpam (Iron Parpam)",
+      "sfiCode": "SFI-P-003",
+      "dosageForm": "Parpam",
+      "sourceBook": "Gunapadam Thathu Jeeva Vaguppu (1968)",
+      "pageNo": 162,
+      "verseNo": "09:11",
+      "preparationMethod": "சுத்தி செய்த இரும்புத் தூளைக் கடுக்காய்க் கஷாயத்தில் ஊறவைத்து அரைத்து வில்லை தட்டிப் புடமிடவும். | Steep purified iron powder in Terminalia chebula decoction, levigate, form discs and fire repeatedly.",
+      "dose": "100-200 மி.கி., இருவேளை (100-200 mg twice daily)",
+      "anupanam": "தேன், நெய்",
+      "shelfLife": "5 years",
+      "containsHeavyMetal": true,
+      "safetyClass": "AMBER",
+      "ingredients": [
+        {
+          "ingredientId": "iron",
+          "quantity": "70 கிராம்",
+          "sutthiNote": "Sutthi with kadukkai decoction"
+        }
+      ],
+      "indicatedDiseases": [
+        {
+          "diseaseId": "paandu",
+          "evidenceNote": "Gunapadam Thathu Jeevam p.162"
+        }
+      ],
+      "contraindications": [
+        {
+          "conditionName": "Haemochromatosis",
+          "severity": "MAJOR",
+          "note": "Iron overload state - iron parpam contraindicated."
+        },
+        {
+          "conditionName": "Peptic ulcer",
+          "severity": "MODERATE",
+          "note": "May aggravate gastric irritation; give after food."
+        }
+      ]
+    },
+    {
+      "id": "sangu-parpam",
+      "nameTamil": "சங்கு பற்பம்",
+      "nameEnglish": "Sangu Parpam",
+      "sfiCode": "SFI-P-026",
+      "dosageForm": "Parpam",
+      "sourceBook": "Siddha TERM-1 SFI Preparations",
+      "pageNo": 22,
+      "verseNo": "21:04",
+      "preparationMethod": "சுத்தி செய்த சங்கைச் சுண்ணாம்புக் கல்லுடன் புடமிட்டு, எலுமிச்சைச் சாற்றால் அரைத்து மீண்டும் புடமிடவும். | Fire purified conch shell with limestone, levigate with lime juice and re-fire.",
+      "dose": "200-400 மி.கி., இருவேளை (200-400 mg twice daily)",
+      "anupanam": "நெய், பால்",
+      "shelfLife": "5 years",
+      "containsHeavyMetal": false,
+      "safetyClass": "GREEN",
+      "ingredients": [
+        {
+          "ingredientId": "conch-shell",
+          "quantity": "1 பங்கு",
+          "sutthiNote": "Sutthi with lime juice"
+        }
+      ],
+      "indicatedDiseases": [
+        {
+          "diseaseId": "gunmam",
+          "evidenceNote": "SFI Term-1 p.22"
+        }
+      ],
+      "contraindications": []
+    },
+    {
+      "id": "muthuchippi-parpam",
+      "nameTamil": "முத்துச்சிப்பி பற்பம்",
+      "nameEnglish": "Muthuchippi Parpam",
+      "sfiCode": "SFI-P-019",
+      "dosageForm": "Parpam",
+      "sourceBook": "Siddha TERM-1 SFI Preparations",
+      "pageNo": 25,
+      "verseNo": "19:02",
+      "preparationMethod": "சுத்தி செய்த முத்துச்சிப்பியை ரோஜா நீரால் அரைத்து வில்லை தட்டி புடமிடவும். | Levigate purified pearl oyster shell with rose water, form discs and fire.",
+      "dose": "100-200 மி.கி., இருவேளை (100-200 mg twice daily)",
+      "anupanam": "பால், நெய்",
+      "shelfLife": "5 years",
+      "containsHeavyMetal": false,
+      "safetyClass": "GREEN",
+      "ingredients": [
+        {
+          "ingredientId": "pearl-oyster-shell",
+          "quantity": "1 பங்கு",
+          "sutthiNote": "Sutthi with rose water"
+        }
+      ],
+      "indicatedDiseases": [
+        {
+          "diseaseId": "gunmam",
+          "evidenceNote": "SFI Term-1 p.25"
+        }
+      ],
+      "contraindications": []
+    },
+    {
+      "id": "nilavembu-kudineer",
+      "nameTamil": "நிலவேம்பு குடிநீர்",
+      "nameEnglish": "Nilavembu Kudineer",
+      "sfiCode": "SFI-K-001",
+      "dosageForm": "Kudineer",
+      "sourceBook": "Siddha Formulary of India Part-1",
+      "pageNo": 88,
+      "verseNo": "K-01",
+      "preparationMethod": "நிலவேம்பு உள்ளிட்ட ஒன்பது மூலிகைகளைச் சம அளவில் இடித்து, 8 பங்கு நீரில் இட்டு 1 பங்காகச் சுண்டக் காய்ச்சவும். | Coarsely powder the nine herbs in equal parts, boil in eight parts water and reduce to one part.",
+      "dose": "30-60 மி.லி., இருவேளை (30-60 ml twice daily)",
+      "anupanam": "வெது நீர்",
+      "shelfLife": "Prepare fresh",
+      "containsHeavyMetal": false,
+      "safetyClass": "GREEN",
+      "ingredients": [
+        {
+          "ingredientId": "king-of-bitters",
+          "quantity": "1 பங்கு",
+          "sutthiNote": "No sutthi required"
+        }
+      ],
+      "indicatedDiseases": [
+        {
+          "diseaseId": "suram",
+          "evidenceNote": "Siddha Formulary of India Part-1"
+        }
+      ],
+      "contraindications": []
+    },
+    {
+      "id": "vendhaya-churanam",
+      "nameTamil": "வெந்தயச் சூரணம்",
+      "nameEnglish": "Vendhaya Churanam",
+      "sfiCode": "SFI-S-011",
+      "dosageForm": "Churanam",
+      "sourceBook": "Siddha Formulary of India Part-2",
+      "pageNo": 134,
+      "verseNo": "S-11",
+      "preparationMethod": "வெந்தயத்தை வறுத்து நைய இடித்துச் சலித்து வைக்கவும். | Dry roast fenugreek seeds, powder finely and sieve.",
+      "dose": "2-4 கிராம், இருவேளை (2-4 g twice daily)",
+      "anupanam": "வெது நீர், மோர்",
+      "shelfLife": "1 year",
+      "containsHeavyMetal": false,
+      "safetyClass": "GREEN",
+      "ingredients": [
+        {
+          "ingredientId": "fenugreek",
+          "quantity": "தேவையான அளவு",
+          "sutthiNote": "Dry roasted"
+        }
+      ],
+      "indicatedDiseases": [
+        {
+          "diseaseId": "mathumegam",
+          "evidenceNote": "Siddha Formulary of India Part-2"
+        }
+      ],
+      "contraindications": [
+        {
+          "conditionName": "Pregnancy",
+          "severity": "MODERATE",
+          "note": "Fenugreek in large dose may stimulate uterine activity."
+        }
+      ]
+    },
+    {
+      "id": "thiripala-churanam",
+      "nameTamil": "திரிபலா சூரணம்",
+      "nameEnglish": "Thiripala Churanam",
+      "sfiCode": "SFI-S-004",
+      "dosageForm": "Churanam",
+      "sourceBook": "Siddha Formulary of India Part-1",
+      "pageNo": 119,
+      "verseNo": "S-04",
+      "preparationMethod": "கடுக்காய், தான்றிக்காய், நெல்லிக்காய் சம அளவில் இடித்துச் சலிக்கவும். | Powder Terminalia chebula, Terminalia bellirica and Emblica officinalis in equal parts and sieve.",
+      "dose": "3-5 கிராம், இரவில் (3-5 g at night)",
+      "anupanam": "வெது நீர்",
+      "shelfLife": "1 year",
+      "containsHeavyMetal": false,
+      "safetyClass": "GREEN",
+      "ingredients": [
+        {
+          "ingredientId": "turmeric",
+          "quantity": "சம பங்கு",
+          "sutthiNote": "No sutthi required"
+        }
+      ],
+      "indicatedDiseases": [
+        {
+          "diseaseId": "malachikkal",
+          "evidenceNote": "Siddha Formulary of India Part-1"
+        }
+      ],
+      "contraindications": [
+        {
+          "conditionName": "Diarrhoea",
+          "severity": "MODERATE",
+          "note": "Purgative churanam will worsen loose stool."
+        }
+      ]
+    }
+  ],
+  "interactions": [
+    {
+      "ingredientId": "fenugreek",
+      "drugId": "metformin",
+      "severity": "MODERATE",
+      "mechanism": "Fenugreek has an independent hypoglycaemic action that adds to metformin.",
+      "advice": "Monitor fasting glucose; separate doses by 2 hours and review antidiabetic dosage."
+    },
+    {
+      "ingredientId": "fenugreek",
+      "drugId": "glimepiride",
+      "severity": "MAJOR",
+      "mechanism": "Additive hypoglycaemia with sulfonylurea can cause symptomatic low sugar.",
+      "advice": "Avoid unsupervised combination; counsel patient on hypoglycaemia symptoms."
+    },
+    {
+      "ingredientId": "neem",
+      "drugId": "metformin",
+      "severity": "MODERATE",
+      "mechanism": "Neem lowers blood glucose and may potentiate antidiabetic therapy.",
+      "advice": "Monitor glucose closely during the first two weeks."
+    },
+    {
+      "ingredientId": "turmeric",
+      "drugId": "warfarin",
+      "severity": "MAJOR",
+      "mechanism": "Curcumin has antiplatelet activity and may increase INR with warfarin.",
+      "advice": "Avoid high-dose turmeric preparations; monitor INR if unavoidable."
+    },
+    {
+      "ingredientId": "dry-ginger",
+      "drugId": "aspirin",
+      "severity": "MODERATE",
+      "mechanism": "Ginger inhibits thromboxane synthesis and adds to aspirin bleeding risk.",
+      "advice": "Limit dose; watch for bruising or gum bleeding."
+    },
+    {
+      "ingredientId": "iron",
+      "drugId": "doxycycline",
+      "severity": "MAJOR",
+      "mechanism": "Iron chelates tetracyclines and markedly reduces antibiotic absorption.",
+      "advice": "Separate administration by at least 3 hours."
+    },
+    {
+      "ingredientId": "iron",
+      "drugId": "ciprofloxacin",
+      "severity": "MAJOR",
+      "mechanism": "Iron chelates fluoroquinolones reducing bioavailability.",
+      "advice": "Separate administration by at least 3 hours."
+    },
+    {
+      "ingredientId": "iron",
+      "drugId": "levothyroxine",
+      "severity": "MODERATE",
+      "mechanism": "Iron reduces levothyroxine absorption.",
+      "advice": "Give levothyroxine on empty stomach 4 hours apart."
+    },
+    {
+      "ingredientId": "conch-shell",
+      "drugId": "levothyroxine",
+      "severity": "MODERATE",
+      "mechanism": "Calcium from conch parpam impairs levothyroxine absorption.",
+      "advice": "Separate by 4 hours."
+    },
+    {
+      "ingredientId": "pearl-oyster-shell",
+      "drugId": "levothyroxine",
+      "severity": "MODERATE",
+      "mechanism": "Calcium from pearl parpam impairs levothyroxine absorption.",
+      "advice": "Separate by 4 hours."
+    },
+    {
+      "ingredientId": "zinc",
+      "drugId": "ciprofloxacin",
+      "severity": "MODERATE",
+      "mechanism": "Zinc chelates fluoroquinolones.",
+      "advice": "Separate by 2-3 hours."
+    },
+    {
+      "ingredientId": "zinc",
+      "drugId": "penicillamine",
+      "severity": "MAJOR",
+      "mechanism": "Penicillamine and zinc mutually reduce absorption and alter metal balance.",
+      "advice": "Do not co-administer without specialist advice."
+    },
+    {
+      "ingredientId": "cinnabar",
+      "drugId": "furosemide",
+      "severity": "MAJOR",
+      "mechanism": "Mercury bearing preparation with a loop diuretic increases renal burden.",
+      "advice": "Contraindicated; assess renal function before any mercury bearing drug."
+    },
+    {
+      "ingredientId": "calomel",
+      "drugId": "furosemide",
+      "severity": "MAJOR",
+      "mechanism": "Calomel with diuretic increases risk of mercury accumulation.",
+      "advice": "Contraindicated in reduced renal clearance."
+    },
+    {
+      "ingredientId": "white-arsenic",
+      "drugId": "warfarin",
+      "severity": "MAJOR",
+      "mechanism": "Arsenic bearing preparation with anticoagulant raises bleeding and marrow risk.",
+      "advice": "Do not combine; expert supervision mandatory."
+    },
+    {
+      "ingredientId": "giloy",
+      "drugId": "tacrolimus",
+      "severity": "MAJOR",
+      "mechanism": "Giloy is an immunostimulant and can oppose tacrolimus.",
+      "advice": "Avoid in transplant and autoimmune patients on immunosuppressants."
+    },
+    {
+      "ingredientId": "sulphur",
+      "drugId": "pantoprazole",
+      "severity": "MINOR",
+      "mechanism": "Gastric pH change may alter sulphur preparation tolerance.",
+      "advice": "Take after food; monitor dyspepsia."
+    },
+    {
+      "ingredientId": "radish",
+      "drugId": "furosemide",
+      "severity": "MINOR",
+      "mechanism": "Radish juice has a mild diuretic effect additive to furosemide.",
+      "advice": "Monitor electrolytes and hydration."
+    }
+  ],
+  "sourceDocuments": [
+    {
+      "id": "sfi-t1",
+      "title": "Siddha TERM-1 SFI Preparations",
+      "author": "GMK BSMS 2nd Year Compilation",
+      "bookCode": "SFI-T1",
+      "language": "Tamil",
+      "totalPages": 47,
+      "filePath": "corpus/Siddha TERM 1 SFI preparations.pdf",
+      "uploadedBy": "admin"
+    },
+    {
+      "id": "mrk-t1",
+      "title": "Siddha 1st Term Marunthakaviyal Preparation",
+      "author": "Dept. of Gunapadam, GSMC Palayamkottai",
+      "bookCode": "MRK-T1",
+      "language": "Tamil",
+      "totalPages": 69,
+      "filePath": "corpus/Siddha marunthakaviyal.pdf",
+      "uploadedBy": "admin"
+    },
+    {
+      "id": "tva-bok-0025367",
+      "title": "Siddha Principles of Social and Preventive Medicine",
+      "author": "Central Council for Research in Siddha",
+      "bookCode": "TVA-BOK-0025367",
+      "language": "English",
+      "totalPages": 412,
+      "filePath": "corpus/TVA_BOK_0025367_Siddha_principles_of_social_and_preventive_medicine.pdf",
+      "uploadedBy": "admin"
+    },
+    {
+      "id": "park-23",
+      "title": "Parks Textbook of Preventive and Social Medicine (23rd ed.)",
+      "author": "K. Park",
+      "bookCode": "PARK-23",
+      "language": "English",
+      "totalPages": 932,
+      "filePath": "corpus/parks-preventive-social-medicine-23rd-ed.pdf",
+      "uploadedBy": "admin"
+    },
+    {
+      "id": "fld-d1",
+      "title": "Siddha Medicinal Plant Field Visit Report - Day 1",
+      "author": "Navasakthivel S M, Thulasi Lakshmanan M",
+      "bookCode": "FLD-D1",
+      "language": "English",
+      "totalPages": 18,
+      "filePath": "corpus/Siddha Day -1 report.pdf",
+      "uploadedBy": "admin"
+    },
+    {
+      "id": "fld-d2",
+      "title": "Siddha Field Visit Report - Day 2",
+      "author": "Navasakthivel S M, Thulasi Lakshmanan M",
+      "bookCode": "FLD-D2",
+      "language": "English",
+      "totalPages": 14,
+      "filePath": "corpus/Siddha Day -2 Report.pdf",
+      "uploadedBy": "admin"
+    },
+    {
+      "id": "test-sample",
+      "title": "Synthetic Test Document",
+      "author": "SiddhaMind AI test fixture",
+      "bookCode": "TEST-01",
+      "language": "mixed",
+      "totalPages": 4,
+      "filePath": "corpus/test-sample.pdf",
+      "uploadedBy": "admin"
+    }
+  ],
+  "notifications": [
+    {
+      "userId": "admin",
+      "title": "Welcome to SiddhaMind AI",
+      "message": "Upload your Siddha PDF corpus from Admin > Knowledge Base and click Index to activate the AI assistant."
+    },
+    {
+      "userId": "doctor",
+      "title": "Safety module active",
+      "message": "Drug interaction rules for 20 ingredients and 12 allopathic drugs are loaded."
+    },
+    {
+      "userId": "student",
+      "title": "Formulary ready",
+      "message": "10 seed formulations with source citations are available for study."
+    }
+  ]
+}

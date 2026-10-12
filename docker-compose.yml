@@ -1,0 +1,130 @@
+name: siddhamind
+
+# Postgres is Supabase-hosted, so there is no database service here and no Qdrant:
+# embeddings live in the same instance, in doc_chunks.embedding.
+#
+# Connection roles, which are not interchangeable:
+#   JAVA_DB_URL      transaction pooler :6543 - runtime queries from Spring Boot
+#   PYTHON_DB_URL    session connection :5432 - ingestion and retrieval
+#   MIGRATION_DB_URL session connection :5432 - Flyway only (advisory locks need a
+#                    stable session, which a transaction pooler cannot provide)
+
+services:
+  redis:
+    image: redis:7-alpine
+    container_name: siddhamind-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  python-ai-service:
+    build:
+      context: ./siddhamind-ai
+    container_name: siddhamind-ai
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      ENVIRONMENT: prod
+      LOG_LEVEL: INFO
+      INTERNAL_API_TOKEN: ${INTERNAL_API_TOKEN:?INTERNAL_API_TOKEN must be set in .env}
+      PYTHON_DB_URL: ${PYTHON_DB_URL:?PYTHON_DB_URL must be set in .env}
+      EMBEDDING_MODEL: ${EMBEDDING_MODEL:-BAAI/bge-m3}
+      # Must match doc_chunks.embedding; the service refuses to run on a mismatch.
+      EMBEDDING_DIM: ${EMBEDDING_DIM:-1024}
+      EMBEDDING_BATCH_SIZE: ${EMBEDDING_BATCH_SIZE:-16}
+      # Preloaded off the event loop at startup, so /health answers immediately
+      # while the ~2 GB of weights are still loading.
+      EMBEDDING_WARMUP: ${EMBEDDING_WARMUP:-true}
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      GEMINI_MODEL: ${GEMINI_MODEL:-gemini-2.0-flash}
+      # OCR. TESSERACT_CMD and POPPLER_PATH are deliberately unset: the image
+      # installs both binaries on PATH. They exist for native Windows runs.
+      OCR_LANGUAGES: ${OCR_LANGUAGES:-tam+eng}
+      OCR_MIN_CONFIDENCE: ${OCR_MIN_CONFIDENCE:-45.0}
+      OCR_DPI: ${OCR_DPI:-300}
+      CHUNK_SIZE: ${CHUNK_SIZE:-900}
+      CHUNK_OVERLAP: ${CHUNK_OVERLAP:-150}
+      CORPUS_DIR: /data/corpus
+      UPLOAD_DIR: /data/uploads
+      REDIS_URL: redis://redis:6379/0
+      # Cache the embedding model between restarts instead of re-downloading ~2 GB.
+      HF_HOME: /data/hf-cache
+    volumes:
+      # Read-only: ingestion reads the corpus and writes only to Postgres.
+      - ./corpus:/data/corpus:ro
+      - ./uploads:/data/uploads
+      - hf_cache:/data/hf-cache
+    # torch plus bge-m3 needs roughly 4 GB resident during ingestion. Below that
+    # the container is OOM-killed mid-run, which looks like an unexplained
+    # restart rather than a memory error.
+    shm_size: 1gb
+    depends_on:
+      redis:
+        condition: service_healthy
+
+  java-service:
+    build:
+      context: ./siddhamind-core
+    container_name: siddhamind-core
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      JAVA_DB_URL: ${JAVA_DB_URL:?JAVA_DB_URL must be set in .env}
+      # Flyway runs at startup and must not go through the transaction pooler.
+      # No fallback to PYTHON_DB_URL: that is a libpq URL (postgresql://...) and
+      # Flyway needs JDBC, so the container would refuse to start. Left empty,
+      # FlywayConfig logs a warning and migrates over the runtime connection.
+      MIGRATION_DB_URL: ${MIGRATION_DB_URL:-}
+      AI_SERVICE_URL: http://python-ai-service:8000
+      INTERNAL_API_TOKEN: ${INTERNAL_API_TOKEN:?INTERNAL_API_TOKEN must be set in .env}
+      SEED_ENABLED: ${SEED_ENABLED:-false}
+      SEED_FORCE: ${SEED_FORCE:-false}
+      CORPUS_DIR: /data/corpus
+      UPLOAD_DIR: /data/uploads
+    volumes:
+      - ./corpus:/data/corpus
+      - ./uploads:/data/uploads
+    depends_on:
+      python-ai-service:
+        condition: service_started
+
+  # The React client. Runs the Vite dev server rather than a built bundle
+  # behind a static server, because the proxy is what keeps the page and the
+  # API on one origin - and that is what makes the JSESSIONID cookie
+  # first-party. A static build would need either CORS with SameSite=None
+  # (and therefore HTTPS) or a reverse proxy in front of both services.
+  #
+  # VITE_PROXY_TARGET points at the service name, not localhost: inside the
+  # compose network "localhost" is this container.
+  react-app:
+    image: node:22-alpine
+    container_name: siddhamind-react
+    restart: unless-stopped
+    working_dir: /app
+    command: sh -c "npm install && npm run dev -- --host 0.0.0.0"
+    ports:
+      - "5173:5173"
+    environment:
+      VITE_PROXY_TARGET: http://java-service:8080
+    volumes:
+      - ./react-app:/app
+      # Keeps the container's node_modules off the host mount, so a Linux
+      # install does not overwrite (or get overwritten by) a Windows one.
+      - react_node_modules:/app/node_modules
+    depends_on:
+      java-service:
+        condition: service_started
+
+volumes:
+  redis_data:
+  hf_cache:
+  react_node_modules:

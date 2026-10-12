@@ -1,0 +1,236 @@
+/* SiddhaMind AI — Design System v2.
+   Layered ON TOP of tokens.css + siddhamind.css, which main.jsx describes as
+   the design as delivered and not hand-maintained. Everything new lives here so
+   those two stay diffable against the original export.
+
+   Every colour below is a token. Nothing in this file hardcodes a hex, which is
+   what lets the light theme work without touching a single component. */
+
+/* ——————————————————————————————— page transition ——————————————————————— */
+/* The wrapper must not create a containing block that breaks position:fixed
+   children (the drawer), so no transform/filter is left on it at rest. */
+.sm-page-transition { will-change: opacity; }
+
+/* The palette trigger shows its shortcut, because a shortcut nobody can see is
+   a shortcut only the person who built it knows about. */
+.sm-palette-trigger { min-width: 180px; justify-content: flex-start; color: var(--mu); }
+@media (max-width: 860px) {
+  .sm-palette-trigger { min-width: 0; }}
+
+kbd, .sm-palette-kbd {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10.5px;
+  line-height: 1;
+  padding: 3px 5px;
+  border-radius: 5px;
+  border: 1px solid var(--line);
+  background: var(--s3);
+  color: var(--mu);
+}
+
+/* ——————————————————————————————— command palette ——————————————————————— */
+.sm-palette-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 12vh 16px 16px;
+  background: rgba(4, 5, 12, .55);
+}
+:root[data-theme="light"] .sm-palette-backdrop { background: rgba(20, 22, 43, .28); }
+
+/* Signature moment #2. Sits behind the dialog, never behind its text. */
+.sm-palette-aurora {
+  position: absolute;
+  top: 6vh;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(680px, 94vw);
+  height: 260px;
+  background: linear-gradient(115deg, var(--gold), var(--jade));
+  opacity: .16;
+  filter: blur(64px);
+  pointer-events: none;
+}
+
+/* The glass surface itself.
+   It was applied by the command palette and the toasts from the beginning but
+   never defined - the only rule mentioning it was `.sm-drawer.sm-glass`, which
+   set a border and nothing else, so both floating surfaces rendered fully
+   transparent over the page behind them. Measured in Chrome before this rule
+   existed: background rgba(0,0,0,0), backdrop-filter none, box-shadow none.
+
+   Scoped to floating surfaces only, per the Design System v2 rule that glass
+   never touches a page-level or content surface. */
+.sm-glass {
+  background: var(--glass);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border: 1px solid var(--line2);
+  box-shadow: var(--e4);
+}
+/* Firefox without backdrop-filter would otherwise show the page through a
+   62%-opaque panel. An opaque surface is the correct fallback. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .sm-glass { background: var(--s1); }
+}
+
+.sm-palette {
+  position: relative;
+  width: min(640px, 100%);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  max-height: min(60vh, 520px);
+}
+
+.sm-palette-field {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--line2);
+  color: var(--mu);
+  flex: 0 0 auto;
+}
+.sm-palette-input {
+  flex: 1;
+  background: transparent;
+  border: 0;
+  outline: none;
+  color: var(--tx);
+  font-family: var(--font-body);
+  font-size: 15px;
+}
+.sm-palette-input::placeholder { color: var(--mu); }
+
+.sm-palette-list { overflow-y: auto; padding: 6px; flex: 1 1 auto; }
+
+.sm-palette-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 9px 11px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--mu);
+  font-size: 13.5px;
+  text-align: left;
+  cursor: pointer;
+}
+.sm-palette-row[data-active="true"] { background: var(--goldT); color: var(--tx); }
+.sm-palette-glyph { width: 18px; text-align: center; color: var(--gold); flex: 0 0 auto; }
+.sm-palette-label { font-weight: 500; }
+.sm-palette-path {
+  margin-left: auto;
+  font-size: 11.5px;
+  color: var(--mu);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+@media (max-width: 560px) { .sm-palette-path { display: none; }}
+
+.sm-palette-empty { padding: 26px 16px; text-align: center; color: var(--mu); font-size: 13px; }
+
+.sm-palette-foot {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  padding: 9px 14px;
+  border-top: 1px solid var(--line2);
+  font-size: 11.5px;
+  color: var(--mu);
+  flex: 0 0 auto;
+}
+.sm-palette-foot span { display: inline-flex; align-items: center; gap: 4px; }
+.sm-palette-foot span:last-child { margin-left: auto; }
+@media (max-width: 560px) { .sm-palette-foot span:not(:last-child) { display: none; }}
+
+/* ——————————————————————————————— toasts ———————————————————————————————— */
+.sm-toast-viewport {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 140;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  width: min(360px, calc(100vw - 32px));
+  pointer-events: none;
+}
+.sm-toast {
+  pointer-events: auto;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 11px 12px;
+  border-radius: var(--radius-md);
+  color: var(--tx);
+}
+.sm-toast-mark {
+  flex: 0 0 auto;
+  width: 20px; height: 20px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  margin-top: 1px;
+}
+.sm-toast--success .sm-toast-mark { background: var(--jadeT); color: var(--jade); }
+.sm-toast--error   .sm-toast-mark { background: var(--redT); color: var(--red); }
+.sm-toast--info    .sm-toast-mark { background: var(--goldT);  color: var(--gold); }
+
+.sm-toast-text { flex: 1; min-width: 0; }
+.sm-toast-message { font-size: 13.5px; font-weight: 500; }
+.sm-toast-detail { font-size: 12px; color: var(--mu); margin-top: 2px; }
+.sm-toast-close {
+  flex: 0 0 auto;
+  background: transparent; border: 0; cursor: pointer;
+  color: var(--mu); font-size: 12px; line-height: 1; padding: 3px;
+  border-radius: 4px;
+}
+.sm-toast-close:hover { color: var(--tx); }
+
+@media (max-width: 640px) {
+  .sm-toast-viewport { right: 12px; left: 12px; bottom: 12px; width: auto; }}
+
+/* ——————————————————————————————— empty / error states —————————————————— */
+.sm-emptystate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 34px 20px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--line);
+  background: var(--s2);
+}
+.sm-emptystate-art { color: var(--gold); opacity: .55; margin-bottom: 12px; }
+.sm-emptystate--error .sm-emptystate-art { color: var(--red); opacity: .7; }
+.sm-emptystate-title { font-size: 14.5px; font-weight: 600; color: var(--tx); }
+.sm-emptystate-body {
+  font-size: 12.8px; color: var(--mu);
+  margin: 6px 0 0; max-width: 46ch; line-height: 1.55;
+}
+.sm-emptystate-action { margin-top: 14px; }
+
+/* ——————————————————————————————— assistant thinking ———————————————————— */
+/* The dots already use the `wave` keyframe from tokens.css (see
+   siddhamind.css:627) - that keyframe was defined for exactly this, so nothing
+   new is introduced. The only addition is the reduced-motion end state: the
+   global reduce rule collapses the animation to its 100% frame, which for
+   `wave` is opacity .45, leaving the dots dimmed as if stuck mid-fade. Holding
+   them at full opacity keeps "searching" legible without motion. */
+@media (prefers-reduced-motion: reduce) {
+  .sm-chat-thinking-dot { animation: none !important; opacity: 1; }
+}
+/* ------------------------------------------------ assistant chat layout ---- */
+/* The past-chats list is a 260px rail on a wide screen and a horizontal strip
+   above the thread on a narrow one. Only one of the two is ever in the layout,
+   so the same chats never render twice. */
+@media (max-width: 900px) {
+  .sm-chat-aside { display: none !important; }
+  .sm-chat-strip { display: flex !important; }
+}

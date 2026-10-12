@@ -1,0 +1,36 @@
+/* SiddhaMind AI — application styles.
+   Loaded after tokens.css. Classes are prefixed sm-. Component blocks are
+   grouped and commented so a backend/frontend dev can find the piece they
+   need to touch without reading the whole file. */
+
+[hidden] { display: none !important; }
+
+/* ============================== buttons ============================== */
+.sm-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 9px 16px; border-radius: 9px; font-size: 13px; font-weight: 500;
+  cursor: pointer; min-height: 38px; white-space: nowrap;
+  transition: transform .09s, box-shadow .12s, background .15s, border-color .15s;
+  border: 1px solid transparent; text-decoration: none;
+}
+.sm-btn:active { transform: translateY(1px) scale(.994); }
+.sm-btn-ghost { border-color: transparent; background: transparent; color: var(--mu); }
+.sm-btn-ghost:hover { color: var(--tx); }
+@media (max-width: 640px) { .sm-btn { padding: 11px 18px; min-height: 44px; }}
+
+/* generic view-state switch: parent gets [data-view-state], children carry
+   [data-state-view="ready|loading|empty|error"] and only the match shows */
+[data-state-view] { display: none; }
+[data-view-state="ready"] [data-state-view="ready"],
+[data-view-state="loading"] [data-state-view="loading"],
+[data-view-state="empty"] [data-state-view="empty"],
+[data-view-state="error"] [data-state-view="error"] { display: block; }
+.sm-login-back {
+  position: relative; z-index: 1; color: var(--mu); font-size: 13px; font-weight: 500;
+  display: inline-flex; align-items: center; gap: 6px; transition: color .2s, gap .2s; width: fit-content;
+}
+.sm-login-back:hover { color: var(--gold); gap: 9px; }
+
+/* ============================== login: button states ============================== */
+.sm-btn-status { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; }
+.sm-btn-status[data-status="success"] { background: var(--jade); border-color: var(--jade); }

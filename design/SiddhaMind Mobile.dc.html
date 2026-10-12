@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..500&family=Manrope:wght@400;600&family=IBM+Plex+Mono&display=swap">
+<link rel="stylesheet" href="_ds/nocturne-0f502f35-0453-4217-be7f-451c26cb997d/styles.css">
+<script src="_ds/nocturne-0f502f35-0453-4217-be7f-451c26cb997d/_ds_bundle.js"></script>
+<style>body{margin:0;background:#07100D}a{color:#E0A43B}a:hover{color:#EDE6D3}</style>
+</helmet>
+<section style="padding:64px;display:flex;flex-direction:column;gap:40px;background:#07100D;color:#EDE6D3;font-family:Manrope,sans-serif;min-width:max-content">
+  <div style="display:flex;flex-direction:column;gap:8px">
+    <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#E0A43B;letter-spacing:.1em">SIDDHAMIND AI · MOBILE 390 × 844</span>
+    <h1 style="font-family:Fraunces,serif;font-weight:400;font-size:44px;margin:0">Landing, Login, Assistant, dashboards &amp; clinical flows</h1>
+    <span style="color:#A9B3A6">Each phone runs the live prototype — scroll and tap inside. Desktop: <a href="SiddhaMind.dc.html">SiddhaMind.dc.html</a></span>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;gap:64px 48px;align-items:flex-start;width:2142px">
+    <sc-for list="{{ phones }}" as="p" hint-placeholder-count="5">
+      <figure id="{{ p.id }}" style="margin:0;display:flex;flex-direction:column;gap:16px">
+        <div style="width:390px;height:844px;border-radius:48px;padding:10px;background:#1a2621;box-shadow:0 0 0 1px rgba(237,230,211,.14),0 40px 80px -30px rgba(0,0,0,.8)">
+          <iframe src="{{ p.src }}" title="{{ p.label }}" style="width:370px;height:824px;border:0;border-radius:38px;display:block;background:#0B1512"></iframe>
+        </div>
+        <figcaption style="display:flex;gap:12px;align-items:center;font-size:14px;color:#EDE6D3"><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;padding:2px 8px;border:1px solid #E0A43B;color:#E0A43B;border-radius:6px">{{ p.id }}</span>{{ p.label }}</figcaption>
+      </figure>
+    </sc-for>
+  </div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals(){
+    return { phones:[
+      {id:'M1',label:'Landing',src:'SiddhaMind.dc.html?screen=landing'},
+      {id:'M2',label:'Login',src:'SiddhaMind.dc.html?screen=login&role=student'},
+      {id:'M3',label:'Assistant — cited answer',src:'SiddhaMind.dc.html?screen=assistant&role=student&chat=c1'},
+      {id:'M4',label:'Assistant — not found in corpus',src:'SiddhaMind.dc.html?screen=assistant&role=practitioner&chat=c3'},
+      {id:'M5',label:'Navigation drawer',src:'SiddhaMind.dc.html?screen=pracDash&role=practitioner&drawer=1'},
+      {id:'M6',label:'Admin dashboard',src:'SiddhaMind.dc.html?screen=adminDash&role=admin'},
+      {id:'M7',label:'Practitioner dashboard',src:'SiddhaMind.dc.html?screen=pracDash&role=practitioner'},
+      {id:'M8',label:'Diagnosis intake',src:'SiddhaMind.dc.html?screen=intake&role=practitioner'},
+      {id:'M9',label:'Safety result — HIGH',src:'SiddhaMind.dc.html?screen=safetyResult&role=practitioner'},
+      {id:'M10',label:'Patient dashboard',src:'SiddhaMind.dc.html?screen=patientDash&role=patient'}
+    ]};
+  }
+}
+</script>
+</body>
+</html>

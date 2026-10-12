@@ -1,0 +1,11 @@
+-- Server-side session revocation.
+--
+-- Sessions are in-memory HttpSessions, so there is no session table to delete
+-- rows from when an admin suspends or resets a user. Instead each session records
+-- the user's session_version at sign-in, and AuthInterceptor compares it with the
+-- current value on every authenticated request. Suspend, reset and set-password
+-- increment it, so every session opened before that moment is answered with 401.
+--
+-- A separate migration rather than an edit to V5: V5 may already be applied, and
+-- Flyway's checksum validation would refuse to start against a changed V5.
+ALTER TABLE users ADD COLUMN session_version INTEGER NOT NULL DEFAULT 0;

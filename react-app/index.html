@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SiddhaMind AI</title>
+  <!-- Without this the browser asks for /favicon.ico on every load and logs a
+       404. SVG so one file covers every size; no .ico fallback because the
+       browsers this is built for all support it. -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <!-- Fonts are bundled locally in public/fonts and declared in
+       src/styles/fonts.css. No CDN: the app must render identically offline,
+       and a webfont request is also a third-party request on every load. The
+       @font-face rules keep Google's own unicode-range values, so a browser
+       still downloads only the subsets a page uses. -->
+</head>
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+</html>

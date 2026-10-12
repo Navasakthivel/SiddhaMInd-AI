@@ -1,0 +1,62 @@
+# ============================================================
+#  siddhamind-ai  |  Python 3.11+
+# ============================================================
+# Phase 1 (scaffold + Supabase/pgvector connection) - installed now.
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+pydantic==2.10.4
+pydantic-settings==2.7.1
+httpx==0.28.1
+python-multipart==0.0.20
+
+# Postgres + pgvector. asyncpg is the async driver; the pgvector package registers
+# the vector type codec so embeddings round-trip as Python lists instead of strings.
+asyncpg==0.30.0
+pgvector==0.3.6
+
+# ------------------------------------------------------------
+# Phase 4 (OCR -> chunk -> embed).
+# ------------------------------------------------------------
+# pdf2image shells out to poppler; pytesseract shells out to Tesseract. Both
+# binaries come from the Dockerfile, or from TESSERACT_CMD / POPPLER_PATH when
+# running natively on Windows.
+pdf2image==1.17.0
+pypdf==5.1.0
+pillow==11.1.0
+opencv-python-headless==4.10.0.84
+pytesseract==0.3.13
+numpy==2.2.1
+
+# INSTALL TORCH FIRST, FROM THE CPU INDEX, WITH THE VERSION PINNED:
+#
+#   pip install torch==2.13.0 --index-url https://download.pytorch.org/whl/cpu
+#
+# Then this line is already satisfied and pip leaves it alone. Both halves
+# matter and each fails silently on its own:
+#   * without --index-url, PyPI serves the CUDA build - ~2.5 GB of GPU runtime
+#     that is never used for CPU inference;
+#   * without the version pin, you get the latest CPU build and *this* line then
+#     reinstalls the pinned version from PyPI, i.e. the CUDA build, discarding
+#     the CPU one you just downloaded.
+sentence-transformers==3.3.1
+torch==2.13.0
+
+# ------------------------------------------------------------
+# Phase 5 (hybrid retrieval + Gemini generation).
+# Keyword search is Postgres full-text against ix_chunks_content_fts, so no BM25
+# library is needed. Reciprocal rank fusion is pure Python over the two ranked
+# lists - see app/retrieval/fusion.py.
+# ------------------------------------------------------------
+google-genai==0.3.0
+
+# ------------------------------------------------------------
+# Optional: Celery + Redis instead of FastAPI BackgroundTasks.
+# ------------------------------------------------------------
+# celery[redis]==5.4.0
+# redis==5.2.1
+
+# ------------------------------------------------------------
+# Dev / test
+# ------------------------------------------------------------
+pytest==8.3.4
+pytest-asyncio==0.25.0

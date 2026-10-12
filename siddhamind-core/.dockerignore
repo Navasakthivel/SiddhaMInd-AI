@@ -1,0 +1,4 @@
+target/
+.git/
+legacy-reference/
+*.md

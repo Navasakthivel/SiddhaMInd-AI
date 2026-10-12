@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Manrope:wght@400;500;600;700&family=Noto+Serif+Tamil:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="_ds/nocturne-0f502f35-0453-4217-be7f-451c26cb997d/styles.css">
+<script src="_ds/nocturne-0f502f35-0453-4217-be7f-451c26cb997d/_ds_bundle.js"></script>
+<script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+<style>
+:root,[data-theme="dark"]{--bg:#0B1512;--s1:#111F1A;--s2:#16271F;--s3:#1C3027;--line:rgba(237,230,211,.10);--line2:rgba(237,230,211,.18);--tx:#EDE6D3;--mu:#A9B3A6;--gold:#E0A43B;--goldT:rgba(224,164,59,.10);--goldT2:rgba(224,164,59,.24);--jade:#5FB58C;--red:#E0643F;--amb:#E8B04B;--va:#8FB8DE;--pi:#E0773F;--ka:#5FB58C;--redT:rgba(224,100,63,.12);--ambT:rgba(232,176,75,.12);--jadeT:rgba(95,181,140,.12);--vaT:rgba(143,184,222,.14);--glass:rgba(11,21,18,.62);--onGold:#0B1512}
+[data-theme="light"]{--bg:#FAF6EC;--s1:#F4EEDF;--s2:#EDE5D0;--s3:#E4DAC0;--line:rgba(15,42,33,.12);--line2:rgba(15,42,33,.22);--tx:#0F2A21;--mu:#4C5A52;--gold:#8A5A0B;--goldT:rgba(138,90,11,.08);--goldT2:rgba(138,90,11,.2);--jade:#23704C;--red:#B23E1C;--amb:#8E620C;--va:#2F6392;--pi:#A94A18;--ka:#23704C;--redT:rgba(178,62,28,.10);--ambT:rgba(142,98,12,.10);--jadeT:rgba(35,112,76,.10);--vaT:rgba(47,99,146,.10);--glass:rgba(250,246,236,.7);--onGold:#FAF6EC}
+:root,[data-theme]{--serif:"Fraunces",Georgia,serif;--sans:"Manrope",system-ui,sans-serif;--tamil:"Noto Serif Tamil",serif;--mono:"IBM Plex Mono",ui-monospace,monospace;--color-bg:var(--bg);--color-surface:var(--s2);--color-text:var(--tx);--color-accent:var(--gold);--color-divider:var(--line2);--color-accent-800:var(--goldT2);--color-accent-100:var(--gold);--color-neutral-800:var(--s3);--color-neutral-100:var(--tx);--font-heading:var(--serif);--font-body:var(--sans);--font-heading-weight:400}
+body{margin:0;background:var(--bg)}
+.btn,kbd,[aria-label="Past chats"] button,[role="tablist"] button,[role="group"] button{white-space:nowrap}
+*{scrollbar-width:thin;scrollbar-color:var(--line2) transparent}
+[aria-label="Past chats"]{scrollbar-width:none}
+.btn{font-family:var(--sans);font-weight:600}
+a{color:var(--gold)}a:hover{color:var(--tx)}
+input::placeholder,textarea::placeholder{color:var(--mu);opacity:.85}
+select option{background:var(--s2);color:var(--tx)}
+@keyframes smUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes smSlide{from{opacity:0;transform:translateX(-16px)}to{opacity:1;transform:none}}
+@keyframes smSpin{to{transform:rotate(360deg)}}
+@keyframes smSpinR{to{transform:rotate(-360deg)}}
+@keyframes smDraw{to{stroke-dashoffset:0}}
+@keyframes smRing{from{stroke-dashoffset:100}}
+@keyframes smBar{from{transform:scaleX(0)}}
+@keyframes smBarY{from{transform:scaleY(0)}}
+@keyframes smDot{0%,80%,100%{opacity:.25;transform:translateY(0)}40%{opacity:1;transform:translateY(-4px)}}
+@keyframes smPop{0%{opacity:0;transform:scale(.6)}70%{opacity:1;transform:scale(1.06)}100%{opacity:1;transform:scale(1)}}
+@keyframes smScale{from{transform:scale(.9)}to{transform:scale(1)}}
+@keyframes smIndet{0%{transform:translateX(-100%)}100%{transform:translateX(320%)}}
+@keyframes smPulse{0%,100%{box-shadow:0 0 0 0 var(--goldT2)}50%{box-shadow:0 0 0 8px transparent}}
+@keyframes smCaret{50%{opacity:0}}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:.001ms!important}}
+</style>
+</helmet>
+<div data-theme="{{ theme }}" style="min-height:100vh;background:var(--bg);color:var(--tx);font-family:var(--sans);font-size:15px;line-height:1.55">
+
+<sc-if value="{{ isLanding }}" hint-placeholder-val="{{ true }}">
+<div data-screen-label="01 Landing" style="position:relative;overflow:hidden">
+  <header style="display:flex;align-items:center;gap:24px;padding:16px clamp(16px,4vw,56px);border-bottom:1px solid var(--line);position:relative;z-index:2">
+    <button onClick="{{ goLanding }}" style="display:flex;align-items:center;gap:12px;background:none;border:0;color:var(--tx);cursor:pointer;padding:0;min-height:44px">
+      <svg width="32" height="32" viewBox="0 0 40 40" fill="none" stroke="var(--gold)" stroke-width="1.3" aria-hidden="true"><circle cx="20" cy="20" r="18" stroke-opacity=".5"></circle><ellipse cx="20" cy="20" rx="6" ry="15"></ellipse><ellipse cx="20" cy="20" rx="6" ry="15" transform="rotate(60 20 20)"></ellipse><ellipse cx="20" cy="20" rx="6" ry="15" transform="rotate(120 20 20)"></ellipse><circle cx="20" cy="20" r="2" fill="var(--gold)"></circle></svg>
+      <span style="font-family:var(--serif);font-size:21px;letter-spacing:-.01em">SiddhaMind <span style="font-family:var(--mono);font-size:12px;color:var(--gold);letter-spacing:.08em">AI</span></span>
+    </button>
+    <sc-if value="{{ notMobile }}" hint-placeholder-val="{{ true }}">
+      <nav style="display:flex;gap:32px;margin-left:auto;font-size:14px">
+        <a href="#modules" style="color:var(--mu);text-decoration:none">Modules</a>
+        <a href="#how" style="color:var(--mu);text-decoration:none">How it works</a>
+        <a href="#roles" style="color:var(--mu);text-decoration:none">Access</a>
+      </nav>
+    </sc-if>
+    <div style="display:flex;gap:8px;margin-left:auto">
+      <button class="btn btn-secondary" onClick="{{ goLogin }}" style="min-height:44px;padding:0 16px">Sign in</button>
+      <sc-if value="{{ notMobile }}" hint-placeholder-val="{{ true }}"><button class="btn btn-primary" onClick="{{ goRegister }}" style="min-height:44px;padding:0 18px">Create account</button></sc-if>
+    </div>
+  </header>
+
+  <section style="display:flex;flex-wrap:wrap;align-items:center;gap:48px;padding:clamp(40px,7vw,96px) clamp(16px,4vw,56px) clamp(48px,6vw,80px);max-width:1440px;margin:0 auto">
+    <div style="flex:1 1 440px;max-width:640px;display:flex;flex-direction:column;gap:24px">
+      <div style="font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);animation:smUp .7s ease both;animation-delay:.05s">Siddha medicine · clinical decision support</div>
+      <h1 style="font-family:var(--serif);font-weight:350;font-size:clamp(46px,6.4vw,88px);line-height:1;letter-spacing:-.025em;margin:0;animation:smUp .8s ease both;animation-delay:.15s">Rules decide.<br><em style="color:var(--gold);font-weight:300">AI explains.</em></h1>
+      <p style="font-size:clamp(16px,1.4vw,18px);color:var(--mu);max-width:540px;margin:0;text-wrap:pretty;animation:smUp .8s ease both;animation-delay:.28s">A searchable Siddha formulary, a rule-based drug-safety checker, Envagai Thervu diagnosis and an assistant that answers only from the scanned Tamil pharmacopoeia — with the book and page it came from.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;animation:smUp .8s ease both;animation-delay:.4s">
+        <button class="btn btn-primary" onClick="{{ goLogin }}" style="min-height:48px;padding:0 24px;font-size:15px;background-image:linear-gradient(110deg,transparent 35%,var(--goldT2) 50%,transparent 65%);background-size:250% 100%;background-position:130% 0;background-repeat:no-repeat;transition:background-position .8s ease,background-color .2s" style-hover="background-position:-30% 0;background-color:var(--goldT)">Sign in to SiddhaMind <i class="ph ph-arrow-right"></i></button>
+        <a href="#roles" class="btn btn-secondary" style="min-height:48px;padding:0 20px;font-size:15px;color:var(--tx)">Continue as a role</a>
+      </div>
+      <div style="display:flex;gap:24px;flex-wrap:wrap;font-family:var(--tamil);font-size:15px;color:var(--mu);animation:smUp .8s ease both;animation-delay:.52s">
+        <span>சித்த மருத்துவம்</span><span style="color:var(--gold)">·</span><span>எண்வகைத் தேர்வு</span><span style="color:var(--gold)">·</span><span>மருந்து பாதுகாப்பு</span>
+      </div>
+    </div>
+    <div style="flex:1 1 360px;max-width:560px;aspect-ratio:1;position:relative;margin:0 auto">
+      <svg viewBox="0 0 400 400" width="100%" height="100%" fill="none" stroke="var(--gold)" aria-hidden="true" style="position:absolute;inset:0">
+        <g style="transform-origin:200px 200px;animation:smSpin 160s linear infinite">
+          <circle cx="200" cy="200" r="190" stroke-opacity=".28"></circle>
+          <circle cx="200" cy="200" r="174" stroke-opacity=".5" stroke-dasharray="1.5 7" stroke-linecap="round" stroke-width="1.4"></circle>
+          <rect x="92" y="92" width="216" height="216" rx="34" stroke-opacity=".38"></rect>
+          <rect x="92" y="92" width="216" height="216" rx="34" stroke-opacity=".38" transform="rotate(45 200 200)"></rect>
+          <g fill="var(--gold)" stroke="none" fill-opacity=".8"><circle cx="347.8" cy="261.2" r="2.4"></circle><circle cx="261.2" cy="347.8" r="2.4"></circle><circle cx="138.8" cy="347.8" r="2.4"></circle><circle cx="52.2" cy="261.2" r="2.4"></circle><circle cx="52.2" cy="138.8" r="2.4"></circle><circle cx="138.8" cy="52.2" r="2.4"></circle><circle cx="261.2" cy="52.2" r="2.4"></circle><circle cx="347.8" cy="138.8" r="2.4"></circle></g>
+        </g>
+        <g style="transform-origin:200px 200px;animation:smSpinR 110s linear infinite" stroke-width="1.1">
+          <ellipse cx="200" cy="200" rx="44" ry="146" stroke-opacity=".7"></ellipse>
+          <ellipse cx="200" cy="200" rx="44" ry="146" stroke-opacity=".7" transform="rotate(45 200 200)"></ellipse>
+          <ellipse cx="200" cy="200" rx="44" ry="146" stroke-opacity=".7" transform="rotate(90 200 200)"></ellipse>
+          <ellipse cx="200" cy="200" rx="44" ry="146" stroke-opacity=".7" transform="rotate(135 200 200)"></ellipse>
+          <g fill="var(--gold)" stroke="none"><circle cx="310" cy="200" r="2.6"></circle><circle cx="277.8" cy="277.8" r="2.6"></circle><circle cx="200" cy="310" r="2.6"></circle><circle cx="122.2" cy="277.8" r="2.6"></circle><circle cx="90" cy="200" r="2.6"></circle><circle cx="122.2" cy="122.2" r="2.6"></circle><circle cx="200" cy="90" r="2.6"></circle><circle cx="277.8" cy="122.2" r="2.6"></circle></g>
+        </g>
+        <circle cx="200" cy="200" r="66" stroke-opacity=".6"></circle>
+        <circle cx="200" cy="200" r="34" stroke-opacity=".8"></circle>
+        <circle cx="200" cy="200" r="4" fill="var(--gold)" stroke="none"></circle>
+      </svg>
+      <svg viewBox="0 0 120 240" fill="none" stroke="var(--jade)" stroke-width="1.3" stroke-linecap="round" aria-hidden="true" style="position:absolute;left:-4%;bottom:-2%;width:30%">
+        <path pathLength="1" d="M60 236 C 58 180, 64 120, 58 20" style="stroke-dasharray:1;stroke-dashoffset:1;animation:smDraw 2.4s ease forwards;animation-delay:.5s"></path>
+        <path pathLength="1" d="M60 190 C 30 184, 18 164, 16 150 C 40 152, 56 170, 60 190" style="stroke-dasharray:1;stroke-dashoffset:1;animation:smDraw 1.4s ease forwards;animation-delay:1.1s"></path>
+        <path pathLength="1" d="M60 160 C 90 152, 102 132, 104 118 C 80 122, 64 140, 60 160" style="stroke-dasharray:1;stroke-dashoffset:1;animation:smDraw 1.4s ease forwards;animation-delay:1.4s"></path>
+        <path pathLength="1" d="M59 128 C 32 120, 22 100, 22 86 C 44 90, 56 108, 59 128" style="stroke-dasharray:1;stroke-dashoffset:1;animation:smDraw 1.4s ease forwards;animation-delay:1.7s"></path>
+        <path pathLength="1" d="M59 96 C 84 88, 94 70, 96 56 C 74 60, 62 78, 59 96" style="stroke-dasharray:1;stroke-dashoffset:1;animation:smDraw 1.4s ease forwards;animation-delay:2s"></path>
+        <path pathLength="1" d="M58 62 C 42 52, 38 36, 40 24 C 54 32, 58 46, 58 62" style="stroke-dasharray:1;stroke-dashoffset:1;animation:smDraw 1.4s ease forwards;animation-delay:2.3s"></path>
+      </svg>
+      <svg viewBox="0 0 120 240" fill="none" stroke="var(--gold)" stroke-width="1.2" stroke-linecap="round" aria-hidden="true" style="position:absolute;right:-2%;top:2%;width:22%;transform:scaleX(-1) rotate(18deg)">
+        <path pathLength="1" d="M60 236 C 58 180, 64 120, 58 20" style="stroke-dasharray:1;stroke-dashoffset:1;animation:smDraw 2.4s ease forwards;animation-delay:.9s"></path>
+        <path pathLength="1" d="M60 190 C 30 184, 18 164, 16 150 C 40 152, 56 170, 60 190" style="stroke-dasharray:1;stroke-dashoffset:1;animation:smDraw 1.4s ease forwards;animation-delay:1.6s"></path>
+        <path pathLength="1" d="M59 128 C 32 120, 22 100, 22 86 C 44 90, 56 108, 59 128" style="stroke-dasharray:1;stroke-dashoffset:1;animation:smDraw 1.4s ease forwards;animation-delay:2s"></path>
+        <path pathLength="1" d="M59 96 C 84 88, 94 70, 96 56 C 74 60, 62 78, 59 96" style="stroke-dasharray:1;stroke-dashoffset:1;animation:smDraw 1.4s ease forwards;animation-delay:2.4s"></path>
+      </svg>
+    </div>
+  </section>
+
+  <section id="modules" style="padding:clamp(48px,6vw,88px) clamp(16px,4vw,56px);max-width:1440px;margin:0 auto;display:flex;flex-direction:column;gap:32px">
+    <div style="display:flex;flex-direction:column;gap:8px;max-width:640px">
+      <div style="font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)">Modules</div>
+      <h2 style="font-family:var(--serif);font-weight:400;font-size:clamp(30px,3.4vw,44px);margin:0;letter-spacing:-.02em">Three tools over one verified formulary</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:24px">
+      <sc-for list="{{ moduleCards }}" as="m" hint-placeholder-count="3">
+        <button onClick="{{ goLogin }}" style="text-align:left;font:inherit;color:inherit;cursor:pointer;background:var(--s1);border:1px solid var(--line);border-radius:14px;padding:32px;display:flex;flex-direction:column;gap:16px;min-height:280px;transition:transform .25s ease,box-shadow .25s ease,border-color .25s;animation:smUp .7s ease both;animation-delay:{{ m.delay }}" style-hover="transform:translateY(-4px);border-color:var(--goldT2);box-shadow:0 18px 44px -16px var(--goldT2)">
+          <span style="width:48px;height:48px;border-radius:12px;border:1px solid var(--goldT2);display:grid;place-items:center;color:var(--gold);font-size:24px"><i class="{{ m.icon }}"></i></span>
+          <span style="font-family:var(--tamil);font-size:14px;color:var(--mu)">{{ m.ta }}</span>
+          <span style="font-family:var(--serif);font-size:26px;line-height:1.15;letter-spacing:-.01em">{{ m.title }}</span>
+          <span style="color:var(--mu);font-size:15px;flex:1;text-wrap:pretty">{{ m.body }}</span>
+          <span style="color:var(--gold);font-size:14px;font-weight:600;display:flex;align-items:center;gap:8px">Open module <i class="ph ph-arrow-right"></i></span>
+        </button>
+      </sc-for>
+    </div>
+  </section>
+
+  <section id="how" style="padding:clamp(48px,6vw,88px) clamp(16px,4vw,56px);max-width:1440px;margin:0 auto;display:flex;flex-direction:column;gap:40px">
+    <div style="display:flex;flex-direction:column;gap:8px;max-width:640px">
+      <div style="font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)">How it works</div>
+      <h2 style="font-family:var(--serif);font-weight:400;font-size:clamp(30px,3.4vw,44px);margin:0;letter-spacing:-.02em">The model never makes the call</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:40px">
+      <sc-for list="{{ howSteps }}" as="h" hint-placeholder-count="3">
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div style="display:flex;align-items:center;gap:16px"><span style="font-family:var(--mono);font-size:13px;color:var(--gold)">{{ h.n }}</span><span style="flex:1;height:1px;background:linear-gradient(to right,var(--goldT2),transparent)"></span></div>
+          <div style="font-family:var(--serif);font-size:28px;letter-spacing:-.01em">{{ h.title }}</div>
+          <p style="margin:0;color:var(--mu);text-wrap:pretty">{{ h.body }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section id="roles" style="padding:clamp(48px,6vw,88px) clamp(16px,4vw,56px);max-width:1440px;margin:0 auto;display:flex;flex-direction:column;gap:32px">
+    <div style="display:flex;flex-direction:column;gap:8px;max-width:640px">
+      <div style="font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)">Continue as</div>
+      <h2 style="font-family:var(--serif);font-weight:400;font-size:clamp(30px,3.4vw,44px);margin:0;letter-spacing:-.02em">Each role sees what it needs</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:16px">
+      <sc-for list="{{ roleCards }}" as="r" hint-placeholder-count="4">
+        <button onClick="{{ r.pick }}" style="text-align:left;font:inherit;color:inherit;cursor:pointer;background:var(--s1);border:1px solid var(--line);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:12px;min-height:200px;transition:transform .25s ease,box-shadow .25s ease,border-color .25s;animation:smUp .7s ease both;animation-delay:{{ r.delay }}" style-hover="transform:translateY(-4px);border-color:var(--goldT2);box-shadow:0 18px 44px -16px var(--goldT2)">
+          <span style="display:flex;justify-content:space-between;align-items:center"><i class="{{ r.icon }}" style="font-size:26px;color:{{ r.color }}"></i><i class="ph ph-arrow-up-right" style="color:var(--mu)"></i></span>
+          <span style="font-family:var(--serif);font-size:24px">{{ r.label }}</span>
+          <span style="color:var(--mu);font-size:14px;flex:1;text-wrap:pretty">{{ r.desc }}</span>
+        </button>
+      </sc-for>
+    </div>
+  </section>
+
+  <footer style="border-top:1px solid var(--line);padding:32px clamp(16px,4vw,56px);display:flex;flex-wrap:wrap;gap:24px;align-items:center;justify-content:space-between;max-width:1440px;margin:0 auto">
+    <div style="display:flex;flex-direction:column;gap:4px">
+      <span style="font-family:var(--serif);font-size:18px">SiddhaMind AI</span>
+      <span style="color:var(--mu);font-size:13px">© 2026 · Built on the Siddha Formulary of India preparations</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;border:1px solid var(--goldT2);border-radius:12px;padding:12px 16px;max-width:560px">
+      <i class="ph ph-info" style="color:var(--gold);font-size:20px"></i>
+      <span style="font-size:14px">Education and decision support — not a prescription. Consult a registered Siddha practitioner before taking any preparation.</span>
+    </div>
+  </footer>
+</div>
+</sc-if>
+
+<sc-if value="{{ isLogin }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="02 Login" style="min-height:100vh;display:flex;flex-wrap:wrap">
+  <sc-if value="{{ notMobile }}" hint-placeholder-val="{{ true }}">
+  <div style="flex:1 1 520px;position:relative;overflow:hidden;background:var(--s1);border-right:1px solid var(--line);display:flex;flex-direction:column;justify-content:space-between;padding:48px;min-height:100vh">
+    <button onClick="{{ goLanding }}" style="display:flex;align-items:center;gap:12px;background:none;border:0;color:var(--tx);cursor:pointer;padding:0;min-height:44px;align-self:flex-start;position:relative;z-index:1">
+      <svg width="32" height="32" viewBox="0 0 40 40" fill="none" stroke="var(--gold)" stroke-width="1.3" aria-hidden="true"><circle cx="20" cy="20" r="18" stroke-opacity=".5"></circle><ellipse cx="20" cy="20" rx="6" ry="15"></ellipse><ellipse cx="20" cy="20" rx="6" ry="15" transform="rotate(60 20 20)"></ellipse><ellipse cx="20" cy="20" rx="6" ry="15" transform="rotate(120 20 20)"></ellipse><circle cx="20" cy="20" r="2" fill="var(--gold)"></circle></svg>
+      <span style="font-family:var(--serif);font-size:21px">SiddhaMind <span style="font-family:var(--mono);font-size:12px;color:var(--gold)">AI</span></span>
+    </button>
+    <svg viewBox="0 0 400 400" fill="none" stroke="var(--gold)" aria-hidden="true" style="position:absolute;width:88%;max-width:600px;left:50%;top:50%;margin-left:-44%;margin-top:-44%;opacity:.9">
+      <g style="transform-origin:200px 200px;animation:smSpin 160s linear infinite">
+        <circle cx="200" cy="200" r="190" stroke-opacity=".22"></circle>
+        <circle cx="200" cy="200" r="174" stroke-opacity=".4" stroke-dasharray="1.5 7" stroke-linecap="round" stroke-width="1.4"></circle>
+        <rect x="92" y="92" width="216" height="216" rx="34" stroke-opacity=".3"></rect>
+        <rect x="92" y="92" width="216" height="216" rx="34" stroke-opacity=".3" transform="rotate(45 200 200)"></rect>
+      </g>
+      <g style="transform-origin:200px 200px;animation:smSpinR 110s linear infinite" stroke-opacity=".55">
+        <ellipse cx="200" cy="200" rx="44" ry="146"></ellipse><ellipse cx="200" cy="200" rx="44" ry="146" transform="rotate(45 200 200)"></ellipse><ellipse cx="200" cy="200" rx="44" ry="146" transform="rotate(90 200 200)"></ellipse><ellipse cx="200" cy="200" rx="44" ry="146" transform="rotate(135 200 200)"></ellipse>
+      </g>
+      <circle cx="200" cy="200" r="66" stroke-opacity=".5"></circle><circle cx="200" cy="200" r="4" fill="var(--gold)" stroke="none"></circle>
+    </svg>
+    <svg viewBox="0 0 120 240" fill="none" stroke="var(--jade)" stroke-width="1.3" stroke-linecap="round" aria-hidden="true" style="position:absolute;left:6%;bottom:8%;width:130px">
+      <path pathLength="1" d="M60 236 C 58 180, 64 120, 58 20" style="stroke-dasharray:1;stroke-dashoffset:1;animation:smDraw 2.4s ease forwards;animation-delay:.3s"></path>
+      <path pathLength="1" d="M60 190 C 30 184, 18 164, 16 150 C 40 152, 56 170, 60 190" style="stroke-dasharray:1;stroke-dashoffset:1;animation:smDraw 1.4s ease forwards;animation-delay:.9s"></path>
+      <path pathLength="1" d="M60 160 C 90 152, 102 132, 104 118 C 80 122, 64 140, 60 160" style="stroke-dasharray:1;stroke-dashoffset:1;animation:smDraw 1.4s ease forwards;animation-delay:1.2s"></path>
+      <path pathLength="1" d="M59 128 C 32 120, 22 100, 22 86 C 44 90, 56 108, 59 128" style="stroke-dasharray:1;stroke-dashoffset:1;animation:smDraw 1.4s ease forwards;animation-delay:1.5s"></path>
+      <path pathLength="1" d="M59 96 C 84 88, 94 70, 96 56 C 74 60, 62 78, 59 96" style="stroke-dasharray:1;stroke-dashoffset:1;animation:smDraw 1.4s ease forwards;animation-delay:1.8s"></path>
+    </svg>
+    <div style="position:relative;z-index:1;display:flex;flex-direction:column;gap:8px;max-width:420px">
+      <div style="font-family:var(--serif);font-size:40px;line-height:1.05;letter-spacing:-.02em">Rules decide.<br><em style="color:var(--gold)">AI explains.</em></div>
+      <div style="font-family:var(--tamil);color:var(--mu)">விதிகள் முடிவெடுக்கின்றன · AI விளக்குகிறது</div>
+    </div>
+  </div>
+  </sc-if>
+  <div style="flex:1 1 440px;display:flex;align-items:center;justify-content:center;padding:clamp(24px,5vw,64px)">
+    <form onSubmit="{{ signIn }}" style="width:100%;max-width:420px;display:flex;flex-direction:column;gap:24px;animation:smUp .6s ease both">
+      <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+        <button type="button" onClick="{{ goLanding }}" style="display:flex;align-items:center;gap:8px;background:none;border:0;color:var(--mu);cursor:pointer;padding:0;min-height:44px;font:inherit"><i class="ph ph-arrow-left"></i> SiddhaMind AI</button>
+      </sc-if>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <h1 style="font-family:var(--serif);font-weight:400;font-size:36px;margin:0;letter-spacing:-.02em">Welcome back</h1>
+        <p style="margin:0;color:var(--mu)">Sign in to continue. Your role is set on your account — the tabs below only prefill a demo login.</p>
+      </div>
+      <div role="tablist" aria-label="Role hint" style="position:relative;display:grid;grid-template-columns:repeat(4,1fr);background:var(--s1);border:1px solid var(--line);border-radius:12px;padding:4px">
+        <span aria-hidden="true" style="position:absolute;top:4px;bottom:4px;left:4px;width:calc((100% - 8px) / 4);border-radius:9px;background:var(--goldT);border:1px solid var(--goldT2);transform:translateX({{ pillX }});transition:transform .35s cubic-bezier(.3,.7,.2,1)"></span>
+        <sc-for list="{{ loginTabs }}" as="t" hint-placeholder-count="4">
+          <button type="button" role="tab" aria-selected="{{ t.on }}" onClick="{{ t.pick }}" style="position:relative;z-index:1;min-height:44px;background:none;border:0;font:inherit;font-size:13px;font-weight:600;cursor:pointer;color:{{ t.fg }};transition:color .3s">{{ t.label }}</button>
+        </sc-for>
+      </div>
+      <div class="field"><label for="lg-email">Email</label><input id="lg-email" class="input" type="email" value="{{ email }}" onChange="{{ setEmail }}" style="min-height:48px;background:var(--s1)"></div>
+      <div class="field"><label for="lg-pw" style="display:flex;justify-content:space-between">Password <a href="#" style="font-size:12px">Forgot password?</a></label><input id="lg-pw" class="input" type="password" value="demo-password" readOnly style="min-height:48px;background:var(--s1)"></div>
+      <button type="submit" class="btn btn-primary" style="min-height:48px;font-size:15px;background-image:linear-gradient(110deg,transparent 35%,var(--goldT2) 50%,transparent 65%);background-size:250% 100%;background-position:130% 0;background-repeat:no-repeat;transition:background-position .8s ease,background-color .2s" style-hover="background-position:-30% 0;background-color:var(--goldT)">Sign in as {{ loginRoleLabel }}</button>
+      <p style="margin:0;color:var(--mu);font-size:14px">New to SiddhaMind? <a href="#" onClick="{{ goRegister }}">Create an account</a></p>
+      <p style="margin:0;color:var(--mu);font-size:12px;display:flex;gap:8px"><i class="ph ph-info"></i> Education and decision support — not a prescription.</p>
+    </form>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isRegister }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="03 Register" style="min-height:100vh;display:flex;justify-content:center;padding:clamp(24px,5vw,72px) clamp(16px,4vw,56px)">
+  <form onSubmit="{{ submitRegister }}" style="width:100%;max-width:720px;display:flex;flex-direction:column;gap:32px;animation:smUp .6s ease both">
+    <button type="button" onClick="{{ goLanding }}" style="display:flex;align-items:center;gap:8px;background:none;border:0;color:var(--mu);cursor:pointer;padding:0;min-height:44px;font:inherit;align-self:flex-start"><i class="ph ph-arrow-left"></i> Back to SiddhaMind</button>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <div style="font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)">Create account</div>
+      <h1 style="font-family:var(--serif);font-weight:400;font-size:clamp(32px,4vw,44px);margin:0;letter-spacing:-.02em">Join SiddhaMind</h1>
+      <p style="margin:0;color:var(--mu);max-width:560px">Practitioners and students are verified against their registration or enrolment number before clinical tools unlock. Patients can leave those fields blank.</p>
+    </div>
+    <div style="background:var(--s1);border:1px solid var(--line);border-radius:14px;padding:32px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:24px">
+      <fieldset style="grid-column:1 / -1;border:0;margin:0;padding:0;display:flex;flex-direction:column;gap:8px">
+        <legend style="font-size:12px;color:color-mix(in srgb,var(--tx) 70%,transparent);margin-bottom:5px">I am a <span style="color:var(--gold)">*</span></legend>
+        <div class="seg" role="radiogroup" aria-required="true" style="display:flex;flex-wrap:wrap;align-self:flex-start">
+          <label class="seg-opt" style="min-height:44px;padding:0 18px;font-size:14px"><input type="radio" name="rg-role" value="practitioner" required="{{ true }}"><i class="ph ph-stethoscope"></i>Practitioner</label>
+          <label class="seg-opt" style="min-height:44px;padding:0 18px;font-size:14px"><input type="radio" name="rg-role" value="student"><i class="ph ph-graduation-cap"></i>Student</label>
+          <label class="seg-opt" style="min-height:44px;padding:0 18px;font-size:14px"><input type="radio" name="rg-role" value="patient"><i class="ph ph-heart"></i>Patient</label>
+        </div>
+        <span style="font-size:12px;color:var(--mu)">Admin accounts are created by an administrator only.</span>
+      </fieldset>
+      <div class="field"><label for="rg-name">Full name</label><input id="rg-name" class="input" placeholder="As on your registration" style="min-height:48px"></div>
+      <div class="field"><label for="rg-email">Email</label><input id="rg-email" type="email" class="input" placeholder="name@institution.edu.in" style="min-height:48px"></div>
+      <div class="field"><label for="rg-phone">Phone</label><input id="rg-phone" type="tel" class="input" placeholder="+91" style="min-height:48px"></div>
+      <div class="field"><label for="rg-inst">Institution</label><input id="rg-inst" class="input" placeholder="e.g. Govt Siddha Medical College, Palayamkottai" style="min-height:48px"></div>
+      <div class="field"><label for="rg-reg">Registration / enrolment number</label><input id="rg-reg" class="input" placeholder="Optional for patients" style="min-height:48px;font-family:var(--mono)"></div>
+      <div class="field"><label for="rg-pw">Password</label><input id="rg-pw" type="password" class="input" placeholder="At least 10 characters" style="min-height:48px"></div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center">
+      <button type="submit" class="btn btn-primary" style="min-height:48px;padding:0 28px;font-size:15px">Create account</button>
+      <span style="color:var(--mu);font-size:14px">Already registered? <a href="#" onClick="{{ goLogin }}">Sign in</a></span>
+    </div>
+  </form>
+</div>
+</sc-if>
+
+<sc-if value="{{ inApp }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;min-height:100vh">
+  <sc-if value="{{ drawerBackdrop }}" hint-placeholder-val="{{ false }}"><div onClick="{{ closeDrawer }}" style="position:fixed;inset:0;z-index:40;background:var(--glass);backdrop-filter:blur(6px)"></div></sc-if>
+  <aside aria-label="Main navigation" style="width:256px;flex:none;height:100vh;top:0;left:0;z-index:50;background:var(--s1);border-right:1px solid var(--line);display:flex;flex-direction:column;position:{{ asidePos }};transform:{{ asideTf }};transition:transform .3s ease">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:20px 20px 16px">
+      <button onClick="{{ goDash }}" style="display:flex;align-items:center;gap:12px;background:none;border:0;color:var(--tx);cursor:pointer;padding:0;min-height:44px">
+        <svg width="30" height="30" viewBox="0 0 40 40" fill="none" stroke="var(--gold)" stroke-width="1.3" aria-hidden="true"><circle cx="20" cy="20" r="18" stroke-opacity=".5"></circle><ellipse cx="20" cy="20" rx="6" ry="15"></ellipse><ellipse cx="20" cy="20" rx="6" ry="15" transform="rotate(60 20 20)"></ellipse><ellipse cx="20" cy="20" rx="6" ry="15" transform="rotate(120 20 20)"></ellipse><circle cx="20" cy="20" r="2" fill="var(--gold)"></circle></svg>
+        <span style="font-family:var(--serif);font-size:19px">SiddhaMind <span style="font-family:var(--mono);font-size:11px;color:var(--gold)">AI</span></span>
+      </button>
+      <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}"><button class="btn btn-secondary" aria-label="Close menu" onClick="{{ closeDrawer }}" style="width:44px;height:44px;padding:0"><i class="ph ph-x"></i></button></sc-if>
+    </div>
+    <nav style="flex:1;overflow:auto;padding:4px 12px;display:flex;flex-direction:column;gap:2px">
+      <sc-for list="{{ nav }}" as="n" hint-placeholder-count="7">
+        <sc-if value="{{ n.isHead }}" hint-placeholder-val="{{ false }}"><div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mu);padding:16px 12px 6px">{{ n.head }}</div></sc-if>
+        <sc-if value="{{ n.isItem }}" hint-placeholder-val="{{ true }}">
+          <button onClick="{{ n.go }}" aria-current="{{ n.current }}" style="display:flex;align-items:center;gap:12px;min-height:44px;padding:0 12px;border:0;border-radius:10px;font:inherit;font-size:14px;font-weight:500;cursor:pointer;text-align:left;position:relative;background:{{ n.bg }};color:{{ n.fg }};transition:background .2s,color .2s" style-hover="color:var(--tx);background:var(--goldT)">
+            <span style="position:absolute;left:0;top:10px;bottom:10px;width:2px;border-radius:2px;background:{{ n.bar }}"></span>
+            <i class="{{ n.icon }}" style="font-size:19px"></i>{{ n.label }}
+          </button>
+        </sc-if>
+      </sc-for>
+    </nav>
+    <div style="padding:16px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:12px">
+      <button onClick="{{ goProfile }}" style="display:flex;align-items:center;gap:12px;background:none;border:0;padding:0;color:inherit;font:inherit;cursor:pointer;text-align:left;min-height:44px">
+        <span style="width:40px;height:40px;flex:none;border-radius:50%;display:grid;place-items:center;font-family:var(--serif);font-size:15px;border:1px solid {{ me.color }};color:{{ me.color }}">{{ me.initials }}</span>
+        <span style="display:flex;flex-direction:column;gap:2px;min-width:0">
+          <span style="font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ me.name }}</span>
+          <span style="align-self:flex-start;font-size:11px;font-weight:600;letter-spacing:.04em;padding:1px 8px;border-radius:6px;border:1px solid {{ me.color }};color:{{ me.color }}">{{ me.label }}</span>
+        </span>
+      </button>
+      <button class="btn btn-secondary" onClick="{{ signOut }}" style="min-height:44px;justify-content:flex-start;padding:0 12px;color:var(--mu)"><i class="ph ph-sign-out"></i> Sign out</button>
+    </div>
+  </aside>
+
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+    <header style="position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:12px;padding:12px clamp(16px,3vw,32px);min-height:72px;background:var(--glass);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)">
+      <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}"><button class="btn btn-secondary" aria-label="Open menu" onClick="{{ openDrawer }}" style="width:44px;height:44px;padding:0;flex:none"><i class="ph ph-list" style="font-size:20px"></i></button></sc-if>
+      <div style="display:flex;flex-direction:column;min-width:0;flex:1">
+        <span style="font-size:12px;color:var(--mu);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ crumb }}</span>
+        <h1 style="font-family:var(--serif);font-weight:400;font-size:clamp(20px,2vw,26px);margin:0;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ title }}</h1>
+      </div>
+      <button onClick="{{ openPalette }}" aria-label="Open command palette" style="display:flex;align-items:center;gap:10px;min-height:44px;padding:0 12px;border:1px solid var(--line2);border-radius:10px;background:var(--s1);color:var(--mu);font:inherit;font-size:14px;cursor:pointer;min-width:44px" style-hover="border-color:var(--goldT2);color:var(--tx)">
+        <i class="ph ph-magnifying-glass" style="font-size:17px"></i>
+        <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}"><span style="width:160px;text-align:left">Search or jump to…</span></sc-if><sc-if value="{{ notMobile }}" hint-placeholder-val="{{ true }}"><kbd style="font-family:var(--mono);font-size:11px;border:1px solid var(--line2);border-radius:6px;padding:2px 6px">Ctrl K</kbd></sc-if>
+      </button>
+      <button class="btn btn-secondary" aria-label="Toggle theme" onClick="{{ toggleTheme }}" style="width:44px;height:44px;padding:0;flex:none"><i class="{{ themeIcon }}" style="font-size:19px"></i></button>
+      <div style="position:relative;flex:none">
+        <button class="btn btn-secondary" aria-label="Notifications" onClick="{{ toggleNotif }}" style="width:44px;height:44px;padding:0;position:relative"><i class="ph ph-bell" style="font-size:19px"></i><span style="position:absolute;top:10px;right:11px;width:7px;height:7px;border-radius:50%;background:var(--gold)"></span></button>
+        <sc-if value="{{ notifOpen }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;right:0;top:52px;width:min(340px,86vw);background:var(--glass);backdrop-filter:blur(16px);border:1px solid var(--line2);border-radius:14px;padding:8px;box-shadow:0 24px 60px -20px rgba(0,0,0,.6);animation:smUp .25s ease both">
+            <div style="padding:8px 12px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mu)">Notifications</div>
+            <sc-for list="{{ notifs }}" as="x" hint-placeholder-count="3">
+              <div style="display:flex;gap:12px;padding:12px;border-radius:10px"><i class="{{ x.icon }}" style="color:{{ x.color }};font-size:18px;margin-top:2px"></i><div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:14px">{{ x.text }}</span><span style="font-size:12px;color:var(--mu)">{{ x.when }}</span></div></div>
+            </sc-for>
+            <button class="btn btn-ghost" onClick="{{ goProfile }}" style="width:100%;min-height:44px">View all in profile</button>
+          </div>
+        </sc-if>
+      </div>
+      <div style="position:relative;flex:none">
+        <button onClick="{{ toggleMenu }}" aria-label="Profile menu" style="width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-family:var(--serif);font-size:15px;background:var(--s1);cursor:pointer;border:1px solid {{ me.color }};color:{{ me.color }}">{{ me.initials }}</button>
+        <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;right:0;top:52px;width:240px;background:var(--glass);backdrop-filter:blur(16px);border:1px solid var(--line2);border-radius:14px;padding:8px;box-shadow:0 24px 60px -20px rgba(0,0,0,.6);animation:smUp .25s ease both;display:flex;flex-direction:column">
+            <div style="padding:8px 12px 12px;display:flex;flex-direction:column"><span style="font-weight:600;font-size:14px">{{ me.name }}</span><span style="font-size:12px;color:var(--mu)">{{ me.email }}</span></div>
+            <button onClick="{{ goProfile }}" style="display:flex;gap:12px;align-items:center;min-height:44px;padding:0 12px;border:0;border-radius:10px;background:none;color:var(--tx);font:inherit;font-size:14px;cursor:pointer" style-hover="background:var(--goldT)"><i class="ph ph-user-circle"></i> Profile</button>
+            <button onClick="{{ toggleTheme }}" style="display:flex;gap:12px;align-items:center;min-height:44px;padding:0 12px;border:0;border-radius:10px;background:none;color:var(--tx);font:inherit;font-size:14px;cursor:pointer" style-hover="background:var(--goldT)"><i class="{{ themeIcon }}"></i> {{ themeLabel }}</button>
+            <button onClick="{{ signOut }}" style="display:flex;gap:12px;align-items:center;min-height:44px;padding:0 12px;border:0;border-radius:10px;background:none;color:var(--tx);font:inherit;font-size:14px;cursor:pointer" style-hover="background:var(--goldT)"><i class="ph ph-sign-out"></i> Sign out</button>
+          </div>
+        </sc-if>
+      </div>
+    </header>
+    <main style="flex:1;padding:clamp(16px,3vw,32px);max-width:1280px;width:100%;box-sizing:border-box">
+<sc-if value="{{ scr.adminDash }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="05 Admin dashboard" style="display:flex;flex-direction:column;gap:24px">
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:16px">
+    <sc-for list="{{ statTiles }}" as="t" hint-placeholder-count="5">
+      <button onClick="{{ t.go }}" style="text-align:left;font:inherit;color:inherit;cursor:pointer;background:var(--s1);border:1px solid var(--line);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:8px;animation:smSlide .6s ease both;animation-delay:{{ t.delay }};transition:transform .25s,box-shadow .25s,border-color .25s" style-hover="transform:translateY(-3px);border-color:var(--goldT2);box-shadow:0 14px 36px -14px var(--goldT2)">
+        <span style="display:flex;justify-content:space-between;align-items:center;color:var(--mu);font-size:13px">{{ t.label }}<i class="{{ t.icon }}" style="font-size:18px;color:var(--gold)"></i></span>
+        <span style="font-family:var(--serif);font-size:40px;line-height:1;letter-spacing:-.02em">{{ t.value }}</span>
+        <span style="font-size:12px;color:var(--mu)">{{ t.sub }}</span>
+      </button>
+    </sc-for>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:24px">
+    <section style="background:var(--s1);border:1px solid var(--line);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;justify-content:space-between;align-items:center"><h2 style="font-family:var(--serif);font-weight:400;font-size:20px;margin:0">AI service status</h2><button onClick="{{ toggleOnline }}" style="display:flex;align-items:center;gap:8px;min-height:36px;padding:0 12px;border-radius:999px;border:1px solid {{ onlineC }};background:none;color:{{ onlineC }};font:inherit;font-size:12px;font-weight:600;cursor:pointer"><span style="width:7px;height:7px;border-radius:50%;background:{{ onlineC }}"></span>{{ onlineLabel }}</button></div>
+      <sc-for list="{{ services }}" as="v" hint-placeholder-count="4">
+        <div style="display:flex;align-items:center;gap:16px;padding:12px 0;border-top:1px solid var(--line)">
+          <span style="width:8px;height:8px;border-radius:50%;flex:none;background:{{ v.c }}"></span>
+          <div style="flex:1;display:flex;flex-direction:column"><span style="font-weight:600;font-size:14px">{{ v.name }}</span><span style="font-size:13px;color:var(--mu)">{{ v.detail }}</span></div>
+          <span style="font-family:var(--mono);font-size:12px;color:{{ v.c }}">{{ v.status }}</span>
+        </div>
+      </sc-for>
+    </section>
+    <section style="background:var(--s1);border:1px solid var(--line);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:16px">
+      <h2 style="font-family:var(--serif);font-weight:400;font-size:20px;margin:0">Activity</h2>
+      <ol style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column">
+        <sc-for list="{{ activity }}" as="a" hint-placeholder-count="5">
+          <li style="display:flex;gap:16px;position:relative;padding-bottom:16px">
+            <span style="display:flex;flex-direction:column;align-items:center;flex:none"><span style="width:10px;height:10px;border-radius:50%;margin-top:6px;border:2px solid {{ a.c }}"></span><span style="flex:1;width:1px;background:var(--line2);margin-top:4px"></span></span>
+            <div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:14px"><strong style="font-weight:600">{{ a.who }}</strong> {{ a.what }}</span><span style="font-size:12px;color:var(--mu);font-family:var(--mono)">{{ a.when }}</span></div>
+          </li>
+        </sc-for>
+      </ol>
+    </section>
+  </div>
+  <section style="background:var(--s1);border:1px solid var(--line);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:16px">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap"><h2 style="font-family:var(--serif);font-weight:400;font-size:20px;margin:0">Corpus</h2><button class="btn btn-secondary" onClick="{{ goCorpus }}" style="min-height:40px">Manage corpus</button></div>
+    <div style="overflow-x:auto"><table class="table" style="min-width:640px">
+      <thead><tr><th>Document</th><th>Language</th><th>Pages</th><th>Chunks</th><th>Skipped OCR</th><th>Status</th></tr></thead>
+      <tbody><sc-for list="{{ docs }}" as="d" hint-placeholder-count="2"><tr><td style="font-weight:500">{{ d.title }}</td><td>{{ d.lang }}</td><td style="font-family:var(--mono)">{{ d.pages }}</td><td style="font-family:var(--mono)">{{ d.chunks }}</td><td style="font-family:var(--mono)">{{ d.skipped }}</td><td><span style="font-size:12px;font-weight:600;color:{{ d.sc }};display:inline-flex;gap:6px;align-items:center"><span style="width:7px;height:7px;border-radius:50%;background:{{ d.sc }}"></span>{{ d.status }}</span></td></tr></sc-for></tbody>
+    </table></div>
+  </section>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:24px">
+    <section style="background:var(--s1);border:1px solid var(--line);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:8px">
+      <h2 style="font-family:var(--serif);font-weight:400;font-size:20px;margin:0 0 8px">Recent safety checks</h2>
+      <sc-for list="{{ schecks }}" as="c" hint-placeholder-count="3">
+        <button onClick="{{ c.open }}" style="display:flex;align-items:center;gap:16px;padding:12px 0;border:0;border-top:1px solid var(--line);background:none;color:inherit;font:inherit;text-align:left;cursor:pointer;min-height:56px">
+          <div style="flex:1;display:flex;flex-direction:column"><span style="font-weight:600;font-size:14px">{{ c.f }} <span style="font-family:var(--tamil);font-weight:400;color:var(--mu)">{{ c.ta }}</span></span><span style="font-size:13px;color:var(--mu)">{{ c.with }} · {{ c.by }}</span></div>
+          <span style="font-family:var(--mono);font-size:11px;font-weight:500;padding:3px 8px;border-radius:6px;border:1px solid {{ c.vc }};color:{{ c.vc }}">{{ c.v }}</span>
+        </button>
+      </sc-for>
+    </section>
+    <section style="background:var(--s1);border:1px solid var(--line);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:8px">
+      <h2 style="font-family:var(--serif);font-weight:400;font-size:20px;margin:0 0 8px">Recent diagnoses</h2>
+      <sc-for list="{{ dxRows }}" as="d" hint-placeholder-count="4">
+        <button onClick="{{ d.open }}" style="display:flex;align-items:center;gap:16px;padding:12px 0;border:0;border-top:1px solid var(--line);background:none;color:inherit;font:inherit;text-align:left;cursor:pointer;min-height:56px">
+          <div style="flex:1;display:flex;flex-direction:column"><span style="font-weight:600;font-size:14px">{{ d.noi }} <span style="font-family:var(--tamil);font-weight:400;color:var(--mu)">{{ d.ta }}</span></span><span style="font-size:13px;color:var(--mu)">{{ d.pt }} · {{ d.when }}</span></div>
+          <span style="display:flex;width:96px;height:6px;border-radius:3px;overflow:hidden;gap:2px"><span style="background:var(--va);width:{{ d.vw }}"></span><span style="background:var(--pi);width:{{ d.pw }}"></span><span style="background:var(--ka);width:{{ d.kw }}"></span></span>
+        </button>
+      </sc-for>
+    </section>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ scr.users }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="06 User management" style="display:flex;flex-direction:column;gap:24px">
+  <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between">
+    <label style="position:relative;flex:1 1 320px;max-width:480px"><i class="ph ph-magnifying-glass" style="position:absolute;left:14px;top:15px;color:var(--mu)"></i><input class="input" value="{{ uq }}" onChange="{{ setUq }}" placeholder="Search by name, email or role" aria-label="Search users" style="min-height:48px;padding-left:40px;background:var(--s1)"></label>
+    <button class="btn btn-primary" onClick="{{ openModal }}" style="min-height:48px;padding:0 20px"><i class="ph ph-user-plus"></i> Create user</button>
+  </div>
+  <section style="background:var(--s1);border:1px solid var(--line);border-radius:14px;padding:8px 24px 16px;overflow-x:auto">
+    <table class="table" style="min-width:880px">
+      <thead><tr><th>Name</th><th>Role</th><th>Institution</th><th>Status</th><th>Last login</th><th style="text-align:right">Actions</th></tr></thead>
+      <tbody><sc-for list="{{ users }}" as="u" hint-placeholder-count="4"><tr>
+        <td style="padding:12px 6px"><div style="display:flex;flex-direction:column"><span style="font-weight:600">{{ u.name }}</span><span style="font-size:13px;color:var(--mu)">{{ u.email }}</span></div></td>
+        <td><span style="font-size:11px;font-weight:600;padding:2px 8px;border-radius:6px;border:1px solid {{ u.rc }};color:{{ u.rc }}">{{ u.roleLabel }}</span></td>
+        <td style="font-size:13px;color:var(--mu)">{{ u.inst }}</td>
+        <td><span style="font-size:13px;font-weight:600;color:{{ u.stc }};display:inline-flex;gap:6px;align-items:center"><span style="width:7px;height:7px;border-radius:50%;background:{{ u.stc }}"></span>{{ u.status }}</span></td>
+        <td style="font-family:var(--mono);font-size:12px;color:var(--mu)">{{ u.last }}</td>
+        <td><div style="display:flex;gap:8px;justify-content:flex-end"><button class="btn btn-secondary" onClick="{{ u.toggle }}" style="min-height:40px"><i class="{{ u.actIcon }}"></i>{{ u.act }}</button><button class="btn btn-secondary" onClick="{{ u.reset }}" style="min-height:40px"><i class="ph ph-key"></i>Reset password</button></div></td>
+      </tr></sc-for></tbody>
+    </table>
+  </section>
+</div>
+</sc-if>
+
+<sc-if value="{{ scr.corpus }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="07 Corpus upload" style="display:flex;flex-direction:column;gap:24px">
+  <label style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;padding:48px 24px;border:1.5px dashed var(--goldT2);border-radius:14px;background:var(--s1);cursor:pointer;transition:border-color .2s,background .2s" style-hover="border-color:var(--gold);background:var(--goldT)">
+    <input type="file" accept="application/pdf" multiple="{{ true }}" onChange="{{ addFiles }}" style="position:absolute;opacity:0;width:0;height:0">
+    <span style="width:56px;height:56px;border-radius:50%;border:1px solid var(--goldT2);display:grid;place-items:center;color:var(--gold);font-size:26px"><i class="ph ph-file-arrow-up"></i></span>
+    <span style="font-family:var(--serif);font-size:22px">Drop scanned PDFs here</span>
+    <span style="color:var(--mu);font-size:14px;max-width:460px">Tamil and English pharmacopoeia scans. Pages are OCR’d, split into cited chunks and embedded for the assistant. <span style="color:var(--gold);font-weight:600">Browse files</span></span>
+  </label>
+  <sc-for list="{{ docs }}" as="d" hint-placeholder-count="2">
+    <section style="background:var(--s1);border:1px solid var(--line);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:20px">
+      <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start;justify-content:space-between">
+        <div style="display:flex;gap:16px;align-items:flex-start"><i class="ph ph-file-pdf" style="font-size:28px;color:var(--gold)"></i><div style="display:flex;flex-direction:column;gap:4px"><span style="font-family:var(--serif);font-size:20px">{{ d.title }}</span><span style="font-size:13px;color:var(--mu)">{{ d.added }}</span></div></div>
+        <span style="font-size:12px;font-weight:600;color:{{ d.sc }};display:inline-flex;gap:6px;align-items:center;padding:4px 10px;border-radius:999px;border:1px solid {{ d.sc }}"><span style="width:7px;height:7px;border-radius:50%;background:{{ d.sc }}"></span>{{ d.status }}</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:16px">
+        <div style="display:flex;flex-direction:column"><span style="font-size:12px;color:var(--mu)">Language</span><span style="font-family:var(--tamil)">{{ d.lang }} · தமிழ்</span></div>
+        <div style="display:flex;flex-direction:column"><span style="font-size:12px;color:var(--mu)">Pages</span><span style="font-family:var(--mono)">{{ d.pages }}</span></div>
+        <div style="display:flex;flex-direction:column"><span style="font-size:12px;color:var(--mu)">Chunks</span><span style="font-family:var(--mono)">{{ d.chunks }}</span></div>
+        <div style="display:flex;flex-direction:column"><span style="font-size:12px;color:var(--mu)">Skipped OCR pages</span><span style="font-family:var(--mono)">{{ d.skipped }}</span></div>
+      </div>
+      <sc-if value="{{ d.showStepper }}" hint-placeholder-val="{{ true }}">
+      <ol aria-label="Processing stages" style="list-style:none;margin:0;padding:0;display:flex;align-items:center;flex-wrap:wrap;gap:8px">
+        <sc-for list="{{ d.stages }}" as="g" hint-placeholder-count="5">
+          <li style="display:flex;align-items:center;gap:8px;flex:1 1 100px">
+            <span style="width:28px;height:28px;flex:none;border-radius:50%;display:grid;place-items:center;font-size:14px;color:var(--onGold);background:{{ g.dotBg }};border:1.5px solid {{ g.dotBd }};animation:{{ g.anim }}"><i class="{{ g.icon }}"></i></span>
+            <span style="font-size:13px;font-weight:600;color:{{ g.fg }}">{{ g.label }}</span>
+            <sc-if value="{{ g.notLast }}" hint-placeholder-val="{{ true }}"><span style="flex:1;height:1.5px;min-width:16px;background:{{ g.lineBg }}"></span></sc-if>
+          </li>
+        </sc-for>
+      </ol>
+      </sc-if>
+      <sc-if value="{{ d.busy }}" hint-placeholder-val="{{ false }}">
+        <div role="progressbar" aria-label="Indexing in progress" style="height:4px;border-radius:2px;background:var(--line);overflow:hidden"><div style="width:32%;height:100%;border-radius:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);animation:smIndet 1.6s ease-in-out infinite"></div></div>
+      </sc-if>
+      <sc-if value="{{ d.hasMsg }}" hint-placeholder-val="{{ false }}"><span style="display:flex;gap:8px;align-items:center;font-size:14px;color:{{ d.msgC }}"><i class="ph ph-warning-circle"></i>{{ d.msg }}</span></sc-if>
+      <sc-if value="{{ d.canStart }}" hint-placeholder-val="{{ false }}"><div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><button class="btn btn-primary" onClick="{{ d.start }}" style="min-height:44px;padding:0 18px"><i class="ph ph-play"></i> Start indexing</button><span style="font-size:13px;color:var(--mu)">OCR → Chunk → Embed runs in the background.</span></div></sc-if>
+      <sc-if value="{{ d.canRetry }}" hint-placeholder-val="{{ false }}"><div style="display:flex;gap:12px"><button class="btn btn-primary" onClick="{{ d.retry }}" style="min-height:44px;padding:0 18px"><i class="ph ph-arrow-clockwise"></i> Retry</button></div></sc-if>
+    </section>
+  </sc-for>
+</div>
+</sc-if>
+
+<sc-if value="{{ scr.reports }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="08 System reports" style="display:flex;flex-direction:column;gap:24px">
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:24px">
+    <section style="background:var(--s1);border:1px solid var(--line);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:16px">
+      <h2 style="font-family:var(--serif);font-weight:400;font-size:20px;margin:0">Users per role</h2>
+      <sc-for list="{{ roleBars }}" as="b" hint-placeholder-count="4">
+        <div style="display:grid;grid-template-columns:110px 1fr 32px;align-items:center;gap:16px"><span style="font-size:14px">{{ b.label }}</span><span style="height:10px;border-radius:5px;background:var(--line)"><span style="display:block;height:100%;border-radius:5px;transform-origin:left;animation:smBar .9s cubic-bezier(.3,.7,.2,1) both;animation-delay:{{ b.delay }};width:{{ b.w }};background:{{ b.c }}"></span></span><span style="font-family:var(--mono);text-align:right">{{ b.n }}</span></div>
+      </sc-for>
+    </section>
+    <section style="background:var(--s1);border:1px solid var(--line);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline"><h2 style="font-family:var(--serif);font-weight:400;font-size:20px;margin:0">Formulary by dosage form</h2><span style="font-size:13px;color:var(--mu)">{{ hmCount }} heavy-metal</span></div>
+      <div style="display:flex;align-items:flex-end;gap:24px;height:160px;padding-top:8px">
+        <sc-for list="{{ byForm }}" as="b" hint-placeholder-count="4">
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:8px;height:100%;justify-content:flex-end">
+            <span style="font-family:var(--mono);font-size:13px">{{ b.n }}</span>
+            <span style="width:100%;max-width:56px;border-radius:8px 8px 2px 2px;background:linear-gradient(to top,var(--goldT2),var(--gold));transform-origin:bottom;animation:smBarY .9s cubic-bezier(.3,.7,.2,1) both;animation-delay:{{ b.delay }};height:{{ b.w }}"></span>
+            <span style="font-size:12px;color:var(--mu)">{{ b.label }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+  </div>
+  <section style="background:var(--s1);border:1px solid var(--line);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:16px">
+    <h2 style="font-family:var(--serif);font-weight:400;font-size:20px;margin:0">Audit log</h2>
+    <div style="overflow-x:auto"><table class="table" style="min-width:760px">
+      <thead><tr><th>Time</th><th>User</th><th>Action</th><th>Target</th><th>IP address</th></tr></thead>
+      <tbody><sc-for list="{{ audit }}" as="a" hint-placeholder-count="6"><tr><td style="font-family:var(--mono);font-size:12px;color:var(--mu)">{{ a.when }}</td><td style="font-size:13px">{{ a.who }}</td><td style="font-family:var(--mono);font-size:12px;color:var(--gold)">{{ a.action }}</td><td style="font-size:13px">{{ a.target }}</td><td style="font-family:var(--mono);font-size:12px">{{ a.ip }}</td></tr></sc-for></tbody>
+    </table></div>
+  </section>
+</div>
+</sc-if>
+
+<sc-if value="{{ scr.pracDash }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="09 Practitioner dashboard" style="display:flex;flex-direction:column;gap:24px">
+  <p style="margin:0;color:var(--mu);max-width:640px">Start an examination, check a formulation before you dispense, or look something up in the corpus.</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:16px">
+    <sc-for list="{{ quickActions }}" as="q" hint-placeholder-count="3">
+      <button onClick="{{ q.go }}" style="text-align:left;font:inherit;color:inherit;cursor:pointer;background:var(--s1);border:1px solid var(--line);border-radius:14px;padding:24px;display:flex;align-items:center;gap:16px;min-height:96px;animation:smSlide .6s ease both;transition:transform .25s,box-shadow .25s,border-color .25s" style-hover="transform:translateY(-3px);border-color:var(--goldT2);box-shadow:0 14px 36px -14px var(--goldT2)">
+        <span style="width:48px;height:48px;flex:none;border-radius:12px;border:1px solid var(--goldT2);display:grid;place-items:center;color:var(--gold);font-size:22px"><i class="{{ q.icon }}"></i></span>
+        <span style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-family:var(--serif);font-size:20px">{{ q.label }}</span><span style="font-size:13px;color:var(--mu)">{{ q.desc }}</span></span>
+        <i class="ph ph-arrow-right" style="color:var(--gold)"></i>
+      </button>
+    </sc-for>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:24px">
+    <section style="background:var(--s1);border:1px solid var(--line);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:8px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><h2 style="font-family:var(--serif);font-weight:400;font-size:20px;margin:0">My recent diagnoses</h2><button class="btn btn-ghost" onClick="{{ goDxHistory }}" style="min-height:40px">View all</button></div>
+      <sc-for list="{{ dxRows }}" as="d" hint-placeholder-count="4">
+        <button onClick="{{ d.open }}" style="display:flex;align-items:center;gap:16px;padding:12px 0;border:0;border-top:1px solid var(--line);background:none;color:inherit;font:inherit;text-align:left;cursor:pointer;min-height:56px">
+          <div style="flex:1;display:flex;flex-direction:column"><span style="font-weight:600;font-size:14px">{{ d.noi }} <span style="font-family:var(--tamil);font-weight:400;color:var(--mu)">{{ d.ta }}</span></span><span style="font-size:13px;color:var(--mu)">{{ d.pt }} · {{ d.when }}</span></div>
+          <span style="display:flex;width:96px;height:6px;border-radius:3px;overflow:hidden;gap:2px"><span style="background:var(--va);width:{{ d.vw }}"></span><span style="background:var(--pi);width:{{ d.pw }}"></span><span style="background:var(--ka);width:{{ d.kw }}"></span></span>
+        </button>
+      </sc-for>
+    </section>
+    <section style="background:var(--s1);border:1px solid var(--line);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:8px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><h2 style="font-family:var(--serif);font-weight:400;font-size:20px;margin:0">My safety checks</h2><button class="btn btn-ghost" onClick="{{ goSafety }}" style="min-height:40px">New check</button></div>
+      <sc-for list="{{ schecks }}" as="c" hint-placeholder-count="3">
+        <button onClick="{{ c.open }}" style="display:flex;align-items:center;gap:16px;padding:12px 0;border:0;border-top:1px solid var(--line);background:none;color:inherit;font:inherit;text-align:left;cursor:pointer;min-height:56px">
+          <div style="flex:1;display:flex;flex-direction:column"><span style="font-weight:600;font-size:14px">{{ c.f }} <span style="font-family:var(--tamil);font-weight:400;color:var(--mu)">{{ c.ta }}</span></span><span style="font-size:13px;color:var(--mu)">{{ c.with }} · {{ c.when }}</span></div>
+          <span style="font-family:var(--mono);font-size:11px;font-weight:500;padding:3px 8px;border-radius:6px;border:1px solid {{ c.vc }};color:{{ c.vc }}">{{ c.v }}</span>
+        </button>
+      </sc-for>
+    </section>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ scr.intake }}" hint-placeholder-val="{{ false }}">
+<form data-screen-label="10 Diagnosis intake" onSubmit="{{ runDx }}" style="display:flex;flex-direction:column;gap:24px">
+  <section style="background:var(--s1);border:1px solid var(--line);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:20px">
+    <h2 style="font-family:var(--serif);font-weight:400;font-size:20px;margin:0">Patient</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:16px">
+      <div class="field" style="grid-column:span 2"><label for="pt-name">Patient name</label><input id="pt-name" class="input" value="{{ pt.name }}" onChange="{{ setPtName }}" placeholder="Full name" style="min-height:48px"></div>
+      <div class="field"><label for="pt-age">Age</label><input id="pt-age" class="input" inputMode="numeric" value="{{ pt.age }}" onChange="{{ setPtAge }}" style="min-height:48px"></div>
+      <div class="field"><label for="pt-g">Gender</label><select id="pt-g" class="input" value="{{ pt.gender }}" onChange="{{ setPtGender }}" style="min-height:48px"><option>Female</option><option>Male</option><option>Other</option></select></div>
+    </div>
+    <div class="field"><label for="pt-c">Chief complaint</label><textarea id="pt-c" class="input" value="{{ pt.complaint }}" onChange="{{ setPtComplaint }}" style="min-height:80px"></textarea></div>
+  </section>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
+    <div style="display:flex;flex-direction:column;gap:4px"><h2 style="font-family:var(--serif);font-weight:400;font-size:24px;margin:0">Eight examinations <span style="font-family:var(--tamil);font-size:18px;color:var(--mu)">எண்வகைத் தேர்வு</span></h2><span style="font-size:13px;color:var(--mu)">Pick one finding per examination. Tap again to clear.</span></div>
+    <div style="display:flex;align-items:center;gap:12px;min-width:220px"><span style="flex:1;height:6px;border-radius:3px;background:var(--line);overflow:hidden"><span style="display:block;height:100%;background:var(--gold);transition:width .4s;width:{{ recordedW }}"></span></span><span style="font-family:var(--mono);font-size:12px">{{ recordedLabel }}</span></div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,280px),1fr));gap:16px">
+    <sc-for list="{{ examCards }}" as="e" hint-placeholder-count="8">
+      <fieldset style="margin:0;background:var(--s1);border:1px solid var(--line);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:16px;animation:smUp .5s ease both">
+        <legend style="position:absolute;width:1px;height:1px;overflow:hidden">{{ e.en }}</legend>
+        <div style="display:flex;align-items:center;gap:12px"><span style="width:40px;height:40px;border-radius:10px;border:1px solid var(--goldT2);display:grid;place-items:center;color:var(--gold);font-size:19px"><i class="{{ e.icon }}"></i></span><div style="display:flex;flex-direction:column"><span style="font-family:var(--serif);font-size:19px;line-height:1.2">{{ e.en }} <span style="font-family:var(--tamil);font-size:15px;color:var(--mu)">{{ e.ta }}</span></span><span style="font-size:12px;color:var(--mu)">{{ e.hint }}</span></div></div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <sc-for list="{{ e.opts }}" as="o" hint-placeholder-count="4">
+            <button type="button" aria-pressed="{{ o.on }}" onClick="{{ o.pick }}" style="min-height:40px;padding:0 14px;border-radius:999px;font:inherit;font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;background:{{ o.bg }};border:1px solid {{ o.bd }};color:{{ o.fg }}">{{ o.label }}</button>
+          </sc-for>
+        </div>
+      </fieldset>
+    </sc-for>
+  </div>
+  <div style="position:sticky;bottom:16px;display:flex;flex-wrap:wrap;gap:12px;justify-content:flex-end;align-items:center;padding:12px 16px;border-radius:14px;background:var(--glass);backdrop-filter:blur(12px);border:1px solid var(--line2)">
+    <span style="margin-right:auto;font-size:13px;color:var(--mu);display:flex;gap:8px;align-items:center"><i class="ph ph-scales"></i> Scores are computed by rules. The AI writes the summary only.</span>
+    <button type="button" class="btn btn-secondary" onClick="{{ resetExam }}" style="min-height:44px;padding:0 16px">Clear findings</button>
+    <button type="submit" class="btn btn-primary" style="min-height:44px;padding:0 20px">Compute dosha &amp; noi <i class="ph ph-arrow-right"></i></button>
+  </div>
+</form>
+</sc-if>
+
+<sc-if value="{{ scr.dxResult }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="11 Diagnosis result" style="display:flex;flex-direction:column;gap:24px">
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:24px">
+    <section style="background:var(--s1);border:1px solid var(--line);border-radius:14px;padding:24px;display:flex;flex-wrap:wrap;gap:24px;align-items:center">
+      <div style="position:relative;width:220px;height:220px;flex:none;margin:0 auto">
+        <svg viewBox="0 0 220 220" width="220" height="220" fill="none" aria-hidden="true">
+          <circle cx="110" cy="110" r="92" stroke="var(--line)" stroke-width="10"></circle><circle cx="110" cy="110" r="72" stroke="var(--line)" stroke-width="10"></circle><circle cx="110" cy="110" r="52" stroke="var(--line)" stroke-width="10"></circle>
+          <sc-for list="{{ rings }}" as="g" hint-placeholder-count="3">
+            <circle cx="110" cy="110" r="{{ g.r }}" pathLength="100" stroke="{{ g.c }}" stroke-width="10" stroke-linecap="round" stroke-dasharray="100" stroke-dashoffset="{{ g.off }}" transform="rotate(-90 110 110)" style="animation:smRing 1.4s cubic-bezier(.3,.7,.2,1) both"></circle>
+          </sc-for>
+        </svg>
+        <div style="position:absolute;inset:0;display:grid;place-items:center;text-align:center"><div style="display:flex;flex-direction:column"><span style="font-family:var(--tamil);font-size:18px;color:{{ dom.c }}">{{ dom.ta }}</span><span style="font-size:11px;color:var(--mu);letter-spacing:.1em;text-transform:uppercase">Dominant</span></div></div>
+      </div>
+      <div style="flex:1 1 180px;display:flex;flex-direction:column;gap:16px">
+        <h2 style="font-family:var(--serif);font-weight:400;font-size:20px;margin:0">Dosha balance</h2>
+        <sc-for list="{{ rings }}" as="g" hint-placeholder-count="3">
+          <div style="display:flex;align-items:center;gap:12px"><span style="width:10px;height:10px;border-radius:50%;background:{{ g.c }}"></span><span style="flex:1;display:flex;flex-direction:column"><span style="font-weight:600;font-size:14px">{{ g.name }} <span style="font-family:var(--tamil);font-weight:400;color:var(--mu)">{{ g.ta }}</span></span><span style="font-size:12px;color:var(--mu)">{{ g.el }}</span></span><span style="font-family:var(--mono);font-size:20px">{{ g.pctLabel }}</span></div>
+        </sc-for>
+      </div>
+    </section>
+    <section style="background:var(--s1);border:1px solid var(--line);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:12px;justify-content:center">
+      <span style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mu)">Dominant kutram</span>
+      <div style="display:flex;align-items:baseline;gap:16px;flex-wrap:wrap"><span style="font-family:var(--tamil);font-size:48px;line-height:1.2;color:{{ dom.c }}">{{ dom.ta }}</span><span style="font-family:var(--serif);font-size:32px">{{ dom.name }}</span></div>
+      <span style="color:var(--mu)">{{ dom.el }} · <span style="font-family:var(--mono)">{{ dom.pct }}</span> of the weighted examination score</span>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px"><button class="btn btn-secondary" onClick="{{ goIntake }}" style="min-height:44px;padding:0 16px"><i class="ph ph-pencil-simple"></i> Edit findings</button><button class="btn btn-primary" onClick="{{ goSafety }}" style="min-height:44px;padding:0 16px"><i class="ph ph-shield-check"></i> Check a preparation</button></div>
+    </section>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:24px;align-items:start">
+    <section style="background:var(--s1);border:1px solid var(--line);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:8px">
+      <h2 style="font-family:var(--serif);font-weight:400;font-size:20px;margin:0 0 8px">Candidate noi, ranked</h2>
+      <sc-for list="{{ cands }}" as="c" hint-placeholder-count="4">
+        <button onClick="{{ c.open }}" style="display:flex;gap:16px;align-items:flex-start;padding:16px 0;border:0;border-top:1px solid var(--line);background:none;color:inherit;font:inherit;text-align:left;cursor:pointer;animation:smUp .5s ease both">
+          <span style="font-family:var(--mono);font-size:13px;color:var(--gold);padding-top:4px">{{ c.rank }}</span>
+          <span style="flex:1;display:flex;flex-direction:column;gap:4px"><span style="display:flex;gap:12px;align-items:baseline;flex-wrap:wrap"><span style="font-family:var(--tamil);font-size:19px">{{ c.ta }}</span><span style="font-family:var(--serif);font-size:18px">{{ c.en }}</span></span><span style="font-size:13px;color:var(--mu)">Modern equivalent: {{ c.modern }} · {{ c.signs }}</span></span>
+          <span style="font-size:11px;font-weight:600;padding:2px 8px;border-radius:6px;border:1px solid {{ c.kc }};color:{{ c.kc }}">{{ c.k }}</span>
+        </button>
+      </sc-for>
+    </section>
+    <div style="display:flex;flex-direction:column;gap:24px">
+      <section style="background:var(--s1);border:1px solid var(--line);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:8px">
+        <h2 style="font-family:var(--serif);font-weight:400;font-size:20px;margin:0 0 8px">Classically indicated preparations</h2>
+        <sc-for list="{{ preps }}" as="p" hint-placeholder-count="3">
+          <button onClick="{{ p.open }}" style="display:flex;gap:16px;align-items:center;padding:12px 0;border:0;border-top:1px solid var(--line);background:none;color:inherit;font:inherit;text-align:left;cursor:pointer;min-height:56px">
+            <span style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-weight:600">{{ p.en }} <span style="font-family:var(--tamil);font-weight:400;color:var(--mu)">{{ p.ta }}</span></span><span style="font-family:var(--mono);font-size:12px;color:var(--gold)">{{ p.cite }}</span><span style="font-size:12px;color:var(--mu)">For {{ p.forNoi }} · {{ p.form }} · <span style="font-family:var(--mono)">{{ p.code }}</span></span></span>
+            <sc-if value="{{ p.hm }}" hint-placeholder-val="{{ false }}"><span style="font-size:11px;font-weight:600;padding:2px 8px;border-radius:6px;border:1px solid var(--amb);color:var(--amb)">Heavy metal</span></sc-if>
+            <i class="ph ph-caret-right" style="color:var(--mu)"></i>
+          </button>
+        </sc-for>
+      </section>
+      <section style="border:1px solid var(--goldT2);background:var(--goldT);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)"><i class="ph ph-sparkle"></i> AI summary</div>
+        <p style="margin:0;font-size:15px;text-wrap:pretty">{{ dxSummary }}</p>
+        <span style="font-size:12px;color:var(--mu)">Rules decided the scores and ranking above. This summary cannot change them.</span>
+      </section>
+    </div>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ scr.dxHistory }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="12 Diagnosis history" style="display:flex;flex-direction:column;gap:24px">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap"><p style="margin:0;color:var(--mu)">Every saved Envagai Thervu examination, newest first.</p><button class="btn btn-primary" onClick="{{ goIntake }}" style="min-height:44px;padding:0 18px"><i class="ph ph-plus"></i> New examination</button></div>
+  <section style="background:var(--s1);border:1px solid var(--line);border-radius:14px;padding:8px 24px 16px;overflow-x:auto">
+    <table class="table" style="min-width:760px">
+      <thead><tr><th>Date</th><th>Record</th><th>Patient</th><th>Leading noi</th><th>Dosha · V / P / K</th><th></th></tr></thead>
+      <tbody><sc-for list="{{ dxRows }}" as="d" hint-placeholder-count="4"><tr>
+        <td style="font-family:var(--mono);font-size:12px;color:var(--mu)">{{ d.when }}</td>
+        <td style="font-family:var(--mono);font-size:12px">{{ d.id }}</td>
+        <td>{{ d.pt }}</td>
+        <td><span style="font-weight:600">{{ d.noi }}</span> <span style="font-family:var(--tamil);color:var(--mu)">{{ d.ta }}</span></td>
+        <td><div style="display:flex;align-items:center;gap:12px"><span style="display:flex;width:120px;height:8px;border-radius:4px;overflow:hidden;gap:2px"><span style="background:var(--va);width:{{ d.vw }}"></span><span style="background:var(--pi);width:{{ d.pw }}"></span><span style="background:var(--ka);width:{{ d.kw }}"></span></span><span style="font-family:var(--mono);font-size:12px;color:var(--mu)">{{ d.V }} / {{ d.P }} / {{ d.K }}</span></div></td>
+        <td style="text-align:right"><button class="btn btn-ghost" onClick="{{ d.open }}" style="min-height:40px;padding:0 10px">View</button></td>
+      </tr></sc-for></tbody>
+    </table>
+  </section>
+</div>
+</sc-if>
+
+<sc-if value="{{ scr.safety }}" hint-placeholder-val="{{ false }}">
+<form data-screen-label="13 Safety checker" onSubmit="{{ runSafety }}" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:24px;align-items:start">
+  <section style="background:var(--s1);border:1px solid var(--line);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:24px">
+    <div class="field"><label for="sf-form">Formulation</label><select id="sf-form" class="input" value="{{ sForm }}" onChange="{{ setSForm }}" style="min-height:48px"><sc-for list="{{ formOptions }}" as="o" hint-placeholder-count="4"><option value="{{ o.id }}">{{ o.label }}</option></sc-for></select></div>
+    <div class="field">
+      <label for="sf-drug">Concurrent allopathic drugs</label>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;min-height:48px;padding:6px 8px;border:1px solid var(--line2);border-radius:8px;background:var(--s2)">
+        <sc-for list="{{ drugs }}" as="d" hint-placeholder-count="1">
+          <span style="display:inline-flex;align-items:center;gap:6px;padding:4px 4px 4px 12px;border-radius:999px;background:var(--goldT);border:1px solid var(--goldT2);font-size:13px;font-weight:600">{{ d.name }}<button type="button" aria-label="Remove" onClick="{{ d.remove }}" style="width:28px;height:28px;border-radius:50%;border:0;background:none;color:var(--mu);cursor:pointer;display:grid;place-items:center"><i class="ph ph-x"></i></button></span>
+        </sc-for>
+        <input id="sf-drug" value="{{ drugIn }}" onChange="{{ setDrugIn }}" onKeyDown="{{ drugKey }}" placeholder="Type a drug and press Enter" style="flex:1;min-width:160px;min-height:36px;border:0;outline:0;background:none;color:var(--tx);font:inherit;font-size:14px">
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;align-items:center"><span style="font-size:12px;color:var(--mu)">Add:</span><sc-for list="{{ drugSugg }}" as="g" hint-placeholder-count="3"><button type="button" onClick="{{ g.add }}" class="btn btn-ghost" style="min-height:32px;padding:0 8px;font-size:13px">+ {{ g.name }}</button></sc-for></div>
+    </div>
+    <fieldset style="border:0;margin:0;padding:0;display:flex;flex-direction:column;gap:8px">
+      <legend style="font-size:12px;color:var(--mu);margin-bottom:8px">Patient conditions</legend>
+      <div style="display:flex;flex-wrap:wrap;gap:8px">
+        <sc-for list="{{ condChips }}" as="c" hint-placeholder-count="6">
+          <button type="button" aria-pressed="{{ c.on }}" onClick="{{ c.toggle }}" style="display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;border-radius:10px;font:inherit;font-size:14px;cursor:pointer;background:{{ c.bg }};border:1px solid {{ c.bd }};color:{{ c.fg }}"><i class="{{ c.icon }}"></i>{{ c.label }}</button>
+        </sc-for>
+      </div>
+    </fieldset>
+    <button type="submit" class="btn btn-primary" style="min-height:52px;font-size:16px;background-image:linear-gradient(110deg,transparent 35%,var(--goldT2) 50%,transparent 65%);background-size:250% 100%;background-position:130% 0;background-repeat:no-repeat;transition:background-position .8s ease,background-color .2s" style-hover="background-position:-30% 0;background-color:var(--goldT)"><i class="ph ph-shield-check"></i> Run check</button>
+  </section>
+  <aside style="display:flex;flex-direction:column;gap:16px">
+    <section style="background:var(--s1);border:1px solid var(--line);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:8px">
+      <span style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mu)">Selected formulation</span>
+      <span style="font-family:var(--tamil);font-size:22px">{{ sFormObj.ta }}</span>
+      <span style="font-family:var(--serif);font-size:22px">{{ sFormObj.en }}</span>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><span style="font-family:var(--mono);font-size:12px;color:var(--gold)">{{ sFormObj.code }}</span><span style="font-size:12px;color:var(--mu)">· {{ sFormObj.form }}</span><sc-if value="{{ sFormObj.hm }}" hint-placeholder-val="{{ false }}"><span style="font-size:11px;font-weight:600;padding:2px 8px;border-radius:6px;border:1px solid var(--amb);color:var(--amb)">{{ sFormObj.metalTag }}</span></sc-if></div>
+    </section>
+    <section style="border:1px solid var(--line);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:12px">
+      <span style="font-family:var(--serif);font-size:18px">What the rules check</span>
+      <span style="display:flex;gap:12px;font-size:14px;color:var(--mu)"><i class="ph ph-arrows-left-right" style="color:var(--gold);margin-top:3px"></i>Herb–drug and mineral–drug interactions</span>
+      <span style="display:flex;gap:12px;font-size:14px;color:var(--mu)"><i class="ph ph-prohibit" style="color:var(--gold);margin-top:3px"></i>Contraindications recorded for the formulation</span>
+      <span style="display:flex;gap:12px;font-size:14px;color:var(--mu)"><i class="ph ph-atom" style="color:var(--gold);margin-top:3px"></i>Heavy-metal content against the record’s daily ceiling</span>
+    </section>
+  </aside>
+</form>
+</sc-if>
+
+<sc-if value="{{ scr.safetyResult }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="14 Safety result" style="display:flex;flex-direction:column;gap:24px">
+  <section style="border:1.5px solid {{ sr.vc }};background:{{ sr.vbg }};border-radius:16px;padding:clamp(24px,3vw,40px);display:flex;flex-wrap:wrap;gap:32px;align-items:center">
+    <div style="display:flex;flex-direction:column;gap:12px;flex:1 1 360px;transform-origin:left center;animation:smScale .5s cubic-bezier(.3,.7,.2,1) both;opacity:1">
+      <span style="align-self:flex-start;font-family:var(--mono);font-size:15px;font-weight:500;letter-spacing:.1em;padding:6px 14px;border-radius:8px;background:{{ sr.vc }};color:var(--onGold)">{{ sr.v }}</span>
+      <h2 style="font-family:var(--serif);font-weight:400;font-size:clamp(36px,4vw,52px);margin:0;letter-spacing:-.02em;color:{{ sr.vc }};opacity:1">{{ sr.headline }}</h2>
+      <span style="font-size:15px"><strong style="font-weight:600">{{ sr.formEn }}</strong> <span style="font-family:var(--tamil)">{{ sr.formTa }}</span> · <span style="font-family:var(--mono);font-size:13px">{{ sr.code }}</span></span>
+      <span style="font-size:14px;color:var(--mu)">Drugs: {{ sr.drugsText }} · Conditions: {{ sr.condsText }}</span>
+    </div>
+    <div style="flex:1 1 280px;display:flex;gap:16px;align-items:flex-start;padding:20px;border-radius:12px;border:1px solid {{ sr.vc }};background:var(--bg)">
+      <i class="{{ sr.noteIcon }}" style="font-size:28px;color:{{ sr.vc }}"></i>
+      <div style="display:flex;flex-direction:column;gap:4px"><span style="font-family:var(--serif);font-size:22px;color:{{ sr.vc }}">{{ sr.note }}</span><span style="font-size:14px;color:var(--mu)">{{ sr.noteBody }}</span></div>
+    </div>
+  </section>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:24px;align-items:start">
+    <section style="background:var(--s1);border:1px solid var(--line);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:8px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px"><h2 style="font-family:var(--serif);font-weight:400;font-size:20px;margin:0">Findings</h2><span style="font-size:13px;color:var(--mu)">{{ sr.count }}</span></div>
+      <sc-if value="{{ sr.noFindings }}" hint-placeholder-val="{{ false }}"><p style="margin:0;color:var(--mu)">No rule matched these inputs.</p></sc-if>
+      <sc-for list="{{ sr.findings }}" as="f" hint-placeholder-count="3">
+        <article style="display:flex;gap:16px;padding:16px 0;border-top:1px solid var(--line)">
+          <span style="width:40px;height:40px;flex:none;border-radius:10px;display:grid;place-items:center;font-size:19px;border:1px solid {{ f.sc }};color:{{ f.sc }}"><i class="{{ f.icon }}"></i></span>
+          <div style="flex:1;display:flex;flex-direction:column;gap:6px">
+            <div style="display:flex;justify-content:space-between;gap:12px;align-items:baseline;flex-wrap:wrap"><span style="display:flex;flex-direction:column"><span style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mu)">{{ f.type }}</span><span style="font-weight:600;font-size:16px">{{ f.title }}</span></span><span style="font-family:var(--mono);font-size:11px;font-weight:500;padding:3px 8px;border-radius:6px;border:1px solid {{ f.sc }};color:{{ f.sc }}">{{ f.sev }}</span></div>
+            <span style="font-size:14px">{{ f.detail }}</span>
+            <span style="font-size:14px;color:var(--mu);display:flex;gap:8px"><i class="ph ph-arrow-bend-down-right" style="margin-top:3px;color:var(--gold)"></i>{{ f.advice }}</span>
+          </div>
+        </article>
+      </sc-for>
+    </section>
+    <div style="display:flex;flex-direction:column;gap:24px">
+      <sc-if value="{{ sr.hasHm }}" hint-placeholder-val="{{ true }}">
+        <section style="background:var(--s1);border:1px solid var(--line);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:16px">
+          <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline"><h2 style="font-family:var(--serif);font-weight:400;font-size:20px;margin:0">Heavy-metal daily ceiling</h2><span style="font-size:13px;color:var(--amb)">{{ sr.metalLabel }}</span></div>
+          <div style="position:relative;padding-top:28px">
+            <span style="position:absolute;right:0;top:0;font-family:var(--mono);font-size:12px;color:var(--tx)">Ceiling · {{ sr.ceiling }}</span>
+            <div role="img" aria-label="No measured value; the ceiling is shown at the end of the track" style="height:12px;border-radius:6px;border:1px dashed var(--line2);position:relative"><span style="position:absolute;right:-1px;top:-8px;bottom:-8px;width:2px;background:var(--amb)"></span></div>
+          </div>
+          <span style="font-size:13px;color:var(--mu)">No measured value is shown — SiddhaMind does not have a batch assay. The ceiling comes from the formulation record.</span>
+        </section>
+      </sc-if>
+      <section style="background:var(--s1);border:1px solid var(--line);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:12px">
+        <h2 style="font-family:var(--serif);font-weight:400;font-size:20px;margin:0">Unmatched drugs</h2>
+        <sc-if value="{{ sr.noUnmatched }}" hint-placeholder-val="{{ true }}"><span style="font-size:14px;color:var(--mu);display:flex;gap:8px;align-items:center"><i class="ph ph-check" style="color:var(--jade)"></i>Every drug you entered was found in the interaction tables.</span></sc-if>
+        <sc-if value="{{ sr.hasUnmatched }}" hint-placeholder-val="{{ false }}"><span style="font-size:14px;color:var(--mu)">These were not found, so no rule could be checked for them:</span><div style="display:flex;gap:8px;flex-wrap:wrap"><sc-for list="{{ sr.unmatched }}" as="u" hint-placeholder-count="1"><span style="font-size:13px;padding:4px 10px;border-radius:999px;border:1px dashed var(--amb);color:var(--amb)">{{ u.name }}</span></sc-for></div></sc-if>
+      </section>
+      <section style="border:1px solid var(--goldT2);background:var(--goldT);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)"><i class="ph ph-sparkle"></i> AI explanation</div>
+        <p style="margin:0;text-wrap:pretty">{{ sr.explanation }}</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <sc-for list="{{ sr.cites }}" as="c" hint-placeholder-count="2">
+            <span style="display:inline-flex;gap:8px;align-items:center;padding:6px 10px;border-radius:8px;border:1px solid var(--goldT2);background:var(--bg);font-size:12px;animation:smPop .45s ease both;animation-delay:{{ c.delay }}"><span style="font-family:var(--mono);color:var(--gold)">[{{ c.n }}]</span>{{ c.book }}<span style="font-family:var(--mono);color:var(--mu)">{{ c.ref }}</span></span>
+          </sc-for>
+        </div>
+      </section>
+      <div style="display:flex;gap:12px;flex-wrap:wrap"><button class="btn btn-secondary" onClick="{{ goSafety }}" style="min-height:44px;padding:0 16px"><i class="ph ph-arrow-counter-clockwise"></i> Edit inputs</button><button class="btn btn-ghost" onClick="{{ goFormulary }}" style="min-height:44px;padding:0 12px">Open formulary</button></div>
+    </div>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ scr.studentDash }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="15 Student dashboard" style="display:flex;flex-direction:column;gap:24px">
+  <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center">
+    <span style="display:inline-flex;gap:8px;align-items:center;padding:8px 14px;border-radius:999px;border:1px solid var(--line2);font-size:13px"><i class="ph ph-buildings" style="color:var(--va)"></i>{{ studentInst }}</span>
+    <span style="display:inline-flex;gap:8px;align-items:center;padding:8px 14px;border-radius:999px;border:1px solid var(--line2);font-size:13px"><i class="ph ph-identification-card" style="color:var(--va)"></i>Reg. no. <span style="font-family:var(--mono)">{{ studentReg }}</span></span>
+  </div>
+  <section style="display:flex;flex-direction:column;gap:16px">
+    <div style="display:flex;justify-content:space-between;align-items:center"><h2 style="font-family:var(--serif);font-weight:400;font-size:22px;margin:0">Formulations to study</h2><button class="btn btn-ghost" onClick="{{ goFormulary }}" style="min-height:40px">Full formulary</button></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:16px">
+      <sc-for list="{{ studyForms }}" as="f" hint-placeholder-count="8">
+        <button onClick="{{ f.open }}" style="text-align:left;font:inherit;color:inherit;cursor:pointer;background:var(--s1);border:1px solid var(--line);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:8px;min-height:150px;animation:smUp .5s ease both;animation-delay:{{ f.delay }};transition:transform .25s,box-shadow .25s,border-color .25s" style-hover="transform:translateY(-3px);border-color:var(--goldT2);box-shadow:0 14px 36px -14px var(--goldT2)">
+          <span style="display:flex;justify-content:space-between;align-items:center"><span style="font-family:var(--mono);font-size:12px;color:var(--gold)">{{ f.code }}</span><sc-if value="{{ f.hm }}" hint-placeholder-val="{{ false }}"><span style="font-size:11px;font-weight:600;padding:1px 7px;border-radius:6px;border:1px solid var(--amb);color:var(--amb)">{{ f.metalTag }}</span></sc-if></span>
+          <span style="font-family:var(--tamil);font-size:18px;line-height:1.4">{{ f.ta }}</span>
+          <span style="font-family:var(--serif);font-size:18px;flex:1">{{ f.en }}</span>
+          <span style="font-size:12px;color:var(--mu)">{{ f.form }}</span>
+        </button>
+      </sc-for>
+    </div>
+  </section>
+  <section style="background:var(--s1);border:1px solid var(--line);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:8px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><h2 style="font-family:var(--serif);font-weight:400;font-size:20px;margin:0">My past assistant chats</h2><button class="btn btn-ghost" onClick="{{ goAssistant }}" style="min-height:40px">Open assistant</button></div>
+    <sc-for list="{{ pastChats }}" as="c" hint-placeholder-count="3">
+      <button onClick="{{ c.open }}" style="display:flex;align-items:center;gap:16px;padding:12px 0;border:0;border-top:1px solid var(--line);background:none;color:inherit;font:inherit;text-align:left;cursor:pointer;min-height:56px">
+        <i class="{{ c.icon }}" style="font-size:19px;color:var(--gold)"></i><span style="flex:1;font-size:14px;font-weight:500">{{ c.t }}</span><span style="font-size:12px;font-weight:600;color:{{ c.tc }}">{{ c.tag }}</span><span style="font-size:12px;color:var(--mu);width:72px;text-align:right">{{ c.when }}</span>
+      </button>
+    </sc-for>
+  </section>
+</div>
+</sc-if>
+
+<sc-if value="{{ scr.ingredients }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="16a Ingredients" style="display:flex;flex-direction:column;gap:24px">
+  <label style="position:relative;max-width:520px"><i class="ph ph-magnifying-glass" style="position:absolute;left:14px;top:15px;color:var(--mu)"></i><input class="input" value="{{ iq }}" onChange="{{ setIq }}" placeholder="Search English, தமிழ், common or scientific name" aria-label="Search ingredients" style="min-height:48px;padding-left:40px;background:var(--s1)"></label>
+  <p style="margin:0;color:var(--mu);max-width:680px">Raw drugs used across the formulary. Metals and minerals carry a toxicity class and must go through sutthi (purification) before use.</p>
+  <section style="background:var(--s1);border:1px solid var(--line);border-radius:14px;padding:8px 24px 16px;overflow-x:auto">
+    <table class="table" style="min-width:820px">
+      <thead><tr><th>Tamil</th><th>Name</th><th>Common name</th><th>Identity</th><th>Type</th><th>Metal</th><th>Toxicity class</th></tr></thead>
+      <tbody><sc-for list="{{ ingrRows }}" as="i" hint-placeholder-count="8"><tr>
+        <td style="font-family:var(--tamil);font-size:16px;padding:12px 6px">{{ i.ta }}</td><td style="font-weight:600">{{ i.en }}</td><td>{{ i.common }}</td><td style="font-style:italic;color:var(--mu);font-size:13px">{{ i.sci }}</td><td style="font-size:13px">{{ i.type }}</td>
+        <td><sc-if value="{{ i.isMetal }}" hint-placeholder-val="{{ false }}"><span style="font-family:var(--mono);font-size:12px;padding:2px 8px;border-radius:6px;border:1px solid var(--amb);color:var(--amb)">{{ i.metalTag }}</span></sc-if></td>
+        <td style="font-size:13px;font-weight:600;color:{{ i.cc }}">{{ i.cls }}</td>
+      </tr></sc-for></tbody>
+    </table>
+  </section>
+</div>
+</sc-if>
+
+<sc-if value="{{ scr.diseases }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="16b Diseases" style="display:flex;flex-direction:column;gap:24px">
+<div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center"><label style="position:relative;flex:1 1 320px;max-width:520px"><i class="ph ph-magnifying-glass" style="position:absolute;left:14px;top:15px;color:var(--mu)"></i><input class="input" value="{{ nq }}" onChange="{{ setNq }}" placeholder="Search English, தமிழ், modern name or kutram" aria-label="Search diseases" style="min-height:48px;padding-left:40px;background:var(--s1)"></label><span style="margin-left:auto;font-size:13px;color:var(--mu)">{{ noiCount }}</span></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,280px),1fr));gap:16px">
+  <sc-for list="{{ noiRows }}" as="n" hint-placeholder-count="4">
+    <button onClick="{{ n.open }}" style="text-align:left;font:inherit;color:inherit;cursor:pointer;background:var(--s1);border:1px solid var(--line);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:8px;min-height:200px;animation:smUp .5s ease both;transition:transform .25s,box-shadow .25s,border-color .25s" style-hover="transform:translateY(-3px);border-color:var(--goldT2);box-shadow:0 14px 36px -14px var(--goldT2)">
+      <span style="align-self:flex-start;font-size:11px;font-weight:600;padding:2px 8px;border-radius:6px;border:1px solid {{ n.kc }};color:{{ n.kc }}">{{ n.k }} <span style="font-family:var(--tamil);font-weight:400">{{ n.kta }}</span></span>
+      <span style="font-family:var(--tamil);font-size:26px;line-height:1.4">{{ n.ta }}</span>
+      <span style="font-family:var(--serif);font-size:20px">{{ n.en }}</span>
+      <span style="font-size:14px;color:var(--mu);flex:1">{{ n.modern }}</span>
+      <span style="font-size:12px;color:var(--mu)">Preparations: {{ n.formsText }}</span>
+    </button>
+  </sc-for>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ scr.diseaseDetail }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="16c Disease detail" style="display:flex;flex-direction:column;gap:24px">
+  <section style="background:var(--s1);border:1px solid var(--line);border-radius:14px;padding:clamp(24px,3vw,40px);display:flex;flex-direction:column;gap:12px">
+    <span style="align-self:flex-start;font-size:12px;font-weight:600;padding:3px 10px;border-radius:6px;border:1px solid {{ noi.kc }};color:{{ noi.kc }}">{{ noi.k }} · {{ noi.kel }}</span>
+    <div style="display:flex;align-items:baseline;gap:20px;flex-wrap:wrap"><span style="font-family:var(--tamil);font-size:clamp(34px,4vw,48px);line-height:1.3">{{ noi.ta }}</span><span style="font-family:var(--serif);font-size:32px">{{ noi.en }}</span></div>
+    <span style="color:var(--mu)">Modern equivalent: <span style="color:var(--tx)">{{ noi.modern }}</span></span>
+    <p style="margin:8px 0 0;max-width:680px;text-wrap:pretty">{{ noi.about }}</p>
+  </section>
+  <section style="background:var(--s1);border:1px solid var(--line);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:8px">
+    <h2 style="font-family:var(--serif);font-weight:400;font-size:20px;margin:0 0 8px">Classically indicated preparations</h2>
+    <sc-if value="{{ noi.noForms }}" hint-placeholder-val="{{ false }}"><span style="font-family:var(--mono);font-size:13px;color:var(--mu)">[preparations from record]</span></sc-if>
+    <sc-for list="{{ noi.forms }}" as="f" hint-placeholder-count="1">
+      <button onClick="{{ f.open }}" style="display:flex;gap:16px;align-items:center;padding:12px 0;border:0;border-top:1px solid var(--line);background:none;color:inherit;font:inherit;text-align:left;cursor:pointer;min-height:56px">
+        <span style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-weight:600">{{ f.en }} <span style="font-family:var(--tamil);font-weight:400;color:var(--mu)">{{ f.ta }}</span></span><span style="font-family:var(--mono);font-size:12px;color:var(--gold)">{{ f.code }} · Siddha TERM-1 SFI Preparations · p. [page]</span></span>
+        <sc-if value="{{ f.hm }}" hint-placeholder-val="{{ false }}"><span style="font-size:11px;font-weight:600;padding:2px 8px;border-radius:6px;border:1px solid var(--amb);color:var(--amb)">{{ f.metalTag }}</span></sc-if>
+        <i class="ph ph-caret-right" style="color:var(--mu)"></i>
+      </button>
+    </sc-for>
+  </section>
+  <div style="display:flex;gap:12px;flex-wrap:wrap"><button class="btn btn-secondary" onClick="{{ goDiseases }}" style="min-height:44px;padding:0 16px"><i class="ph ph-arrow-left"></i> All diseases</button><button class="btn btn-primary" onClick="{{ goAssistant }}" style="min-height:44px;padding:0 16px"><i class="ph ph-chat-circle-text"></i> Ask the assistant</button></div>
+</div>
+</sc-if>
+
+<sc-if value="{{ scr.patientDash }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="17 Patient dashboard" style="display:flex;flex-direction:column;gap:24px;max-width:960px">
+  <section style="border:1px solid var(--goldT2);background:var(--goldT);border-radius:14px;padding:24px;display:flex;gap:16px;align-items:flex-start">
+    <i class="ph ph-info" style="font-size:24px;color:var(--gold)"></i>
+    <div style="display:flex;flex-direction:column;gap:6px"><span style="font-family:var(--serif);font-size:22px">What this portal is for</span><span style="text-wrap:pretty">Plain-language information about Siddha preparations, drawn from the classical texts. It does not diagnose you or recommend a treatment. Please speak to a registered Siddha practitioner before taking any preparation — especially one that contains a metal or mineral.</span></div>
+  </section>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px">
+    <button onClick="{{ goAssistant }}" style="text-align:left;font:inherit;color:inherit;cursor:pointer;background:var(--s1);border:1px solid var(--line);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:12px;min-height:180px;animation:smUp .5s ease both;transition:transform .25s,box-shadow .25s,border-color .25s" style-hover="transform:translateY(-3px);border-color:var(--goldT2);box-shadow:0 14px 36px -14px var(--goldT2)"><i class="ph ph-chat-circle-text" style="font-size:28px;color:var(--gold)"></i><span style="font-family:var(--serif);font-size:24px">Ask the assistant</span><span style="color:var(--mu);font-size:14px">Ask in Tamil or English. Answers show the book and page they come from.</span></button>
+    <button onClick="{{ goFormulary }}" style="text-align:left;font:inherit;color:inherit;cursor:pointer;background:var(--s1);border:1px solid var(--line);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:12px;min-height:180px;animation:smUp .5s ease both;animation-delay:.1s;transition:transform .25s,box-shadow .25s,border-color .25s" style-hover="transform:translateY(-3px);border-color:var(--goldT2);box-shadow:0 14px 36px -14px var(--goldT2)"><i class="ph ph-flask" style="font-size:28px;color:var(--gold)"></i><span style="font-family:var(--serif);font-size:24px">Browse the formulary</span><span style="color:var(--mu);font-size:14px">Read what each preparation is made of and where it is described.</span></button>
+  </div>
+  <section style="background:var(--s1);border:1px solid var(--line);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:12px">
+    <h2 style="font-family:var(--serif);font-weight:400;font-size:20px;margin:0">Ingredients that need extra care</h2>
+    <p style="margin:0;color:var(--mu);font-size:14px">These metals and minerals appear in some preparations. They are only safe when purified and given under supervision.</p>
+    <div style="overflow-x:auto"><table class="table" style="min-width:520px">
+      <thead><tr><th>Ingredient</th><th>Tamil</th><th>Metal</th><th>Toxicity class</th></tr></thead>
+      <tbody><sc-for list="{{ careRows }}" as="i" hint-placeholder-count="5"><tr><td style="font-weight:600;padding:12px 6px">{{ i.common }}</td><td style="font-family:var(--tamil)">{{ i.ta }}</td><td style="font-family:var(--mono)">{{ i.metal }}</td><td style="font-weight:600;color:{{ i.cc }}">{{ i.cls }}</td></tr></sc-for></tbody>
+    </table></div>
+  </section>
+</div>
+</sc-if>
+
+<sc-if value="{{ scr.formulary }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="18 Formulary" style="display:flex;flex-direction:column;gap:24px">
+  <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center">
+    <label style="position:relative;flex:1 1 320px;max-width:520px"><i class="ph ph-magnifying-glass" style="position:absolute;left:14px;top:15px;color:var(--mu)"></i><input class="input" value="{{ fq }}" onChange="{{ setFq }}" placeholder="Search English, தமிழ் or SFI code" aria-label="Search formulary" style="min-height:48px;padding-left:40px;background:var(--s1)"></label>
+    <div role="group" aria-label="Dosage form" style="display:flex;flex-wrap:wrap;gap:8px">
+      <sc-for list="{{ formFilters }}" as="f" hint-placeholder-count="5"><button onClick="{{ f.pick }}" style="min-height:44px;padding:0 16px;border-radius:999px;font:inherit;font-size:14px;cursor:pointer;background:{{ f.bg }};border:1px solid {{ f.bd }};color:{{ f.fg }}">{{ f.label }}</button></sc-for>
+    </div>
+    <span style="margin-left:auto;font-size:13px;color:var(--mu)">{{ formCount }}</span>
+  </div>
+  <sc-if value="{{ noForms }}" hint-placeholder-val="{{ false }}"><p style="margin:0;color:var(--mu)">No formulation matches. Try the Tamil name or an SFI code such as SFI-P-017.</p></sc-if>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,280px),1fr));gap:16px">
+    <sc-for list="{{ formRows }}" as="f" hint-placeholder-count="10">
+      <button onClick="{{ f.open }}" style="text-align:left;font:inherit;color:inherit;cursor:pointer;background:var(--s1);border:1px solid var(--line);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:8px;min-height:190px;animation:smUp .5s ease both;animation-delay:{{ f.delay }};transition:transform .25s,box-shadow .25s,border-color .25s" style-hover="transform:translateY(-3px);border-color:var(--goldT2);box-shadow:0 14px 36px -14px var(--goldT2)">
+        <span style="display:flex;justify-content:space-between;align-items:center;gap:8px"><span style="font-family:var(--mono);font-size:12px;color:var(--gold)">{{ f.code }}</span><span style="display:flex;gap:6px"><sc-if value="{{ f.red }}" hint-placeholder-val="{{ false }}"><span style="font-size:11px;font-weight:600;padding:1px 7px;border-radius:6px;background:var(--red);color:var(--onGold)">High risk</span></sc-if><sc-if value="{{ f.hm }}" hint-placeholder-val="{{ false }}"><span style="font-size:11px;font-weight:600;padding:1px 7px;border-radius:6px;border:1px solid var(--amb);color:var(--amb)">{{ f.metalTag }}</span></sc-if></span></span>
+        <span style="font-family:var(--tamil);font-size:20px;line-height:1.4">{{ f.ta }}</span>
+        <span style="font-family:var(--serif);font-size:20px">{{ f.en }}</span>
+        <span style="font-size:13px;color:var(--mu);flex:1">For {{ f.indic }}</span>
+        <span style="align-self:flex-start;font-size:12px;padding:2px 10px;border-radius:6px;border:1px solid var(--line2);color:var(--mu)">{{ f.form }}</span>
+      </button>
+    </sc-for>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ scr.formDetail }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="19 Formulary detail" style="display:flex;flex-direction:column;gap:24px">
+  <section style="background:var(--s1);border:1px solid var(--line);border-radius:14px;padding:clamp(24px,3vw,40px);display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between;align-items:flex-end;position:relative;overflow:hidden">
+    <div style="display:flex;flex-direction:column;gap:8px;position:relative">
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><span style="font-family:var(--mono);font-size:13px;color:var(--gold)">{{ fd.code }}</span><span style="font-size:12px;padding:2px 10px;border-radius:6px;border:1px solid var(--line2);color:var(--mu)">{{ fd.form }}</span><sc-if value="{{ fd.hm }}" hint-placeholder-val="{{ false }}"><span style="font-size:12px;font-weight:600;padding:2px 8px;border-radius:6px;border:1px solid var(--amb);color:var(--amb)">{{ fd.metalTag }}</span></sc-if></div>
+      <span style="font-family:var(--tamil);font-size:clamp(32px,4vw,48px);line-height:1.35">{{ fd.ta }}</span>
+      <span style="font-family:var(--serif);font-size:28px">{{ fd.en }}</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:4px;padding:16px;border-radius:12px;border:1px solid var(--goldT2);min-width:260px;position:relative">
+      <span style="font-size:12px;color:var(--mu)">Source</span>
+      <span style="font-weight:600">Siddha TERM-1 SFI Preparations</span>
+      <span style="font-family:var(--mono);font-size:12px;color:var(--gold)">p. [page] · verse [n]</span>
+    </div>
+  </section>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:24px;align-items:start">
+    <section style="background:var(--s1);border:1px solid var(--line);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:8px">
+      <h2 style="font-family:var(--serif);font-weight:400;font-size:20px;margin:0 0 8px">Ingredients &amp; sutthi</h2>
+      <sc-for list="{{ fd.ingr }}" as="i" hint-placeholder-count="2">
+        <div style="display:flex;gap:16px;padding:12px 0;border-top:1px solid var(--line)"><span style="font-family:var(--tamil);font-size:17px;min-width:120px">{{ i.ta }}</span><span style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-weight:600">{{ i.en }}</span><span style="font-size:13px;color:var(--mu)">{{ i.note }}</span></span><sc-if value="{{ i.hm }}" hint-placeholder-val="{{ false }}"><i class="ph ph-atom" style="color:var(--amb);font-size:18px" aria-label="Heavy metal"></i></sc-if></div>
+      </sc-for>
+    </section>
+    <section style="background:var(--s1);border:1px solid var(--line);border-radius:14px;padding:24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:20px">
+      <div style="display:flex;flex-direction:column;gap:4px"><span style="font-size:12px;color:var(--mu)">Dose</span><span style="font-family:var(--mono);font-size:14px">[dose from record]</span></div>
+      <div style="display:flex;flex-direction:column;gap:4px"><span style="font-size:12px;color:var(--mu)">Anupanam (vehicle)</span><span style="font-family:var(--mono);font-size:14px">[anupanam from record]</span></div>
+      <div style="display:flex;flex-direction:column;gap:4px"><span style="font-size:12px;color:var(--mu)">Shelf life</span><span style="font-family:var(--mono);font-size:14px">[shelf life from record]</span></div>
+      <div style="display:flex;flex-direction:column;gap:4px"><span style="font-size:12px;color:var(--mu)">Dosage form</span><span>{{ fd.form }}</span></div>
+    </section>
+    <section style="background:var(--s1);border:1px solid var(--line);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:12px">
+      <h2 style="font-family:var(--serif);font-weight:400;font-size:20px;margin:0">Indicated diseases</h2>
+      <sc-if value="{{ fd.noIndicated }}" hint-placeholder-val="{{ false }}"><span style="font-family:var(--mono);font-size:13px;color:var(--mu)">[indications from record]</span></sc-if>
+      <div style="display:flex;gap:8px;flex-wrap:wrap"><sc-for list="{{ fd.indicated }}" as="n" hint-placeholder-count="1"><button onClick="{{ n.open }}" style="display:inline-flex;gap:8px;align-items:center;min-height:44px;padding:0 14px;border-radius:10px;border:1px solid var(--line2);background:none;color:var(--tx);font:inherit;font-size:14px;cursor:pointer" style-hover="border-color:var(--gold)"><span style="font-family:var(--tamil)">{{ n.ta }}</span>{{ n.en }}<span style="color:var(--mu);font-size:12px">{{ n.modern }}</span></button></sc-for></div>
+    </section>
+    <section style="background:var(--s1);border:1px solid var(--line);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:12px">
+      <h2 style="font-family:var(--serif);font-weight:400;font-size:20px;margin:0">Contraindications</h2>
+      <div style="display:flex;gap:8px;flex-wrap:wrap"><sc-for list="{{ fd.contra }}" as="c" hint-placeholder-count="2"><span style="display:inline-flex;gap:6px;align-items:center;padding:6px 12px;border-radius:8px;border:1px solid var(--red);color:var(--red);font-size:13px;font-weight:600"><i class="ph ph-prohibit"></i>{{ c }}</span></sc-for></div>
+      <button class="btn btn-primary" onClick="{{ fd.check }}" style="min-height:44px;align-self:flex-start;padding:0 16px;margin-top:8px"><i class="ph ph-shield-check"></i> Run a safety check</button>
+    </section>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ scr.assistant }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="20 Assistant" style="display:flex;gap:24px;min-height:calc(100vh - 136px);min-width:0">
+  <sc-if value="{{ showChatList }}" hint-placeholder-val="{{ true }}">
+    <aside aria-label="Past chats" style="width:260px;flex:none;display:flex;flex-direction:column;gap:8px">
+      <button class="btn btn-primary" onClick="{{ newChat }}" style="min-height:44px"><i class="ph ph-plus"></i> New chat</button>
+      <span style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mu);padding:16px 4px 4px">Past chats</span>
+      <sc-for list="{{ chats }}" as="c" hint-placeholder-count="3">
+        <button onClick="{{ c.open }}" style="display:flex;gap:12px;align-items:flex-start;padding:12px;border-radius:10px;font:inherit;text-align:left;cursor:pointer;min-height:44px;background:{{ c.bg }};border:1px solid {{ c.bd }};color:{{ c.fg }}" style-hover="background:var(--goldT)"><i class="{{ c.icon }}" style="margin-top:3px"></i><span style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-size:14px;font-weight:500;color:var(--tx)">{{ c.t }}</span><span style="font-size:12px">{{ c.when }}</span></span></button>
+      </sc-for>
+    </aside>
+  </sc-if>
+  <section style="flex:1;min-width:0;display:flex;flex-direction:column;background:var(--s1);border:1px solid var(--line);border-radius:14px;overflow:hidden">
+    <sc-if value="{{ showChatStrip }}" hint-placeholder-val="{{ false }}">
+      <div aria-label="Past chats" style="display:flex;gap:8px;overflow-x:auto;padding:12px 16px;border-bottom:1px solid var(--line)">
+        <button onClick="{{ newChat }}" class="btn btn-primary" style="min-height:40px;flex:none"><i class="ph ph-plus"></i> New</button>
+        <sc-for list="{{ chats }}" as="c" hint-placeholder-count="3"><button onClick="{{ c.open }}" style="flex:none;max-width:220px;overflow:hidden;text-overflow:ellipsis;min-height:40px;padding:0 14px;border-radius:999px;font:inherit;font-size:13px;cursor:pointer;background:{{ c.bg }};border:1px solid {{ c.bd }};color:{{ c.fg }}"><i class="{{ c.icon }}"></i> {{ c.t }}</button></sc-for>
+      </div>
+    </sc-if>
+    <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap">
+      <span style="font-size:13px;color:var(--mu);flex:1;min-width:0">Answers only from the indexed Tamil corpus</span>
+      <button onClick="{{ toggleOnline }}" aria-label="AI status — click to simulate" style="display:flex;align-items:center;gap:8px;min-height:36px;padding:0 12px;border-radius:999px;border:1px solid {{ onlineC }};background:none;color:{{ onlineC }};font:inherit;font-size:12px;font-weight:600;cursor:pointer"><span style="width:7px;height:7px;border-radius:50%;background:{{ onlineC }}"></span>{{ onlineLabel }}</button>
+    </div>
+    <div style="flex:1;overflow:auto;padding:clamp(16px,3vw,32px);display:flex;flex-direction:column;gap:24px">
+      <div style="align-self:flex-end;max-width:80%;padding:12px 16px;border-radius:14px 14px 4px 14px;background:var(--s3);font-size:15px;font-family:{{ qFont }}">{{ chatQ }}</div>
+      <div style="display:flex;gap:12px;align-items:flex-start;max-width:760px">
+        <span style="width:36px;height:36px;flex:none;border-radius:50%;border:1px solid var(--goldT2);display:grid;place-items:center"><svg width="20" height="20" viewBox="0 0 40 40" fill="none" stroke="var(--gold)" stroke-width="1.6" aria-hidden="true"><ellipse cx="20" cy="20" rx="6" ry="15"></ellipse><ellipse cx="20" cy="20" rx="6" ry="15" transform="rotate(60 20 20)"></ellipse><ellipse cx="20" cy="20" rx="6" ry="15" transform="rotate(120 20 20)"></ellipse></svg></span>
+        <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:16px">
+          <sc-if value="{{ isTyping }}" hint-placeholder-val="{{ false }}"><div aria-label="Assistant is typing" style="display:flex;gap:6px;padding:14px 0"><span style="width:8px;height:8px;border-radius:50%;background:var(--gold);animation:smDot 1.2s infinite"></span><span style="width:8px;height:8px;border-radius:50%;background:var(--gold);animation:smDot 1.2s infinite;animation-delay:.15s"></span><span style="width:8px;height:8px;border-radius:50%;background:var(--gold);animation:smDot 1.2s infinite;animation-delay:.3s"></span></div></sc-if>
+          <sc-if value="{{ showAnswer }}" hint-placeholder-val="{{ true }}">
+            <p style="margin:0;font-size:16px;line-height:1.7;text-wrap:pretty">{{ answerText }}<sc-if value="{{ isStreaming }}" hint-placeholder-val="{{ false }}"><span style="display:inline-block;width:2px;height:1.1em;background:var(--gold);vertical-align:text-bottom;margin-left:2px;animation:smCaret 1s steps(1) infinite"></span></sc-if></p>
+          </sc-if>
+          <sc-if value="{{ showCites }}" hint-placeholder-val="{{ true }}">
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:12px">
+              <sc-for list="{{ chatCites }}" as="c" hint-placeholder-count="2">
+                <article style="border:1px solid var(--goldT2);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:8px;background:var(--bg);animation:smPop .45s ease both;animation-delay:{{ c.delay }}">
+                  <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-family:var(--mono);font-size:13px;color:var(--gold)">[{{ c.n }}]</span><span style="font-family:var(--mono);font-size:11px;color:var(--mu)">match {{ c.score }}</span></div>
+                  <span style="font-weight:600;font-size:14px">{{ c.book }}</span>
+                  <span style="font-family:var(--mono);font-size:12px;color:var(--gold)">{{ c.ref }}</span>
+                  <span style="font-family:var(--tamil);font-size:14px;color:var(--mu);border-left:1px solid var(--goldT2);padding-left:10px">{{ c.ex }}</span>
+                </article>
+              </sc-for>
+            </div>
+          </sc-if>
+          <sc-if value="{{ notFound }}" hint-placeholder-val="{{ false }}">
+            <div style="border:1.5px dashed var(--amb);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:12px;background:var(--ambT)">
+              <div style="display:flex;gap:12px;align-items:center"><i class="ph ph-book-open" style="font-size:24px;color:var(--amb)"></i><span style="font-family:var(--serif);font-size:22px;color:var(--amb)">Not found in corpus</span></div>
+              <span style="text-wrap:pretty">No passage in the indexed books answers this question, so the assistant will not guess. A dose that is not in the source should never come from a language model.</span>
+              <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-secondary" onClick="{{ goFormulary }}" style="min-height:44px;padding:0 14px"><i class="ph ph-flask"></i> Search the formulary</button><button class="btn btn-ghost" onClick="{{ newChat }}" style="min-height:44px;padding:0 12px">Ask something else</button></div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ isOffline }}" hint-placeholder-val="{{ false }}">
+            <div style="border:1px solid var(--red);border-radius:14px;padding:20px;display:flex;gap:12px;align-items:flex-start;background:var(--redT)"><i class="ph ph-plugs" style="font-size:22px;color:var(--red)"></i><span>The AI service is offline. Search results and rule-based checks still work; answers will resume when it reconnects.</span></div>
+          </sc-if>
+        </div>
+      </div>
+    </div>
+    <form onSubmit="{{ send }}" style="display:flex;flex-direction:column;gap:8px;padding:16px;border-top:1px solid var(--line)">
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+        <div role="group" aria-label="Input language" style="display:flex;border:1px solid var(--line2);border-radius:8px;overflow:hidden"><sc-for list="{{ langOpts }}" as="l" hint-placeholder-count="2"><button type="button" onClick="{{ l.pick }}" style="min-height:36px;padding:0 12px;border:0;font:inherit;font-size:13px;cursor:pointer;background:{{ l.bg }};color:{{ l.fg }}">{{ l.label }}</button></sc-for></div>
+        <sc-for list="{{ askSugg }}" as="g" hint-placeholder-count="2"><button type="button" onClick="{{ g.use }}" class="btn btn-ghost" style="min-height:36px;padding:0 8px;font-size:13px">{{ g.t }}</button></sc-for>
+      </div>
+      <div style="display:flex;gap:8px;align-items:flex-end">
+        <textarea class="input" value="{{ draft }}" onChange="{{ setDraft }}" onKeyDown="{{ draftKey }}" placeholder="{{ draftPh }}" aria-label="Message" rows="1" style="min-height:48px;resize:none;font-family:var(--sans);background:var(--s2)"></textarea>
+        <button type="submit" class="btn btn-primary" aria-label="Send" style="width:48px;height:48px;padding:0;flex:none"><i class="ph ph-paper-plane-right" style="font-size:19px"></i></button>
+      </div>
+    </form>
+  </section>
+</div>
+</sc-if>
+
+<sc-if value="{{ scr.profile }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="21 Profile" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:24px;align-items:start">
+  <section style="background:var(--s1);border:1px solid var(--line);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:20px">
+    <div style="display:flex;gap:16px;align-items:center"><span style="width:64px;height:64px;border-radius:50%;display:grid;place-items:center;font-family:var(--serif);font-size:24px;border:1px solid {{ me.color }};color:{{ me.color }}">{{ me.initials }}</span><div style="display:flex;flex-direction:column;gap:4px"><span style="font-family:var(--serif);font-size:24px">{{ me.name }}</span><span style="align-self:flex-start;font-size:11px;font-weight:600;padding:2px 8px;border-radius:6px;border:1px solid {{ me.color }};color:{{ me.color }}">{{ me.label }}</span></div></div>
+    <dl style="margin:0;display:flex;flex-direction:column">
+      <sc-for list="{{ profileRows }}" as="r" hint-placeholder-count="7"><div style="display:grid;grid-template-columns:140px 1fr;gap:16px;padding:12px 0;border-top:1px solid var(--line)"><dt style="font-size:13px;color:var(--mu)">{{ r.k }}</dt><dd style="margin:0;font-size:14px">{{ r.v }}</dd></div></sc-for>
+    </dl>
+    <button class="btn btn-secondary" style="min-height:44px;align-self:flex-start;padding:0 16px"><i class="ph ph-pencil-simple"></i> Edit details</button>
+  </section>
+  <section style="background:var(--s1);border:1px solid var(--line);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:8px">
+    <h2 style="font-family:var(--serif);font-weight:400;font-size:20px;margin:0 0 8px">Notifications</h2>
+    <sc-for list="{{ notifs }}" as="x" hint-placeholder-count="3"><div style="display:flex;gap:12px;padding:12px 0;border-top:1px solid var(--line)"><i class="{{ x.icon }}" style="color:{{ x.color }};font-size:19px;margin-top:2px"></i><div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:14px">{{ x.text }}</span><span style="font-size:12px;color:var(--mu);font-family:var(--mono)">{{ x.when }}</span></div></div></sc-for>
+  </section>
+</div>
+</sc-if>
+
+<sc-if value="{{ scr.denied }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="04 Access denied" style="display:flex;flex-direction:column;gap:32px;max-width:860px">
+  <div style="display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap">
+    <span style="width:72px;height:72px;border-radius:50%;border:1px solid var(--goldT2);display:grid;place-items:center;color:var(--gold);font-size:32px;flex:none"><i class="ph ph-lock-key"></i></span>
+    <div style="flex:1 1 320px;display:flex;flex-direction:column;gap:8px"><h2 style="font-family:var(--serif);font-weight:400;font-size:clamp(28px,3vw,38px);margin:0">{{ deniedName }} isn’t part of the {{ roleName }} workspace</h2><p style="margin:0;color:var(--mu);text-wrap:pretty">Nothing is wrong with your account. Each role sees the tools it needs — if you should have access, ask an administrator to change your role.</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:8px"><button class="btn btn-primary" onClick="{{ goDash }}" style="min-height:44px;padding:0 18px">Back to my dashboard</button><button class="btn btn-secondary" onClick="{{ goAssistant }}" style="min-height:44px;padding:0 16px">Ask the assistant</button></div></div>
+  </div>
+  <section style="background:var(--s1);border:1px solid var(--line);border-radius:14px;padding:8px 24px 16px;overflow-x:auto">
+    <table class="table" style="min-width:560px">
+      <thead><tr><th>Capability</th><th style="text-align:center">Patient</th><th style="text-align:center">Student</th><th style="text-align:center">Practitioner</th><th style="text-align:center">Admin</th></tr></thead>
+      <tbody><sc-for list="{{ capRows }}" as="r" hint-placeholder-count="6"><tr><td style="padding:12px 6px">{{ r.label }}</td><sc-for list="{{ r.cells }}" as="c" hint-placeholder-count="4"><td style="text-align:center"><i class="{{ c.icon }}" aria-label="{{ c.label }}" style="font-size:18px;color:{{ c.color }}"></i></td></sc-for></tr></sc-for></tbody>
+    </table>
+  </section>
+</div>
+</sc-if>
+
+<sc-if value="{{ modalOpen }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ closeModal }}" style="position:fixed;inset:0;z-index:80;background:var(--glass);backdrop-filter:blur(8px);display:grid;place-items:center;padding:16px">
+    <form role="dialog" aria-label="Create user" onClick="{{ stop }}" onSubmit="{{ createUser }}" style="width:min(480px,100%);background:var(--s1);border:1px solid var(--line2);border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:20px;box-shadow:0 40px 80px -24px rgba(0,0,0,.7);animation:smUp .25s ease both">
+      <div style="display:flex;justify-content:space-between;align-items:center"><h2 style="font-family:var(--serif);font-weight:400;font-size:26px;margin:0">Create user</h2><button type="button" class="btn btn-secondary" aria-label="Close" onClick="{{ closeModal }}" style="width:44px;height:44px;padding:0"><i class="ph ph-x"></i></button></div>
+      <div class="field"><label for="nu-name">Full name</label><input id="nu-name" class="input" value="{{ nu.name }}" onChange="{{ setNuName }}" style="min-height:48px"></div>
+      <div class="field"><label for="nu-email">Email</label><input id="nu-email" type="email" class="input" value="{{ nu.email }}" onChange="{{ setNuEmail }}" style="min-height:48px"></div>
+      <div class="field"><label for="nu-role">Role</label><select id="nu-role" class="input" value="{{ nu.role }}" onChange="{{ setNuRole }}" style="min-height:48px"><option value="patient">Patient</option><option value="student">Student</option><option value="practitioner">Practitioner</option><option value="admin">Admin</option></select></div>
+      <p style="margin:0;font-size:13px;color:var(--mu)">A one-time sign-in link is emailed. Practitioners and students stay pending until their registration number is verified.</p>
+      <div style="display:flex;gap:12px;justify-content:flex-end"><button type="button" class="btn btn-secondary" onClick="{{ closeModal }}" style="min-height:44px;padding:0 16px">Cancel</button><button type="submit" class="btn btn-primary" style="min-height:44px;padding:0 20px">Create user</button></div>
+    </form>
+  </div>
+</sc-if>
+<sc-if value="{{ hasToast }}" hint-placeholder-val="{{ false }}">
+  <div role="status" style="position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:90;display:flex;gap:12px;align-items:center;padding:12px 20px;border-radius:12px;background:var(--glass);backdrop-filter:blur(12px);border:1px solid var(--jade);animation:smUp .3s ease both"><i class="ph ph-check-circle" style="color:var(--jade)"></i><span style="font-size:14px">{{ toast }}</span></div>
+</sc-if>
+    </main>
+  </div>
+</div>
+
+<sc-if value="{{ paletteOpen }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ closePalette }}" style="position:fixed;inset:0;z-index:80;background:var(--glass);backdrop-filter:blur(8px);display:flex;justify-content:center;align-items:flex-start;padding:12vh 16px 16px">
+    <div role="dialog" aria-label="Command palette" onClick="{{ stop }}" style="width:min(600px,100%);background:var(--s1);border:1px solid var(--line2);border-radius:16px;box-shadow:0 40px 80px -24px rgba(0,0,0,.7);overflow:hidden;animation:smUp .25s ease both">
+      <div style="display:flex;align-items:center;gap:12px;padding:0 20px;border-bottom:1px solid var(--line)">
+        <i class="ph ph-magnifying-glass" style="font-size:20px;color:var(--gold)"></i>
+        <input autoFocus="{{ true }}" value="{{ pq }}" onChange="{{ setPq }}" placeholder="Jump to a screen, formulation or noi…" aria-label="Search" style="flex:1;min-height:60px;background:none;border:0;outline:0;color:var(--tx);font:inherit;font-size:16px">
+        <kbd style="font-family:var(--mono);font-size:11px;color:var(--mu);border:1px solid var(--line2);border-radius:6px;padding:2px 6px">Esc</kbd>
+      </div>
+      <div style="max-height:52vh;overflow:auto;padding:8px">
+        <sc-for list="{{ paletteItems }}" as="p" hint-placeholder-count="6">
+          <button onClick="{{ p.go }}" style="width:100%;display:flex;align-items:center;gap:12px;min-height:48px;padding:0 12px;border:0;border-radius:10px;background:none;color:var(--tx);font:inherit;font-size:14px;cursor:pointer;text-align:left" style-hover="background:var(--goldT)">
+            <i class="{{ p.icon }}" style="font-size:18px;color:var(--gold)"></i><span style="flex:1">{{ p.label }}</span><span style="font-size:12px;color:var(--mu);display:flex;gap:6px;align-items:center"><i class="{{ p.lockIcon }}"></i>{{ p.meta }}</span>
+          </button>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+</sc-if>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;dark&quot;,&quot;light&quot;],&quot;default&quot;:&quot;dark&quot;,&quot;tsType&quot;:&quot;'dark'|'light'&quot;},&quot;startScreen&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;landing&quot;,&quot;login&quot;,&quot;register&quot;,&quot;assistant&quot;,&quot;safetyResult&quot;,&quot;dxResult&quot;,&quot;formulary&quot;],&quot;default&quot;:&quot;landing&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;role&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;admin&quot;,&quot;practitioner&quot;,&quot;student&quot;,&quot;patient&quot;],&quot;default&quot;:&quot;practitioner&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+const ROLES={
+  admin:{name:'System Administrator',label:'Admin',email:'admin@siddhamind.in',initials:'SA',dash:'adminDash',color:'var(--gold)',icon:'ph ph-shield-star',desc:'Manage users, the Tamil corpus, AI services and the audit trail.'},
+  practitioner:{name:'Dr. Meenakshi Sundaram',label:'Practitioner',email:'doctor@siddhamind.in',initials:'MS',dash:'pracDash',color:'var(--jade)',icon:'ph ph-stethoscope',desc:'Run Envagai Thervu examinations and check formulations before dispensing.'},
+  student:{name:'Navasakthivel S M',label:'Student',email:'student@siddhamind.in',initials:'NS',dash:'studentDash',color:'var(--va)',icon:'ph ph-graduation-cap',desc:'Study formulations, ingredients and noi with cited source pages.'},
+  patient:{name:'Public User',label:'Patient',email:'patient@siddhamind.in',initials:'PU',dash:'patientDash',color:'var(--tx)',icon:'ph ph-heart',desc:'Read about preparations in plain language. Information, not treatment.'}
+};
+const SCREENS={adminDash:['Dashboard','ph-squares-four'],users:['User management','ph-users-three'],corpus:['Corpus','ph-books'],reports:['System reports','ph-chart-bar'],pracDash:['Dashboard','ph-squares-four'],studentDash:['Dashboard','ph-squares-four'],patientDash:['Home','ph-house-line'],intake:['New examination','ph-stethoscope'],dxResult:['Diagnosis result','ph-stethoscope'],dxHistory:['Diagnosis history','ph-clock-counter-clockwise'],safety:['Safety checker','ph-shield-check'],safetyResult:['Safety result','ph-shield-warning'],formulary:['Formulary','ph-flask'],formDetail:['Formulation','ph-flask'],ingredients:['Ingredients','ph-leaf'],diseases:['Diseases (Noi)','ph-list-bullets'],diseaseDetail:['Disease','ph-list-bullets'],assistant:['Assistant','ph-chat-circle-text'],profile:['Profile','ph-user-circle'],denied:['Access denied','ph-lock-key']};
+const NAV={
+  admin:[['h','Administration'],'adminDash','users','corpus','reports',['h','Clinical'],'intake','dxHistory','safety',['h','Knowledge'],'formulary','ingredients','diseases','assistant'],
+  practitioner:['pracDash',['h','Clinic'],'intake','dxHistory','safety',['h','Knowledge'],'formulary','ingredients','diseases','assistant'],
+  student:['studentDash',['h','Study'],'formulary','ingredients','diseases','safety','assistant'],
+  patient:['patientDash','formulary','assistant']
+};
+const SUB={dxResult:'intake',safetyResult:'safety',formDetail:'formulary',diseaseDetail:'diseases'};
+const FORMS=[
+  {id:'nandukkal',en:'Nandukkal Parpam',ta:'நண்டுக்கல் பற்பம்',code:'SFI-P-017',form:'Parpam',hm:false,ingr:[{ta:'நண்டுக்கல்',en:'Crab fossil',note:'Sutthi before calcination — method on source page'}]},
+  {id:'nathai',en:'Nathai Parpam',ta:'நத்தை பற்பம்',code:'SFI-P-014',form:'Parpam',hm:false,ingr:[{ta:'நத்தை ஓடு',en:'Apple snail',note:'Cleaned and purified before calcination'}]},
+  {id:'naga',en:'Naga Parpam',ta:'நாக பற்பம்',code:'SFI-P-021',form:'Parpam',hm:true,metal:'Zn',metalName:'Zinc',metalSrc:'Naagam',ingr:[{ta:'நாகம்',en:'Zinc',note:'Sutthi required — heavy metal',hm:true}]},
+  {id:'linga',en:'Linga Chenthuram',ta:'லிங்க செந்தூரம்',code:'SFI-C-008',form:'Chenthuram',hm:true,red:true,ceiling:'30 mg/day',metal:'Hg',metalName:'Mercury',metalSrc:'Cinnabar',ingr:[{ta:'லிங்கம்',en:'Cinnabar (HgS)',note:'Sutthi required before use — heavy metal, method on source page',hm:true},{ta:'[துணை மருந்து]',en:'[Processing juices per record]',note:'Listed on the source page'}]},
+  {id:'ayya',en:'Ayya Parpam',ta:'அய பற்பம்',code:'SFI-P-003',form:'Parpam',hm:true,metal:'Fe',metalName:'Iron',metalSrc:'Ayam',ingr:[{ta:'அயம்',en:'Iron',note:'Sutthi required — heavy metal',hm:true}]},
+  {id:'sangu',en:'Sangu Parpam',ta:'சங்கு பற்பம்',code:'SFI-P-026',form:'Parpam',hm:false,ingr:[{ta:'சங்கு',en:'Conch shell',note:'Purified before calcination'}]},
+  {id:'muthu',en:'Muthuchippi Parpam',ta:'முத்துச்சிப்பி பற்பம்',code:'SFI-P-019',form:'Parpam',hm:false,ingr:[{ta:'முத்துச்சிப்பி',en:'Pearl-oyster shell',note:'Purified before calcination'}]},
+  {id:'nilavembu',en:'Nilavembu Kudineer',ta:'நிலவேம்பு குடிநீர்',code:'SFI-K-001',form:'Kudineer',hm:false,ingr:[{ta:'நிலவேம்பு',en:'Andrographis paniculata',note:'Dried herb, coarse powder'},{ta:'[பிற மூலிகைகள்]',en:'[Other herbs per record]',note:'Listed on the source page'}]},
+  {id:'vendhaya',en:'Vendhaya Churanam',ta:'வெந்தய சூரணம்',code:'SFI-S-011',form:'Churanam',hm:false,ingr:[{ta:'வெந்தயம்',en:'Fenugreek seed',note:'Cleaned, dried, powdered and sieved'}]},
+  {id:'thiripala',en:'Thiripala Churanam',ta:'திரிபலா சூரணம்',code:'SFI-S-004',form:'Churanam',hm:false,ingr:[{ta:'கடுக்காய்',en:'Terminalia chebula',note:'Seed removed'},{ta:'நெல்லிக்காய்',en:'Phyllanthus emblica',note:'Seed removed'},{ta:'தான்றிக்காய்',en:'Terminalia bellirica',note:'Seed removed'}]}
+];
+const KUT={Vatham:{ta:'வாதம்',el:'Air',c:'var(--va)'},Pitham:{ta:'பித்தம்',el:'Fire',c:'var(--pi)'},Kabam:{ta:'கபம்',el:'Water · Earth',c:'var(--ka)'}};
+const NOI=[
+  {id:'neerk',ta:'நீர்க்கட்டு',en:'Neerkkattu',modern:'Urinary retention',k:'Vatham',forms:[],about:'Retention of urine with lower-abdominal fullness and difficulty in passing urine.'},
+  {id:'kall',ta:'கல்லடைப்பு',en:'Kalladaippu',modern:'Renal / urinary calculi',k:'Vatham',forms:['nandukkal'],about:'Obstruction of urine by stone, with pain along the flank and scanty urine.'},
+  {id:'neerad',ta:'நீரடைப்பு',en:'Neeradaippu',modern:'Urinary obstruction',k:'Vatham',forms:[],about:'Obstruction to the flow of urine — scanty, interrupted or painful passage.'},
+  {id:'kuruthi',ta:'குருதி எருவாய்முளை',en:'Kuruthi Eruvaimulai',modern:'Bleeding haemorrhoids',k:'Pitham',forms:[],about:'Piles with bleeding during or after defecation.'},
+  {id:'kaduppu',ta:'கடுப்புக் கழிச்சல்',en:'Kaduppu Kalichal',modern:'Dysentery',k:'Pitham',forms:[],about:'Frequent loose stools with straining, mucus or blood.'},
+  {id:'ilaippu',ta:'இளைப்பு / சுவாசகாசம்',en:'Ilaippu / Suvasakasam',modern:'Bronchial asthma',k:'Kabam',forms:[],about:'Episodic breathlessness with wheeze and cough.'},
+  {id:'eelai',ta:'ஈளை',en:'Eelai',modern:'Chronic bronchitis',k:'Kabam',forms:[],about:'Persistent cough with phlegm.'},
+  {id:'mathu',ta:'மதுமேகம்',en:'Mathumegam',modern:'Diabetes mellitus',k:'Kabam',forms:['vendhaya'],about:'Classed among the urinary disorders (neerizhivu). Sweetness and increased frequency of urine are the defining signs in the classical texts.'},
+  {id:'paandu',ta:'பாண்டு',en:'Paandu',modern:'Anaemia',k:'Pitham',forms:['ayya'],about:'Pallor of skin, eyes and nails with fatigue and breathlessness on exertion.'},
+  {id:'suram',ta:'சுரம்',en:'Suram',modern:'Fever',k:'Varies',forms:['nilavembu'],about:'Classified by the kutram involved; the type determines the preparation.'},
+  {id:'vatha',ta:'வாத நோய்',en:'Vatha Noi',modern:'Rheumatic & neuromuscular disorders',k:'Vatham',forms:[],about:'Disorders attributed to deranged Vatham — pain, stiffness and impaired movement.'},
+  {id:'gunmam',ta:'குன்மம்',en:'Gunmam',modern:'Peptic ulcer / acid-peptic disease',k:'Pitham',forms:[],about:'Burning or gnawing abdominal pain related to food, with sour eructations.'},
+  {id:'malachi',ta:'மலச்சிக்கல்',en:'Malachikkal',modern:'Constipation',k:'Vatham',forms:[],about:'Infrequent, hard or difficult passage of stool.'}
+];
+const EXAMS=[
+  {k:'naadi',en:'Naadi',ta:'நாடி',hint:'Pulse',icon:'ph-wave-sine',opts:['Vatham (வாதம்) – Snake movement','Pitham (பித்தம்) – Frog movement','Kabam (கபம்) – Swan movement','Vatha-Pitham','Pitha-Vatham','Pitha-Kabam','Kaba-Pitham','Vatha-Kabam','Kaba-Vatham']},
+  {k:'naa',en:'Naa',ta:'நா',hint:'Tongue',icon:'ph-smiley',opts:['Dry, rough, fissured','Red, yellowish','Pale, coated, moist','Normal']},
+  {k:'niram',en:'Niram',ta:'நிறம்',hint:'Complexion',icon:'ph-palette',opts:['Dark / dusky','Yellow / flushed','Pale / white','Normal']},
+  {k:'mozhi',en:'Mozhi',ta:'மொழி',hint:'Voice',icon:'ph-speaker-high',opts:['High-pitched / rapid','Sharp / loud','Low / slow / nasal','Normal']},
+  {k:'vizhi',en:'Vizhi',ta:'விழி',hint:'Eyes',icon:'ph-eye',opts:['Dry / sunken','Red / burning','Watery / swollen lids','Normal']},
+  {k:'sparisam',en:'Sparisam',ta:'ஸ்பரிசம்',hint:'Touch',icon:'ph-hand',opts:['Cold / rough / dry','Warm / sweaty','Cool / clammy / oedematous','Normal']},
+  {k:'malam',en:'Malam',ta:'மலம்',hint:'Stool',icon:'ph-drop-half',opts:['Hard / dry / constipated','Loose / burning / yellowish','Mucoid / sticky / pale','Normal']},
+  {k:'moothiram',en:'Moothiram',ta:'மூத்திரம்',hint:'Urine',icon:'ph-drop',opts:['Scanty / clear','Dark yellow / burning','Frequent / turbid','Normal']}
+];
+const INGR=[
+  {ta:'லிங்கம்',en:'Lingam',common:'Cinnabar',sci:'HgS',type:'Mineral',metal:'Hg',cls:'High'},
+  {ta:'பூரம்',en:'Pooram',common:'Calomel',sci:'Hg₂Cl₂',type:'Mineral',metal:'Hg',cls:'High'},
+  {ta:'வெள்ளைப் பாஷாணம்',en:'Vellai paashaanam',common:'White arsenic',sci:'As₂O₃',type:'Mineral',metal:'As',cls:'High'},
+  {ta:'நாகம்',en:'Naagam',common:'Zinc',sci:'Zn',type:'Metal',metal:'Zn',cls:'Moderate'},
+  {ta:'அயம்',en:'Ayam',common:'Iron',sci:'Fe',type:'Metal',metal:'Fe',cls:'Moderate'},
+  {ta:'நண்டுக்கல்',en:'Nandukkal',common:'Crab fossil',sci:'Fossil crab',type:'Animal · mineral'},
+  {ta:'சங்கு',en:'Sangu',common:'Conch shell',sci:'Turbinella pyrum',type:'Animal'},
+  {ta:'முத்துச்சிப்பி',en:'Muthuchippi',common:'Pearl-oyster shell',sci:'Pinctada spp.',type:'Animal'},
+  {ta:'நத்தை',en:'Nathai',common:'Apple snail',sci:'Pila spp.',type:'Animal'},
+  {ta:'நிலவேம்பு',en:'Nilavembu',common:'Kalmegh',sci:'Andrographis paniculata',type:'Herbal'},
+  {ta:'வெந்தயம்',en:'Vendhayam',common:'Fenugreek',sci:'Trigonella foenum-graecum',type:'Herbal'},
+  {ta:'கடுக்காய்',en:'Kadukkai',common:'Chebulic myrobalan',sci:'Terminalia chebula',type:'Herbal'}
+];
+const CITE_A=[{n:1,book:'Siddha TERM-1 SFI Preparations',ref:'p. [page] · verse [n]',score:'[score]',ex:'நண்டுக்கல் பற்பம் — அளவு, அனுபானம் …'},{n:2,book:'Siddha 1st Term Marunthakaviyal Preparation',ref:'p. [page]',score:'[score]',ex:'நண்டுக்கல் சுத்தி முறை …'}];
+const CHATS=[
+  {id:'c1',t:'Anupanam for Nandukkal Parpam',when:'Today',q:'What is the anupanam for Nandukkal Parpam in Kalladaippu?',found:true,a:'Nandukkal Parpam (நண்டுக்கல் பற்பம், SFI-P-017) is listed for Kalladaippu (கல்லடைப்பு, renal calculi) in the SFI preparations volume. The dose and the anupanam are stated on the cited page [1]. The Marunthakaviyal text describes the sutthi (purification) of nandukkal before it is calcined into parpam [2]. Confirm the dose against the formulary record before advising a patient.',cites:CITE_A},
+  {id:'c2',t:'மதுமேகத்திற்கு வெந்தய சூரணம்',when:'Yesterday',q:'மதுமேகத்திற்கு வெந்தய சூரணம் எப்படி பயன்படுத்துவது?',found:true,a:'Vendhaya Churanam (வெந்தய சூரணம், SFI-S-011) is indicated for Mathumegam (மதுமேகம்) in the SFI preparations volume, which gives its dose and anupanam [1]. Separately, the safety rules flag Fenugreek × Metformin as MODERATE for additive hypoglycaemia — run a safety check before combining them.',cites:[{n:1,book:'Siddha TERM-1 SFI Preparations',ref:'p. [page]',score:'[score]',ex:'வெந்தய சூரணம் — மதுமேகம் …'}]},
+  {id:'c3',t:'Paediatric dose of Rasa Chenthuram',when:'Mon',q:'What is the paediatric dose of Rasa Chenthuram?',found:false,a:'',cites:[]}
+];
+const KNOWN=['metformin','glimepiride','warfarin','aspirin','levothyroxine','doxycycline','ciprofloxacin','penicillamine','furosemide','tacrolimus','amlodipine','pantoprazole'];
+const CONDS=['Pregnancy','Chronic kidney disease','Liver disease','Paediatric age below 12','Peptic ulcer','Hypercalcaemia','Diarrhoea','Haemochromatosis'];
+const SEV={MAJOR:'var(--red)',MODERATE:'var(--amb)',MINOR:'var(--jade)'};
+const DX=[
+  {id:'DX-[id]',when:'Today, 18:20',pt:'54 · M',noi:'Mathumegam',ta:'மதுமேகம்',V:14,P:21,K:65},
+  {id:'DX-[id]',when:'Today, 11:05',pt:'38 · F',noi:'Paandu',ta:'பாண்டு',V:20,P:58,K:22},
+  {id:'DX-[id]',when:'Yesterday',pt:'61 · M',noi:'Kalladaippu',ta:'கல்லடைப்பு',V:62,P:21,K:17},
+  {id:'DX-[id]',when:'Mon',pt:'27 · F',noi:'Suram',ta:'சுரம்',V:30,P:46,K:24}
+];
+const SCHECKS=[
+  {f:'Linga Chenthuram',ta:'லிங்க செந்தூரம்',with:'Furosemide · Pregnancy',v:'HIGH',by:'Dr. Meenakshi Sundaram',when:'Today, 18:42'},
+  {f:'Vendhaya Churanam',ta:'வெந்தய சூரணம்',with:'Metformin',v:'MODERATE',by:'Navasakthivel S M',when:'Today, 15:10'},
+  {f:'Nilavembu Kudineer',ta:'நிலவேம்பு குடிநீர்',with:'No concurrent drugs',v:'LOW',by:'Dr. Meenakshi Sundaram',when:'Yesterday'}
+];
+
+class Component extends DCLogic {
+  state = {
+    screen:this.props.startScreen ?? 'landing', role:this.props.role ?? 'practitioner', theme:this.props.theme ?? 'dark',
+    w:typeof window!=='undefined'?window.innerWidth:1440, drawer:false, palette:false, pq:'', menu:false, notif:false, modal:false,
+    loginRole:'practitioner', email:ROLES.practitioner.email, fq:'', ff:'All', formId:'linga', noiId:'mathu', uq:'',
+    users:[
+      {name:'System Administrator',email:'admin@siddhamind.in',role:'admin',inst:'SiddhaMind',active:true,last:'Today, 09:12'},
+      {name:'Dr. Meenakshi Sundaram',email:'doctor@siddhamind.in',role:'practitioner',inst:'[clinic]',active:true,last:'Today, 18:40'},
+      {name:'Navasakthivel S M',email:'student@siddhamind.in',role:'student',inst:'Govt Siddha Medical College, Palayamkottai',active:true,last:'Today, 15:02'},
+      {name:'Public User',email:'patient@siddhamind.in',role:'patient',inst:'—',active:true,last:'Yesterday'}
+    ],
+    nu:{name:'',email:'',role:'student'}, resetFor:'', iq:'', nq:'',
+    docs:[
+      {id:'d1',title:'Siddha TERM-1 SFI Preparations',lang:'Tamil',pages:'47',chunks:'[count]',skipped:'[count]',st:'indexed',stage:4,added:'Uploaded by System Administrator',msg:''},
+      {id:'d2',title:'Siddha 1st Term Marunthakaviyal Preparation',lang:'Tamil',pages:'[pages]',chunks:'[count]',skipped:'[count]',st:'indexing',stage:3,added:'Uploaded by System Administrator',msg:''},
+      {id:'d3',title:'[filename].pdf',lang:'Tamil',pages:'[pages]',chunks:'—',skipped:'—',st:'uploaded',stage:0,added:'Uploaded just now · not yet indexed',msg:''},
+      {id:'d4',title:'[filename].pdf',lang:'Tamil',pages:'[pages]',chunks:'—',skipped:'[count]',st:'failed',stage:1,added:'Uploaded by System Administrator',msg:'OCR failed on page [n] — the scan may be encrypted or unreadable.'},
+      {id:'d5',title:'[filename].pdf',lang:'Tamil',pages:'[pages]',chunks:'[count]',skipped:'[count]',st:'stalled',stage:2,added:'Uploaded by System Administrator',msg:'No progress at Chunk for [minutes] minutes.'}
+    ],
+    exam:{naadi:'Kaba-Pitham',naa:'Pale, coated, moist',niram:'Pale / white',mozhi:'Low / slow / nasal',vizhi:'Watery / swollen lids',sparisam:'Cool / clammy / oedematous',malam:'Normal',moothiram:'Frequent / turbid'},
+    pt:{name:'',age:'54',gender:'Male',complaint:'Frequent urination and thirst for three months'},
+    drugs:['Furosemide'], drugIn:'', conds:['Pregnancy'], sForm:'linga',
+    chatId:'c1', phase:'done', streamed:99999, online:true, draft:'', custom:null, lang:'en', deniedFrom:''
+  };
+  componentDidMount(){
+    const p=new URLSearchParams(location.search), u={};
+    ['screen','role','theme'].forEach(k=>{ if(p.get(k)) u[k]=p.get(k); });
+    if(p.get('drawer')) u.drawer=true;
+    if(p.get('chat')) u.chatId=p.get('chat');
+    if(u.role && ROLES[u.role]){ u.loginRole=u.role; u.email=ROLES[u.role].email; }
+    this.setState(u,()=>{ if(this.state.screen==='assistant') this.startStream(); });
+    this.onR=()=>this.setState({w:window.innerWidth});
+    this.onK=e=>{
+      if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'&&this.isApp()){ e.preventDefault(); this.setState(s=>({palette:!s.palette,pq:''})); }
+      if(e.key==='Escape') this.setState({palette:false,menu:false,notif:false,modal:false,drawer:false});
+    };
+    addEventListener('resize',this.onR); addEventListener('keydown',this.onK);
+    this.tick=setInterval(()=>{ if(!this.state.docs.some(d=>d.auto&&d.st==='indexing')) return;
+      this.setState(x=>({docs:x.docs.map(d=>!(d.auto&&d.st==='indexing')?d:d.stage>=3?{...d,st:'indexed',stage:4,auto:false,chunks:'[count]',skipped:d.skipped==='—'?'[count]':d.skipped,added:'Indexed just now'}:{...d,stage:d.stage+1})})); },1500);
+  }
+  startIndex(id,retry){ this.setState(x=>({docs:x.docs.map(d=>d.id===id?{...d,st:'indexing',stage:retry?d.stage:1,auto:true,msg:''}:d)})); }
+  componentWillUnmount(){ clearInterval(this.tick); removeEventListener('resize',this.onR); removeEventListener('keydown',this.onK); clearTimeout(this.t1); clearInterval(this.iv); }
+  isApp(s=this.state){ return !['landing','login','register'].includes(s.screen); }
+  allowed(r,k){ const n=NAV[r]; return k==='profile'||k==='denied'||n.includes(k)||(SUB[k]&&n.includes(SUB[k])); }
+  go=(k)=>{
+    const close={drawer:false,palette:false,menu:false,notif:false,modal:false};
+    if(this.isApp({screen:k}) && !this.allowed(this.state.role,k)){ this.setState({...close,screen:'denied',deniedFrom:k}); return; }
+    this.setState({...close,screen:k},()=>{ if(k==='assistant') this.startStream(); });
+    try{ window.scrollTo(0,0); }catch(e){}
+  };
+  curChat(s=this.state){
+    if(s.chatId==='new'&&s.custom) return s.custom;
+    return CHATS.find(c=>c.id===s.chatId)||CHATS[0];
+  }
+  startStream(){
+    clearTimeout(this.t1); clearInterval(this.iv);
+    this.setState({phase:'typing',streamed:0});
+    this.t1=setTimeout(()=>{
+      const c=this.curChat();
+      if(!c.found||!this.state.online){ this.setState({phase:'done'}); return; }
+      this.setState({phase:'stream'});
+      this.iv=setInterval(()=>{
+        this.setState(s=>{ const full=this.curChat(s).a.length, n=s.streamed+5;
+          if(n>=full){ clearInterval(this.iv); return {streamed:full,phase:'done'}; }
+          return {streamed:n}; });
+      },22);
+    },1200);
+  }
+  dosha(exam){
+    let v=2,p=2,k=2;
+    const NA={'Vatham (வாதம்) – Snake movement':[1,0,0],'Pitham (பித்தம்) – Frog movement':[0,1,0],'Kabam (கபம்) – Swan movement':[0,0,1],'Vatha-Pitham':[.6,.4,0],'Pitha-Vatham':[.4,.6,0],'Pitha-Kabam':[0,.6,.4],'Kaba-Pitham':[0,.4,.6],'Vatha-Kabam':[.6,0,.4],'Kaba-Vatham':[.4,0,.6]};
+    const signs={Vatham:[],Pitham:[],Kabam:[]};
+    EXAMS.forEach(e=>{
+      const sel=exam[e.k]; if(!sel) return;
+      if(e.k==='naadi'){ const m=NA[sel]; v+=m[0]*2; p+=m[1]*2; k+=m[2]*2; if(m[0])signs.Vatham.push('Naadi'); if(m[1])signs.Pitham.push('Naadi'); if(m[2])signs.Kabam.push('Naadi'); return; }
+      const i=e.opts.indexOf(sel);
+      if(i===0){v++;signs.Vatham.push(e.en);} if(i===1){p++;signs.Pitham.push(e.en);} if(i===2){k++;signs.Kabam.push(e.en);}
+    });
+    const t=v+p+k, V=Math.round(v/t*100), P=Math.round(p/t*100);
+    return {Vatham:V,Pitham:P,Kabam:100-V-P,signs};
+  }
+  safety(s){
+    const f=FORMS.find(x=>x.id===s.sForm)||FORMS[0], F=[];
+    const has=d=>s.drugs.some(x=>x.toLowerCase()===d);
+    if(f.metal==='Hg'&&has('furosemide')) F.push({type:'Interaction',icon:'ph ph-arrows-left-right',title:'Cinnabar × Furosemide',sev:'MAJOR',detail:'Mercury with a loop diuretic increases renal burden.',advice:'Do not co-administer. Refer the patient for review of the diuretic or choose a non-mineral preparation.'});
+    if(f.id==='vendhaya'&&has('metformin')) F.push({type:'Interaction',icon:'ph ph-arrows-left-right',title:'Fenugreek × Metformin',sev:'MODERATE',detail:'Additive hypoglycaemia.',advice:'Monitor blood glucose, separate the doses and review with the prescriber.'});
+    if(f.hm&&s.conds.includes('Pregnancy')) F.push({type:'Contraindication',icon:'ph ph-prohibit',title:'Pregnancy',sev:'MAJOR',detail:f.en+' is contraindicated in pregnancy in the formulation record.',advice:'Do not dispense during pregnancy.'});
+    if(f.hm&&s.conds.includes('Chronic kidney disease')) F.push({type:'Contraindication',icon:'ph ph-prohibit',title:'Chronic kidney disease',sev:'MAJOR',detail:'Heavy-metal preparation with reduced renal clearance.',advice:'Do not dispense. Refer.'});
+    if(f.hm) F.push({type:'Heavy metal',icon:'ph ph-atom',title:f.metalName+' ('+f.metal+') from '+f.metalSrc,sev:'MODERATE',detail:'Contains a heavy metal. Stay within the daily ceiling in the formulation record and use only a batch-tested preparation.',advice:'Supervised use only; limit the duration of the course.'});
+    const v=F.some(x=>x.sev==='MAJOR')?'HIGH':F.some(x=>x.sev==='MODERATE')?'MODERATE':'LOW';
+    return {f,F,v,unmatched:s.drugs.filter(d=>!KNOWN.includes(d.toLowerCase()))};
+  }
+  renderVals(){
+    const s=this.state, me={...ROLES[s.role]}, mobile=s.w<760, app=this.isApp();
+    const go=k=>()=>this.go(k);
+    const nav=NAV[s.role].map(k=>{
+      if(Array.isArray(k)) return {isHead:true,isItem:false,head:k[1]};
+      const on=s.screen===k||SUB[s.screen]===k;
+      return {isHead:false,isItem:true,label:SCREENS[k][0],icon:'ph '+SCREENS[k][1],go:go(k),current:on?'page':undefined,bg:on?'var(--goldT)':'transparent',fg:on?'var(--gold)':'var(--mu)',bar:on?'var(--gold)':'transparent'};
+    });
+    const roleKeys=['patient','student','practitioner','admin'];
+    const pickRole=r=>()=>this.setState({screen:'login',loginRole:r,email:ROLES[r].email});
+    const pq=s.pq.trim().toLowerCase();
+    const pal=[];
+    Object.keys(SCREENS).filter(k=>!SUB[k]&&k!=='denied'&&!(k.endsWith('Dash')&&k!==me.dash)).forEach(k=>{
+      const ok=this.allowed(s.role,k);
+      pal.push({label:SCREENS[k][0],icon:'ph '+SCREENS[k][1],go:go(k),meta:ok?'Screen':'Not in your role',lockIcon:ok?'':'ph ph-lock-simple'});
+    });
+    FORMS.forEach(f=>pal.push({label:f.en+'  ·  '+f.ta,icon:'ph ph-flask',go:()=>{this.setState({formId:f.id});this.go('formDetail');},meta:f.code,lockIcon:''}));
+    NOI.forEach(n=>pal.push({label:n.en+'  ·  '+n.ta,icon:'ph ph-list-bullets',go:()=>{this.setState({noiId:n.id});this.go('diseaseDetail');},meta:'Noi',lockIcon:''}));
+    const paletteItems=(pq?pal.filter(p=>(p.label+p.meta).toLowerCase().includes(pq)):pal).slice(0,12);
+    const crumbs={formDetail:'Formulary',diseaseDetail:'Diseases',dxResult:'Envagai Thervu',safetyResult:'Safety checker',intake:'Envagai Thervu · எண்வகைத் தேர்வு'};
+    const titles={pracDash:'Good evening, Dr. Meenakshi Sundaram',studentDash:'What would you like to study, Navasakthivel?',patientDash:'Welcome'};
+    const kicker=me.label+' workspace';
+    return {
+      theme:s.theme, isMobile:mobile, notMobile:!mobile, wide:s.w>=1100,
+      isLanding:s.screen==='landing', isLogin:s.screen==='login', isRegister:s.screen==='register', inApp:app,
+      goLanding:go('landing'), goLogin:e=>{e&&e.preventDefault&&e.preventDefault();this.go('login');}, goRegister:e=>{e&&e.preventDefault&&e.preventDefault();this.go('register');},
+      goDash:go(me.dash), goProfile:go('profile'),
+      moduleCards:[
+        {icon:'ph ph-chat-circle-text',ta:'உதவியாளர்',title:'Citation-grounded assistant',body:'Ask in Tamil or English. Every answer cites the book and page it came from — or says plainly that the corpus does not cover it.',delay:'.05s'},
+        {icon:'ph ph-shield-check',ta:'மருந்து பாதுகாப்பு',title:'Drug Safety Checker',body:'Check a formulation against allopathic drugs and patient conditions. Rules produce the verdict; the AI only explains it.',delay:'.15s'},
+        {icon:'ph ph-stethoscope',ta:'எண்வகைத் தேர்வு',title:'Envagai Thervu Clinic',body:'Record the eight classical examinations and see the dosha balance, the dominant kutram and candidate noi, with cited preparations.',delay:'.25s'}
+      ],
+      howSteps:[
+        {n:'01',title:'Rules decide',body:'Verdicts, dosha scores and contraindications come from deterministic rules over the formulary record. Same inputs, same answer.'},
+        {n:'02',title:'AI explains',body:'A language model turns the rule output into plain language for the reader. It cannot change the verdict.'},
+        {n:'03',title:'Always cited',body:'Every claim links to a book, page and verse in the scanned Tamil corpus. If it is not in the corpus, the assistant says so.'}
+      ],
+      roleCards:['admin','practitioner','student','patient'].map((r,i)=>({label:ROLES[r].label,desc:ROLES[r].desc,icon:ROLES[r].icon,color:ROLES[r].color,pick:pickRole(r),delay:(.05+i*.1)+'s'})),
+      loginTabs:roleKeys.map(r=>({label:ROLES[r].label,on:s.loginRole===r,fg:s.loginRole===r?'var(--gold)':'var(--mu)',pick:()=>this.setState({loginRole:r,email:ROLES[r].email})})),
+      pillX:(roleKeys.indexOf(s.loginRole)*100)+'%', email:s.email, setEmail:e=>this.setState({email:e.target.value}),
+      loginRoleLabel:ROLES[s.loginRole].label,
+      signIn:e=>{e.preventDefault(); this.setState({role:s.loginRole},()=>this.go(ROLES[s.loginRole].dash));},
+      submitRegister:e=>{e.preventDefault(); this.go('login');},
+      signOut:()=>this.go('landing'),
+      nav, me, crumb:crumbs[s.screen]||kicker, title:titles[s.screen]||(s.screen==='formDetail'?(FORMS.find(f=>f.id===s.formId)||{}).en:s.screen==='diseaseDetail'?(NOI.find(n=>n.id===s.noiId)||{}).en:(SCREENS[s.screen]||[''])[0]),
+      asidePos:mobile?'fixed':'sticky', asideTf:mobile&&!s.drawer?'translateX(-105%)':'none',
+      drawerBackdrop:mobile&&s.drawer, openDrawer:()=>this.setState({drawer:true}), closeDrawer:()=>this.setState({drawer:false}),
+      paletteOpen:s.palette&&app, openPalette:()=>this.setState({palette:true,pq:''}), closePalette:()=>this.setState({palette:false}),
+      stop:e=>e.stopPropagation(), pq:s.pq, setPq:e=>this.setState({pq:e.target.value}), paletteItems,
+      toggleTheme:()=>this.setState(x=>({theme:x.theme==='dark'?'light':'dark',menu:false})), themeIcon:s.theme==='dark'?'ph ph-sun':'ph ph-moon', themeLabel:s.theme==='dark'?'Parchment theme':'Ink theme',
+      notifOpen:s.notif, toggleNotif:()=>this.setState(x=>({notif:!x.notif,menu:false})), menuOpen:s.menu, toggleMenu:()=>this.setState(x=>({menu:!x.menu,notif:false})),
+      notifs:[
+        {icon:'ph ph-books',color:'var(--jade)',text:'“Siddha TERM-1 SFI Preparations” is indexed and searchable.',when:'Today, 17:05'},
+        {icon:'ph ph-shield-warning',color:'var(--red)',text:'A HIGH-risk safety check was recorded for Linga Chenthuram.',when:'Today, 18:42'},
+        {icon:'ph ph-sparkle',color:'var(--gold)',text:'The AI explanation service is back online.',when:'Yesterday'}
+      ],
+      ...this.screenVals(s,go,me,mobile)
+    };
+  }
+  screenVals(s,go,me,mobile){
+    const scr={}; Object.keys(SCREENS).forEach(k=>scr[k]=s.screen===k);
+    const vcol=v=>v==='HIGH'?'var(--red)':v==='MODERATE'?'var(--amb)':'var(--jade)';
+    const kc=k=>(KUT[k]||{}).c||'var(--mu)';
+    const openForm=id=>()=>{this.setState({formId:id});this.go('formDetail');};
+    const openNoi=id=>()=>{this.setState({noiId:id});this.go('diseaseDetail');};
+    const dxRows=DX.map(d=>({...d,vw:d.V+'%',pw:d.P+'%',kw:d.K+'%',open:()=>this.go('dxResult')}));
+    const schecks=SCHECKS.map(c=>({...c,vc:vcol(c.v),open:()=>this.go('safetyResult')}));
+    const stage=(active,st)=>['Upload','OCR','Chunk','Embed','Indexed'].map((l,j)=>{
+      const all=st==='indexed', done=all||j<active, here=!all&&j===active;
+      const bad=here&&st==='failed', stall=here&&st==='stalled', on=here&&st==='indexing';
+      const c=bad?'var(--red)':stall?'var(--amb)':done?'var(--jade)':on?'var(--gold)':'';
+      return {label:l,dotBg:c||'transparent',dotBd:c||'var(--line2)',fg:done||here?'var(--tx)':'var(--mu)',anim:on?'smPulse 1.6s ease-in-out infinite':'none',icon:bad?'ph ph-x':stall?'ph ph-pause':done?'ph ph-check':on?'ph ph-circle-notch':'',lineBg:done?'var(--jade)':'var(--line2)',notLast:j<4};
+    });
+    const ST={uploaded:['Uploaded','var(--va)'],indexing:['Indexing','var(--gold)'],indexed:['Indexed','var(--jade)'],failed:['Failed','var(--red)'],stalled:['Stalled','var(--amb)']};
+    const docs=s.docs.map(x=>({...x,status:ST[x.st][0],sc:ST[x.st][1],busy:x.st==='indexing',showStepper:x.st!=='uploaded',stages:stage(x.stage,x.st),canStart:x.st==='uploaded',canRetry:x.st==='failed'||x.st==='stalled',hasMsg:!!x.msg,msgC:x.st==='failed'?'var(--red)':'var(--amb)',start:()=>this.startIndex(x.id),retry:()=>this.startIndex(x.id,true)}));
+    // diagnosis
+    const d=this.dosha(s.exam), dom=['Vatham','Pitham','Kabam'].reduce((a,b)=>d[b]>d[a]?b:a,'Vatham');
+    const rings=[['Vatham',92],['Pitham',72],['Kabam',52]].map(([n,r])=>({name:n,ta:KUT[n].ta,el:KUT[n].el,c:KUT[n].c,pct:d[n],pctLabel:d[n]+'%',off:100-d[n],r,w:d[n]+'%'}));
+    const cands=NOI.slice().sort((a,b)=>(b.k===dom)-(a.k===dom)||(d[b.k]||0)-(d[a.k]||0)||(b.forms.length>0)-(a.forms.length>0)).slice(0,4).map((n,i)=>({...n,rank:'0'+(i+1),kc:kc(n.k),kta:(KUT[n.k]||{}).ta||'',signs:KUT[n.k]?(d.signs[n.k].length+' of 8 examinations point to '+n.k):'Classified by type — needs history',open:openNoi(n.id),top:i===0}));
+    const preps=cands.flatMap(c=>c.forms.map(id=>{const f=FORMS.find(x=>x.id===id);return {en:f.en,ta:f.ta,code:f.code,form:f.form,forNoi:c.en,cite:'Siddha TERM-1 SFI Preparations · p. [page]',open:openForm(id),hm:f.hm};}));
+    const examCards=EXAMS.map(e=>({...e,icon:'ph '+e.icon,val:s.exam[e.k]||'Not recorded',opts:e.opts.map(o=>{const on=s.exam[e.k]===o;return {label:o,on,bg:on?'var(--goldT)':'transparent',bd:on?'var(--gold)':'var(--line2)',fg:on?'var(--gold)':'var(--tx)',pick:()=>this.setState(x=>({exam:{...x.exam,[e.k]:x.exam[e.k]===o?'':o}}))};})}));
+    const recorded=EXAMS.filter(e=>s.exam[e.k]).length;
+    const setPt=k=>e=>{const v=e.target.value;this.setState(x=>({pt:{...x.pt,[k]:v}}));};
+    // safety
+    const sr=this.safety(s);
+    const addDrug=v=>{v=(v||'').trim(); if(!v) return; v=v[0].toUpperCase()+v.slice(1); this.setState(x=>({drugs:x.drugs.includes(v)?x.drugs:[...x.drugs,v],drugIn:''}));};
+    const verdictNote={HIGH:['Do not dispense','ph ph-hand-palm','At least one MAJOR rule fired. The rule engine blocks dispensing; the explanation below cannot override it.'],MODERATE:['Dispense only with monitoring','ph ph-warning','A MODERATE rule fired. Review each finding and document the monitoring plan.'],LOW:['No rule triggered','ph ph-check-circle','No interaction, contraindication or heavy-metal rule fired for these inputs. Routine care applies.']}[sr.v];
+    const hasHg=sr.F.some(x=>x.title==='Cinnabar × Furosemide');
+    const expl=sr.v==='HIGH'&&hasHg?sr.f.en+' is made from purified cinnabar (mercuric sulphide). Two rules fired at MAJOR severity. First, cinnabar with furosemide: a loop diuretic increases the kidneys’ exposure to mercury, so the combination raises renal burden [1]. Second, the formulation record lists pregnancy as a contraindication [2]. Because a MAJOR rule fired, the verdict is HIGH and dispensing is blocked — this explanation only restates the rules.'
+      :sr.F.length?sr.f.en+' triggered '+sr.F.length+' rule'+(sr.F.length>1?'s':'')+'. The highest severity is '+(sr.F.some(x=>x.sev==='MAJOR')?'MAJOR':'MODERATE')+', so the verdict is '+sr.v+'. Each finding above lists the advice recorded with the rule [1].'
+      :'No rule in the interaction, contraindication or heavy-metal tables matched '+sr.f.en+' with these inputs. Absence of a rule is not proof of safety — record the check and continue routine care.';
+    const safetyCites=hasHg?[{n:1,book:'Interaction rules · Cinnabar × Furosemide',ref:'RULE-[id] · MAJOR',score:'rule'},{n:2,book:'Siddha TERM-1 SFI Preparations',ref:'p. [page] · contraindications',score:'[score]'}]:[{n:1,book:'Safety rule tables',ref:'RULE-[id]',score:'rule'}];
+    // formulary
+    const fq=s.fq.trim().toLowerCase();
+    const formRows=FORMS.filter(f=>(s.ff==='All'||f.form===s.ff)&&(!fq||(f.en+f.ta+f.code).toLowerCase().includes(fq))).map((f,i)=>({...f,open:openForm(f.id),metalTag:f.hm?'Heavy metal · '+f.metal:'',delay:(i*.04)+'s',indic:NOI.filter(n=>n.forms.includes(f.id)).map(n=>n.en).join(', ')||'[indications from record]'}));
+    const fd0=FORMS.find(f=>f.id===s.formId)||FORMS[3];
+    const fd={...fd0,metalTag:fd0.hm?'Heavy metal · '+fd0.metal:'',indicated:NOI.filter(n=>n.forms.includes(fd0.id)).map(n=>({en:n.en,ta:n.ta,modern:n.modern,open:openNoi(n.id)})),contra:fd0.hm?['Pregnancy','Chronic kidney disease','Paediatric age below 12']:['[contraindications from record]'],check:()=>{this.setState({sForm:fd0.id});this.go('safety');}};
+    fd.hasIndicated=fd.indicated.length>0; fd.noIndicated=!fd.hasIndicated;
+    // assistant
+    const c=this.curChat(s);
+    const chats=[...(s.custom?[s.custom]:[]),...CHATS].map(x=>{const on=x.id===(c.id);return {t:x.t,when:x.when,bg:on?'var(--goldT)':'transparent',fg:on?'var(--tx)':'var(--mu)',bd:on?'var(--goldT2)':'transparent',icon:x.found?'ph ph-chat-text':'ph ph-question',open:()=>{this.setState({chatId:x.id,drawer:false},()=>this.startStream());}};});
+    const send=e=>{ e&&e.preventDefault&&e.preventDefault(); const q=s.draft.trim(); if(!q) return;
+      const found=/nandukkal|kalladaippu|நண்டு|கல்லடைப்பு|parpam|vendhaya|வெந்தய/i.test(q);
+      const src=/vendhaya|வெந்தய/i.test(q)?CHATS[1]:CHATS[0];
+      this.setState({custom:{id:'new',t:q.length>42?q.slice(0,42)+'…':q,when:'Now',q,found,a:src.a,cites:src.cites},chatId:'new',draft:''},()=>this.startStream()); };
+    const tamil=/[\u0B80-\u0BFF]/.test(c.q);
+    const INST={institution:'Govt Siddha Medical College, Palayamkottai',reg:'[reg. number]'};
+    const profileRows=[['Full name',me.name],['Email',me.email],['Phone','[phone]'],['Institution',s.role==='student'?INST.institution:s.role==='practitioner'?'[clinic]':'—'],['Registration no.',s.role==='patient'||s.role==='admin'?'—':'[reg. number]'],['Role',me.label],['Last login','[timestamp] · [IP]']].map(([k,v])=>({k,v}));
+    const Y={icon:'ph ph-check',color:'var(--jade)',label:'Yes'},N={icon:'ph ph-minus',color:'var(--mu)',label:'No'};
+    const capRows=[['Ask the assistant',[Y,Y,Y,Y]],['Browse the formulary',[Y,Y,Y,Y]],['Ingredients & diseases',[N,Y,Y,Y]],['Drug safety checker',[N,Y,Y,Y]],['Envagai Thervu diagnosis',[N,N,Y,Y]],['Users, corpus & reports',[N,N,N,Y]]].map(([label,cells])=>({label,cells}));
+    const uq=s.uq.trim().toLowerCase();
+    const users=s.users.filter(u=>!uq||(u.name+u.email+u.role).toLowerCase().includes(uq)).map(u=>({...u,roleLabel:ROLES[u.role].label,rc:ROLES[u.role].color,status:u.active?'Active':'Suspended',stc:u.active?'var(--jade)':'var(--red)',act:u.active?'Suspend':'Reinstate',actIcon:u.active?'ph ph-pause-circle':'ph ph-play-circle',
+      toggle:()=>this.setState(x=>({users:x.users.map(y=>y.email===u.email?{...y,active:!y.active}:y)})),reset:()=>{this.setState({resetFor:u.email});clearTimeout(this.t2);this.t2=setTimeout(()=>this.setState({resetFor:''}),3200);}}));
+    const byForm=['Parpam','Chenthuram','Churanam','Kudineer'].map((f,i)=>{const n=FORMS.filter(x=>x.form===f).length;return {label:f,n,w:(n/6*100)+'%',delay:(.1+i*.1)+'s'};});
+    return {
+      scr, dxRows, schecks, docs,
+      statTiles:[
+        {label:'Users',value:String(s.users.length),sub:'1 admin · 1 practitioner · 1 student · 1 patient',icon:'ph ph-users-three',delay:'0s',go:go('users')},
+        {label:'Formulations',value:String(FORMS.length),sub:'Parpam, Chenthuram, Churanam, Kudineer',icon:'ph ph-flask',delay:'.08s',go:go('formulary')},
+        {label:'Heavy-metal formulations',value:String(FORMS.filter(f=>f.hm).length),sub:'Naga Parpam · Linga Chenthuram · Ayya Parpam',icon:'ph ph-atom',delay:'.16s',go:go('formulary')},
+        {label:'Indexed documents',value:String(s.docs.filter(x=>x.st==='indexed').length),sub:s.docs.filter(x=>x.st!=='indexed').length+' uploaded or in progress',icon:'ph ph-books',delay:'.24s',go:go('corpus')},
+        {label:'Chunks',value:'[count]',sub:'Across indexed documents',icon:'ph ph-stack',delay:'.32s',go:go('corpus')}
+      ],
+      roleBars:['admin','practitioner','student','patient'].map((r,i)=>({label:ROLES[r].label,n:s.users.filter(u=>u.role===r).length,w:(s.users.filter(u=>u.role===r).length/Math.max(1,s.users.length)*100)+'%',c:ROLES[r].color,delay:(.1+i*.1)+'s'})),
+      byForm, hmCount:String(FORMS.filter(f=>f.hm).length),
+      services:[
+        {name:'Explanation model',detail:'Writes plain-language explanations of rule output',status:s.online?'Online':'Offline',c:s.online?'var(--jade)':'var(--red)'},
+        {name:'Retrieval index',detail:'Search over indexed corpus chunks',status:'Online',c:'var(--jade)'},
+        {name:'Embedding worker',detail:'Processing Marunthakaviyal Preparation',status:'Busy',c:'var(--gold)'},
+        {name:'OCR worker',detail:'Tamil + English page recognition',status:'Idle',c:'var(--mu)'}
+      ],
+      activity:[
+        {who:'Dr. Meenakshi Sundaram',what:'ran a safety check — Linga Chenthuram · HIGH',when:'Today, 18:42',c:'var(--red)'},
+        {who:'Dr. Meenakshi Sundaram',what:'saved an Envagai Thervu examination — Mathumegam',when:'Today, 18:20',c:'var(--jade)'},
+        {who:'System Administrator',what:'uploaded “Siddha 1st Term Marunthakaviyal Preparation”',when:'Today, 17:30',c:'var(--gold)'},
+        {who:'Navasakthivel S M',what:'asked the assistant about Nandukkal Parpam',when:'Today, 15:02',c:'var(--va)'},
+        {who:'Public User',what:'signed in',when:'Yesterday',c:'var(--mu)'}
+      ],
+      audit:[
+        {when:'Today, 18:42',who:'doctor@siddhamind.in',action:'safety_check.create',target:'SFI-C-008',ip:'10.0.4.21'},
+        {when:'Today, 18:20',who:'doctor@siddhamind.in',action:'diagnosis.create',target:'DX-[id]',ip:'10.0.4.21'},
+        {when:'Today, 17:30',who:'admin@siddhamind.in',action:'corpus.upload',target:'Marunthakaviyal Preparation',ip:'10.0.1.5'},
+        {when:'Today, 15:02',who:'student@siddhamind.in',action:'assistant.query',target:'chat c1',ip:'103.[x].[x].[x]'},
+        {when:'Today, 09:12',who:'admin@siddhamind.in',action:'auth.login',target:'—',ip:'10.0.1.5'},
+        {when:'Yesterday',who:'patient@siddhamind.in',action:'auth.login',target:'—',ip:'49.[x].[x].[x]'}
+      ],
+      users, uq:s.uq, setUq:e=>this.setState({uq:e.target.value}), modalOpen:s.modal, openModal:()=>this.setState({modal:true}), closeModal:()=>this.setState({modal:false}),
+      nu:s.nu, setNu:k=>0, setNuName:e=>{const v=e.target.value;this.setState(x=>({nu:{...x.nu,name:v}}));}, setNuEmail:e=>{const v=e.target.value;this.setState(x=>({nu:{...x.nu,email:v}}));}, setNuRole:e=>{const v=e.target.value;this.setState(x=>({nu:{...x.nu,role:v}}));},
+      createUser:e=>{e.preventDefault(); const n=s.nu; if(!n.name||!n.email) return; this.setState(x=>({users:[...x.users,{name:n.name,email:n.email,role:n.role,inst:'—',active:true,last:'Never'}],modal:false,nu:{name:'',email:'',role:'student'}}));},
+      toast:s.resetFor?'Password reset link sent to '+s.resetFor:'', hasToast:!!s.resetFor,
+      quickActions:[
+        {icon:'ph ph-stethoscope',label:'New examination',desc:'Envagai Thervu · எண்வகைத் தேர்வு',go:go('intake')},
+        {icon:'ph ph-shield-check',label:'Safety check',desc:'Formulation × drugs × conditions',go:go('safety')},
+        {icon:'ph ph-chat-circle-text',label:'Ask assistant',desc:'Cited answers from the Tamil corpus',go:go('assistant')}
+      ],
+      pt:s.pt, setPtName:setPt('name'), setPtAge:setPt('age'), setPtGender:setPt('gender'), setPtComplaint:setPt('complaint'),
+      examCards, recordedLabel:recorded+' of 8 recorded', recordedW:(recorded/8*100)+'%', runDx:e=>{e&&e.preventDefault&&e.preventDefault();this.go('dxResult');},
+      resetExam:()=>this.setState({exam:{}}),
+      rings, dom:{name:dom,ta:KUT[dom].ta,el:KUT[dom].el,c:KUT[dom].c,pct:d[dom]+'%'}, cands, preps,
+      examSummary:EXAMS.map(e=>({en:e.en,ta:e.ta,val:s.exam[e.k]||'—'})),
+      dxSummary:'The eight examinations weight '+dom+' ('+KUT[dom].ta+') highest at '+d[dom]+'%. '+(d.signs[dom].length)+' of 8 findings point to it — '+d.signs[dom].join(', ')+'. With the complaint “'+(s.pt.complaint||'—')+'”, the rules rank '+cands[0].en+' ('+cands[0].ta+') first. This is a ranking for the practitioner to confirm, not a diagnosis.',
+      goIntake:go('intake'), goCorpus:go('corpus'), goSafety:go('safety'), goAssistant:go('assistant'), goFormulary:go('formulary'), goDxHistory:go('dxHistory'), goIngredients:go('ingredients'), goDiseases:go('diseases'),
+      formOptions:FORMS.map(f=>({id:f.id,label:f.en+' — '+f.code+(f.hm?' · heavy metal':'')})), sForm:s.sForm, setSForm:e=>this.setState({sForm:e.target.value}),
+      sFormObj:{...sr.f,metalTag:sr.f.hm?'Heavy metal · '+sr.f.metal:''},
+      drugs:s.drugs.map(x=>({name:x,remove:()=>this.setState(y=>({drugs:y.drugs.filter(z=>z!==x)}))})), hasDrugs:s.drugs.length>0,
+      drugIn:s.drugIn, setDrugIn:e=>this.setState({drugIn:e.target.value}),
+      drugKey:e=>{ if(e.key==='Enter'||e.key===','){ e.preventDefault(); addDrug(s.drugIn); } else if(e.key==='Backspace'&&!s.drugIn){ this.setState(y=>({drugs:y.drugs.slice(0,-1)})); } },
+      drugSugg:['Metformin','Furosemide','Warfarin','Amlodipine'].filter(x=>!s.drugs.includes(x)).map(x=>({name:x,add:()=>addDrug(x)})),
+      condChips:CONDS.map(cn=>{const on=s.conds.includes(cn);return {label:cn,on,bg:on?'var(--goldT)':'transparent',bd:on?'var(--gold)':'var(--line2)',fg:on?'var(--gold)':'var(--tx)',icon:on?'ph ph-check-square':'ph ph-square',toggle:()=>this.setState(y=>({conds:on?y.conds.filter(z=>z!==cn):[...y.conds,cn]}))};}),
+      runSafety:e=>{e&&e.preventDefault&&e.preventDefault();this.go('safetyResult');},
+      sr:{v:sr.v,vc:vcol(sr.v),vbg:sr.v==='HIGH'?'var(--redT)':sr.v==='MODERATE'?'var(--ambT)':'var(--jadeT)',note:verdictNote[0],noteIcon:verdictNote[1],noteBody:verdictNote[2],
+        headline:sr.v==='HIGH'?'High risk':sr.v==='MODERATE'?'Moderate risk':'Low risk',
+        formEn:sr.f.en,formTa:sr.f.ta,code:sr.f.code,drugsText:s.drugs.join(', ')||'None',condsText:s.conds.join(', ')||'None',
+        findings:sr.F.map((x,i)=>({...x,sc:SEV[x.sev],delay:(i*.08)+'s'})),count:sr.F.length+' finding'+(sr.F.length===1?'':'s'),hasFindings:sr.F.length>0,noFindings:sr.F.length===0,
+        hasHm:!!sr.f.hm,metalLabel:sr.f.hm?sr.f.metalName+' ('+sr.f.metal+') · from '+sr.f.metalSrc:'',ceiling:sr.f.ceiling||'[ceiling from formulation record] mg/day',
+        unmatched:sr.unmatched.map(n=>({name:n})),hasUnmatched:sr.unmatched.length>0,noUnmatched:sr.unmatched.length===0,
+        explanation:expl,cites:safetyCites.map((x,i)=>({...x,delay:(.2+i*.15)+'s'})),isHigh:sr.v==='HIGH'},
+      studyForms:FORMS.slice(0,8).map((f,i)=>({...f,open:openForm(f.id),metalTag:f.hm?'Heavy metal · '+f.metal:'',delay:(i*.05)+'s'})),
+      pastChats:CHATS.map(x=>({t:x.t,when:x.when,icon:x.found?'ph ph-chat-text':'ph ph-question',tag:x.found?'Cited':'Not in corpus',tc:x.found?'var(--jade)':'var(--amb)',open:()=>{this.setState({chatId:x.id});this.go('assistant');}})),
+      ingrRows:INGR.filter(x=>{const q=s.iq.trim().toLowerCase();return !q||(x.ta+x.en+x.common+x.sci+(x.metal||'')).toLowerCase().includes(q);}).map(x=>({...x,metalTag:x.metal||'',isMetal:!!x.metal,cls:x.cls||'—',cc:x.cls==='High'?'var(--red)':x.cls==='Moderate'?'var(--amb)':x.cls==='Low'?'var(--jade)':'var(--mu)'})),
+      careRows:INGR.slice(0,5).map(x=>({...x,cc:x.cls==='High'?'var(--red)':x.cls==='Moderate'?'var(--amb)':'var(--jade)'})),
+      noiRows:NOI.filter(n=>{const q=s.nq.trim().toLowerCase();return !q||(n.ta+n.en+n.modern+n.k).toLowerCase().includes(q);}).map(n=>({...n,kc:kc(n.k),kta:(KUT[n.k]||{}).ta||'',open:openNoi(n.id),formsText:n.forms.map(id=>FORMS.find(f=>f.id===id).en).join(', ')||'[from record]'})),
+      iq:s.iq, setIq:e=>this.setState({iq:e.target.value}), nq:s.nq, setNq:e=>this.setState({nq:e.target.value}), noiCount:NOI.length+' noi', addFiles:e=>{const fs=[...(e.target.files||[])];if(!fs.length)return;this.setState(x=>({docs:[...fs.map((f,i)=>({id:'u'+Date.now()+i,title:f.name,lang:'Tamil',pages:'[pages]',chunks:'—',skipped:'—',st:'uploaded',stage:0,added:'Uploaded just now · not yet indexed',msg:''})),...x.docs]}));e.target.value='';},
+      noi:(()=>{const n=NOI.find(x=>x.id===s.noiId)||NOI[0];return {...n,noForms:n.forms.length===0,kc:kc(n.k),kta:(KUT[n.k]||{}).ta||'Varies',kel:(KUT[n.k]||{}).el||'By type',forms:n.forms.map(id=>{const f=FORMS.find(x=>x.id===id);return {...f,open:openForm(id),metalTag:f.hm?'Heavy metal · '+f.metal:''};})};})(),
+      fq:s.fq, setFq:e=>this.setState({fq:e.target.value}), formRows, formCount:formRows.length+' of '+FORMS.length+' formulations', noForms:formRows.length===0,
+      formFilters:['All','Parpam','Chenthuram','Churanam','Kudineer'].map(f=>{const on=s.ff===f;return {label:f,bg:on?'var(--goldT)':'transparent',bd:on?'var(--gold)':'var(--line2)',fg:on?'var(--gold)':'var(--tx)',pick:()=>this.setState({ff:f})};}),
+      fd,
+      chats, chatQ:c.q, qFont:tamil?'var(--tamil)':'var(--sans)', isTyping:s.phase==='typing', isStreaming:s.phase==='stream', isDone:s.phase==='done',
+      showAnswer:c.found&&s.phase!=='typing'&&s.online, answerText:(c.a||'').slice(0,s.streamed), showCites:c.found&&s.phase==='done'&&s.online,
+      notFound:!c.found&&s.phase==='done'&&s.online, isOffline:!s.online&&s.phase==='done',
+      chatCites:(c.cites||[]).map((x,i)=>({...x,delay:(i*.18)+'s'})),
+      online:s.online, onlineLabel:s.online?'AI online':'AI offline', onlineC:s.online?'var(--jade)':'var(--red)', toggleOnline:()=>this.setState(x=>({online:!x.online}),()=>this.startStream()),
+      draft:s.draft, setDraft:e=>this.setState({draft:e.target.value}), send, draftKey:e=>{if(e.key==='Enter'&&!e.shiftKey){send(e);}},
+      langOpts:[['en','English'],['ta','தமிழ்']].map(([k,l])=>({label:l,bg:s.lang===k?'var(--goldT)':'transparent',fg:s.lang===k?'var(--gold)':'var(--mu)',pick:()=>this.setState({lang:k})})),
+      draftPh:s.lang==='ta'?'உங்கள் கேள்வியை தமிழில் எழுதுங்கள்…':'Ask about a formulation, noi or ingredient…',
+      newChat:()=>this.setState({chatId:'c1',custom:null,draft:''},()=>this.startStream()),
+      askSugg:[{t:'Anupanam for Nandukkal Parpam',q:'What is the anupanam for Nandukkal Parpam in Kalladaippu?'},{t:'Paediatric dose of Rasa Chenthuram',q:'What is the paediatric dose of Rasa Chenthuram?'}].map(x=>({t:x.t,use:()=>this.setState({draft:x.q})})),
+      studentInst:INST.institution, studentReg:INST.reg,
+      profileRows, capRows, deniedName:(SCREENS[s.deniedFrom]||['that page'])[0], roleName:me.label,
+      showChatList:s.w>=1100, showChatStrip:s.w<1100
+    };
+  }
+}
+</script>
+</body>
+</html>
